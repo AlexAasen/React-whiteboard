@@ -5,36 +5,104 @@
     <title>Floggit</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300|Ubuntu:300" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link href="https://fonts.googleapis.com/css?family=Arapey" rel="stylesheet"/>
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet"/>
+		<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="css/global.css" />
 </head>
 
-<body>
-    <a href="#dialog-link" class="button-link">Create</a>
-    <div class="main-container" id="dialog-link">
-        <div class="dialog-container" id="dialog">
-            <a href="#close" title="Close" class="close">&#10005;</a>
-            <form>
-                <input type="text" name="title-field" placeholder="Title">
-                <div class="list-container">
-                    <ul class="list-group">
-                    </ul>
-                </div>
-            </form>
-            <nav class="post-it-container">
-                <div class="dropdown">
-                    <button class="pick-color-button">Color</button>
-                    <div class="dropdown-content">
-                        <a href="#" id="yellow">Yellow</a>
-                        <a href="#" id="pink">Pink</a>
-                        <a href="#" id="blue">Blue</a>
-                        <a href="#" id="green">Green</a>
-                    </div>
-                </div>
-                <button class="add-listitem-button">List</button>
-                <button class="submit-button">Save</button>
-            </nav>
-        </div>
-    </div>
-</body>
+  <body>
+    <div class="main-container">
+      <div class="nav side-menu">
+        <ul class="ul-colstyle">
+          <li>
+            <div class="img-holder nav-menu">
+              <img src="img/add.png" alt="add col"/>
+            </div>
+          </li>
+          <li>
+            <div class="img-holder nav-menu">
+              <img src="img/post-its.png" alt="add post-it"/>
+            </div>
+          </li>
 
+        </ul>
+      </div>
+
+      <div class="nav wb-sections">
+        <ul class="ul-rowstyle">
+          <li class="wb-section locked" id="backlog">
+            <div class="wb-section">
+              <div class="wb-section-title">
+                <h2 id="backlog">Backlog</h2>
+              </div>
+              <div class="wb-section-content">
+                <p>Content here</p>
+              </div>
+          </li>
+
+          <div class="nav wb-sections">
+            <ul class="ul-rowstyle">
+              <li class="wb-section" id="stories">
+                <div class="wb-section">
+                  <div class="wb-section-title">
+                    <h2 id="stories">Stories</h2>
+                  </div>
+                  <div class="wb-section-content">
+                    <p>Content here</p>
+                  </div>
+                </div>
+              </li>
+              <li class="wb-section" id="curr-sprint">
+                <div class="wb-section">
+                  <div class="wb-section-title">
+                    <h2 id="curr-sprint">Current sprint</h2>
+                  </div>
+                  <div class="wb-section-content">
+                    <p>Content here</p>
+                  </div>
+                </div>
+              </li>
+              <li class="wb-section" id="wip">
+                <div class="wb-section">
+                  <div class="wb-section-title">
+                    <h2 id="wip">WIP</h2>
+                  </div>
+                  <div class="wb-section-content">
+                    <p>Content here</p>
+                  </div>
+                </div>
+              </li>
+              <li class="wb-section" id="test">
+                <div class="wb-section">
+                  <div class="wb-section-title">
+                    <h2 id="test">Testing</h2>
+                  </div>
+                  <div class="wb-section-content">
+                    <p>Content here</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+
+          <li class="wb-section locked" id="done">
+            <div class="wb-section">
+              <div class="wb-section-title">
+                <h2 id="done">Done</h2>
+              </div>
+              <div class="wb-section-content">
+                <p>Content here</p>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+
+    </div>
+  </body>
 </html>
