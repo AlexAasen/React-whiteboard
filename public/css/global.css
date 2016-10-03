@@ -2,9 +2,10 @@ html, body {
   font-family: 'Open Sans Condensed',Arial,Helvetica,sans-serif;
 }
 .main-container{
-  min-width: 1200px;
   height: 100vh;
   width: 100%;
+  min-width: 1200px;
+  min-height: 800px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -29,7 +30,6 @@ html, body {
 }
 .ul-rowstyle{
   display: flex;
-  flex-direction: row;
   width: 100%;
 }
 .img-holder .nav-menu{
@@ -43,20 +43,33 @@ img {
   padding-bottom: 30px;
 }
 li.wb-section{
-  height: 100vh;
+  height:100vh;
   width: 100%;
+  display: block;
   align-items: center;
   text-align: center;
   border-left: 1px solid rgba(49,49,49,0.1);
+}
+div.wb-section{
+  width: 100%;
+  display: block;
 }
 li.locked{
   background-color: #616061;
   width: 25%;
 }
+.wb-section-content{
+  align-items: center;
+  text-align: center;
+  display: block;
+  overflow-y: auto;
+  max-height: 95vh;
+}
 .wb-section-title{
   background-color: #262626;
-  height: 50px;
+  text-align: center;
   align-items: center;
+  height: 50px;
   margin: auto;
 }
 li.wb-section#backlog{
@@ -69,8 +82,44 @@ li.wb-section#done{
   right: 0;
   position:static;
 }
-h2#backlog, h2#done, h2#stories, h2#wip, h2#test, h2#curr-sprint{
+h2{
   color: white;
-  padding-top: 15px;
   margin: auto;
+  padding-top: 5%;
+}
+.post-it-container{
+  width: 80%;
+  height: 130px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  position: relative;
+}
+.post-it{
+  width: 100%;
+  height: 100%;
+  box-shadow:0 10px 25px -5px rgba(0,0,0,0.75);
+}
+h3.title{
+  padding-top: 20px;
+}
+.color1{
+  background-color: #ffe764;
+}
+.color2{
+  background-color: #26a8ff;
+}
+.color3{
+  background-color: #6ee73e;
+}
+.color4{
+  background-color: #fe64ff;
+}
+p{
+  font-family: 'Josefin Sans';
+  font-weight: 500;
+  line-height: 1.1;
+  margin: 10px;
+  max-width: 90%;
+  letter-spacing: .06em;
+  font-size: .75rem;
 }
