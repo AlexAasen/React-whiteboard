@@ -1,0 +1,19 @@
+{
+  "name": "react-whiteboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexAasen/React-whiteboard.git"
+  },
+  "author": "Dream Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexAasen/React-whiteboard/issues"
+  },
+  "homepage": "https://github.com/AlexAasen/React-whiteboard#readme"
+}
