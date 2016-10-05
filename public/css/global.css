@@ -5,72 +5,60 @@ html, body {
   height: 100vh;
   width: 100%;
   min-width: 1200px;
-  min-height: 800px;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  margin: auto;
 }
 .nav.side-menu{
-  background-color: #73145e;
+  background: linear-gradient(to bottom, #ad2785 15%, #30053c 100%);
   height: 100vh;
+  min-height: 900px;
   width: 4%;
-  flex-wrap: wrap;
 }
 .nav.wb-sections{
   width: 96%;
 }
 .ul-colstyle{
-  list-style: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin: 10px;
+  padding: 10px;
 }
 .ul-rowstyle{
   display: flex;
-  width: 100%;
-}
-.img-holder .nav-menu{
-  display:block;
-  align-items: center;
-  margin: auto;
 }
 img {
-  height: auto;
-  width: auto;
   padding-bottom: 30px;
 }
 li.wb-section{
   height:100vh;
+  min-height: 900px;
   width: 100%;
   display: block;
   align-items: center;
   text-align: center;
   border-left: 1px solid rgba(49,49,49,0.1);
+  background: linear-gradient(to bottom, #f9f9f9 25%, #c7c7c7 100%);
 }
 div.wb-section{
-  width: 100%;
   display: block;
+  height: 100%;
 }
 li.locked{
-  background-color: #616061;
+  background: linear-gradient(to bottom, #717171 25%, #3e3d3e 100%);
   width: 25%;
 }
 .wb-section-content{
-  align-items: center;
-  text-align: center;
   display: block;
   overflow-y: auto;
-  max-height: 95vh;
+  height: 95%;
+  min-height: 800px;
 }
 .wb-section-title{
-  background-color: #262626;
+  background: linear-gradient(to bottom, #434343 5%, #101010 100%);
   text-align: center;
   align-items: center;
-  height: 50px;
+  height: 45px;
   margin: auto;
+  box-shadow:0 2px 25px -5px rgba(0,0,0,0.75);
 }
 li.wb-section#backlog{
   top:0;
@@ -103,16 +91,16 @@ h3.title{
   padding-top: 20px;
 }
 .color1{
-  background-color: #ffe764;
+  background: linear-gradient(to bottom, #ffe764 5%, #faea96 100%);
 }
 .color2{
-  background-color: #26a8ff;
+  background: linear-gradient(to bottom, #26a8ff 5%, #7ac7fb 100%);
 }
 .color3{
-  background-color: #6ee73e;
+  background: linear-gradient(to bottom, #6ee73e 5%, #9df27b 100%);
 }
 .color4{
-  background-color: #fe64ff;
+  background: linear-gradient(to bottom, #fe64ff 5%, #f98cfa 100%);
 }
 p{
   font-family: 'Josefin Sans';
@@ -121,5 +109,5 @@ p{
   margin: 10px;
   max-width: 90%;
   letter-spacing: .06em;
-  font-size: .75rem;
+  font-size: .75rem;7ac7fb
 }
