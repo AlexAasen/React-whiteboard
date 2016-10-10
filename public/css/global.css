@@ -1,0 +1,113 @@
+html, body {
+  font-family: 'Open Sans Condensed',Arial,Helvetica,sans-serif;
+}
+.main-container{
+  height: 100vh;
+  width: 100%;
+  min-width: 1200px;
+  display: flex;
+}
+.nav.side-menu{
+  background: linear-gradient(to bottom, #ad2785 15%, #30053c 100%);
+  height: 100vh;
+  min-height: 900px;
+  width: 4%;
+}
+.nav.wb-sections{
+  width: 96%;
+}
+.ul-colstyle{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+.ul-rowstyle{
+  display: flex;
+}
+img {
+  padding-bottom: 30px;
+}
+li.wb-section{
+  height:100vh;
+  min-height: 900px;
+  width: 100%;
+  display: block;
+  align-items: center;
+  text-align: center;
+  border-left: 1px solid rgba(49,49,49,0.1);
+  background: linear-gradient(to bottom, #f9f9f9 25%, #c7c7c7 100%);
+}
+div.wb-section{
+  display: block;
+  height: 100%;
+}
+li.locked{
+  background: linear-gradient(to bottom, #717171 25%, #3e3d3e 100%);
+  width: 25%;
+}
+.wb-section-content{
+  display: block;
+  overflow-y: auto;
+  height: 95%;
+  min-height: 800px;
+}
+.wb-section-title{
+  background: linear-gradient(to bottom, #434343 5%, #101010 100%);
+  text-align: center;
+  align-items: center;
+  height: 45px;
+  margin: auto;
+  box-shadow:0 2px 25px -5px rgba(0,0,0,0.75);
+}
+li.wb-section#backlog{
+  top:0;
+  left: 4%;
+  position: static;
+}
+li.wb-section#done{
+  top:0;
+  right: 0;
+  position:static;
+}
+h2{
+  color: white;
+  margin: auto;
+  padding-top: 5%;
+}
+.post-it-container{
+  width: 80%;
+  height: 130px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  position: relative;
+}
+.post-it{
+  width: 100%;
+  height: 100%;
+  box-shadow:0 10px 25px -5px rgba(0,0,0,0.75);
+}
+h3.title{
+  padding-top: 20px;
+}
+.color1{
+  background: linear-gradient(to bottom, #ffe764 5%, #faea96 100%);
+}
+.color2{
+  background: linear-gradient(to bottom, #26a8ff 5%, #7ac7fb 100%);
+}
+.color3{
+  background: linear-gradient(to bottom, #6ee73e 5%, #9df27b 100%);
+}
+.color4{
+  background: linear-gradient(to bottom, #fe64ff 5%, #f98cfa 100%);
+}
+p{
+  font-family: 'Josefin Sans';
+  font-weight: 500;
+  line-height: 1.1;
+  margin: 10px;
+  max-width: 90%;
+  letter-spacing: .06em;
+  font-size: .75rem;7ac7fb
+}
