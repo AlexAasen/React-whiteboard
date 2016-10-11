@@ -4,8 +4,8 @@ var http = require('http').Server(app);
 var socket = require('socket.io')(http);
 var bodyParser = require('body-parser');
 var corsFilter = require('./middleware/cors-filter');
-var postitRoutesCtr = require('./controllers/routes/postit');
 var columnRoutesCtr = require('./controllers/routes/column');
+var postitRoutesCtr = require('./controllers/routes/postit');
 var sockets = require('./controllers/socket/socketHandler');
 
 app.use(bodyParser.json());

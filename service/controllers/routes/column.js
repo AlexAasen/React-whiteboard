@@ -30,9 +30,14 @@ module.exports.add = function(req, res) {
 };
 
 module.exports.delete = function(req, res) {
-  model.delete(req.params.id);
-  res.status(200);
-  res.send();
+  var correct = model.delete(req.params.id);
+  if (correct) {
+    res.status(200);
+    res.send();
+  } else {
+    res.status(400);
+    res.send();
+  }
 };
 
 module.exports.update = function(req, res) {

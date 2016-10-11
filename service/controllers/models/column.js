@@ -21,7 +21,6 @@ module.exports.getAll = function() {
     });
     return column;
   });
-
   return newColumns;
 };
 
@@ -52,10 +51,13 @@ module.exports.add = function(column) {
 
 module.exports.delete = function(id) {
   id = parseInt(id);
-  columns = storage.getColumns().filter(function(column) {
+  var newColumns = storage.getColumns().filter(function(column) {
     return (column.id !== id);
   });
+
+  storage.setColumns(newColumns);
   update();
+  return true;
 };
 
 module.exports.update = function(id, updatedColumn) {

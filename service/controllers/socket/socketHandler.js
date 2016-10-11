@@ -1,6 +1,5 @@
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
-
 var columns = require('../models/column');
 
 module.exports = function(socket){
@@ -13,7 +12,7 @@ module.exports = function(socket){
   on('socket', onChange);
 
   socket.on('disconnect', function() {
-      eventEmitter.removeListener('socket', onChange);
+      removeListener('socket', onChange);
    });
 };
 

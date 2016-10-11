@@ -21,3 +21,11 @@ module.exports.columnStorage = function(){
 module.exports.postitStorage = function(){
   return postitStorage;
 };
+
+module.exports.setColumns = function(newColumns){
+  columns = newColumns;
+};
+
+module.exports.setPostits = function(newPostits){
+  postits = newPostits;
+};
