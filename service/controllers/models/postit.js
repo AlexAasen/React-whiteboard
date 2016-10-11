@@ -1,55 +1,60 @@
-var Storage = require('dom-storage');
-var localStorage = new Storage('./postit-db.json');
+var storage = require('../storage/storageHandler');
+var socket = require('../socket/socketHandler');
 
-var postits = localStorage.getItem('postitRepo') ? JSON.parse(localStorage.getItem('postitRepo')) : [];
-
-function generateId(){
+function generateId() {
   return +(new Date());
 }
 
-function update(){
-  localStorage.setItem('postitRepo', JSON.stringify(postits));
+function update() {
+  storage.postitStorage().setItem('postitRepo', JSON.stringify(storage.getPostits()));
+  socket.update();
 }
 
-module.exports.getAll = function(){
-  return postits;
+module.exports.getAll = function() {
+  return storage.getPostits();
 };
 
-module.exports.get = function(id){
+module.exports.get = function(id) {
   id = parseInt(id);
-  var postit = postits.filter(function(postit){
+  var postit = storage.getPostits().filter(function(postit) {
     return (postit.id === id);
   })[0];
   return postit;
 };
 
-module.exports.add = function(postit){
+module.exports.add = function(postit) {
   var id;
-  id = generateId();
-  postits.push({
-    id: id,
-    postit: postit
-  });
-  update();
-  return id;
+
+  if (postit.title !== '') {
+    id = generateId();
+    storage.getPostits().push({
+      id: id,
+      postit: postit
+    });
+
+    update();
+    return id;
+  } else {
+    return 0;
+  }
 };
 
-module.exports.delete = function(id){
+module.exports.delete = function(id) {
   id = parseInt(id);
-  postits = postits.filter(function(postit){
+  postits = storage.getPostits().filter(function(postit) {
     return (postit.id !== id);
   });
   update();
 };
 
-module.exports.update = function(id, updatedPostit){
+module.exports.update = function(id, updatedPostit) {
   id = parseInt(id);
-  postits = postits.filter(function(postit){
-    if(postit.id === id){
+  postits = storage.getPostits().filter(function(postit) {
+    if (postit.id === id) {
       postit.postit = updatedPostit;
       updatedPostit = postit;
       return postit;
-    }else{
+    } else {
       return postit;
     }
   });

@@ -1,13 +1,13 @@
-var model = require('../models/postit');
+var model = require('../models/column');
 
 module.exports.getAll = function(req, res) {
   res.json(model.getAll());
 };
 
 module.exports.get = function(req, res) {
-  var postit = model.get(req.params.id);
-  if (postit) {
-    res.json(postit);
+  var column = model.get(req.params.id);
+  if (column) {
+    res.json(column);
   } else {
     res.status(404);
     res.send();
@@ -18,7 +18,7 @@ module.exports.add = function(req, res) {
   var id = model.add(req.body);
 
   if (id !== 0) {
-    res.setHeader('Location', '/postit/' + id);
+    res.setHeader('Location', '/column/' + id);
     res.status(201);
     res.json({
       id: id
@@ -36,6 +36,6 @@ module.exports.delete = function(req, res) {
 };
 
 module.exports.update = function(req, res) {
-  var returnPostit = model.update(req.params.id, req.body);
-  res.json(returnPostit);
+  var returnColumn = model.update(req.params.id, req.body);
+  res.json(returnColumn);
 };
