@@ -20910,7 +20910,7 @@ var PostItDialog = function PostItDialog(props) {
         { className: "dialog-container" },
         _react2.default.createElement(
           "button",
-          { className: "close", onClick: handleSave },
+          { className: "close", onClick: props.onHandleClose },
           "\u2715"
         ),
         _react2.default.createElement("input", {
@@ -20964,7 +20964,7 @@ var PostItDialog = function PostItDialog(props) {
           ),
           _react2.default.createElement(
             "button",
-            { className: "submit-button", onClick: handleSave },
+            { className: "save-button", onClick: handleSave },
             "Save"
           )
         )
@@ -20995,14 +20995,13 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var PostIt = function PostIt(props) {
-  function handleClick() {
+  function removePostIt() {
     props.onRemove(props.id);
   }
   return _react2.default.createElement(
     "li",
     {
       className: "post-it-container"
-      // style={{ backgroundColor: '#ccc' }}
     },
     _react2.default.createElement(
       "div",
@@ -21018,8 +21017,8 @@ var PostIt = function PostIt(props) {
         "Do something"
       ),
       _react2.default.createElement(
-        "a",
-        { href: "#close", title: "Close", className: "close", onClick: handleClick },
+        "button",
+        { className: "close", onClick: removePostIt },
         "\u2715"
       ),
       _react2.default.createElement("img", { src: "img/edit24.png", alt: "edit post-it" })
@@ -21110,6 +21109,7 @@ var WhiteboardContainer = function (_React$Component) {
     _this.handleAdd = _this.handleAdd.bind(_this);
     _this.handleRemove = _this.handleRemove.bind(_this);
     _this.handleDialog = _this.handleDialog.bind(_this);
+    _this.handleClose = _this.handleClose.bind(_this);
     return _this;
   }
 
@@ -21144,14 +21144,30 @@ var WhiteboardContainer = function (_React$Component) {
       });
     }
   }, {
+    key: 'handleClose',
+    value: function handleClose() {
+      this.setState({
+        displayDialog: false
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         { className: 'whiteboard-container' },
-        _react2.default.createElement(_addButton2.default, { showDialog: this.handleDialog }),
-        _react2.default.createElement(_postItDialog2.default, { isVisible: this.state.displayDialog, onAdd: this.handleAdd }),
-        _react2.default.createElement(_postIt2.default, { postIts: this.state.postIts, onRemove: this.handleRemove })
+        _react2.default.createElement(_addButton2.default, {
+          showDialog: this.handleDialog
+        }),
+        _react2.default.createElement(_postItDialog2.default, {
+          isVisible: this.state.displayDialog,
+          onAdd: this.handleAdd,
+          onHandleClose: this.handleClose
+        }),
+        _react2.default.createElement(_postIt2.default, {
+          postIts: this.state.postIts,
+          onRemove: this.handleRemove
+        })
       );
     }
   }]);

@@ -11,7 +11,7 @@ const PostItDialog = (props) => {
     return (
       <div className="main-dialog-container">
         <div className="dialog-container">
-          <button className="close" onClick={handleSave}>&#10005;</button>
+          <button className="close" onClick={props.onHandleClose}>&#10005;</button>
           <input
             type="text"
             name="title-field"
@@ -29,7 +29,7 @@ const PostItDialog = (props) => {
               </div>
             </div>
             <button className="add-listitem-button">List</button>
-            <button className="submit-button" onClick={handleSave}>Save</button>
+            <button className="save-button" onClick={handleSave}>Save</button>
           </nav>
         </div>
       </div>

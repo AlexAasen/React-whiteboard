@@ -13,6 +13,7 @@ class WhiteboardContainer extends React.Component {
     this.handleAdd = this.handleAdd.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.handleDialog = this.handleDialog.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   handleDialog() {
@@ -40,12 +41,27 @@ class WhiteboardContainer extends React.Component {
     });
   }
 
+  handleClose() {
+    this.setState({
+      displayDialog: false
+    });
+  }
+
   render() {
     return (
       <div className="whiteboard-container">
-        <AddButton showDialog={this.handleDialog} />
-        <PostItDialog isVisible={this.state.displayDialog} onAdd={this.handleAdd} />
-        <PostIt postIts={this.state.postIts} onRemove={this.handleRemove} />
+        <AddButton
+          showDialog={this.handleDialog}
+        />
+        <PostItDialog
+          isVisible={this.state.displayDialog}
+          onAdd={this.handleAdd}
+          onHandleClose={this.handleClose}
+        />
+        <PostIt
+          postIts={this.state.postIts}
+          onRemove={this.handleRemove}
+        />
       </div>
     );
   }

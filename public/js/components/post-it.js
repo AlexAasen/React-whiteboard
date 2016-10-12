@@ -1,18 +1,17 @@
 import React from 'react';
 
 const PostIt = (props) => {
-  function handleClick() {
+  function removePostIt() {
     props.onRemove(props.id);
   }
   return (
     <li
       className="post-it-container"
-      // style={{ backgroundColor: '#ccc' }}
     >
       <div className="post-it color3">
         <h3 className="title">{props.title}</h3>
         <p>Do something</p>
-        <a href="#close" title="Close" className="close" onClick={handleClick}>&#10005;</a>
+        <button className="close" onClick={removePostIt}>&#10005;</button>
         <img src="img/edit24.png" alt="edit post-it" />
       </div>
     </li>
