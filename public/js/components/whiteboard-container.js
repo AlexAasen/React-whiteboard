@@ -22,13 +22,15 @@ class WhiteboardContainer extends React.Component {
     });
   }
 
-  handleAdd(postItTitle) {
+  handleAdd(postItTitle, postItDescription) {
     const postTitle = postItTitle.trim();
+
     if (postTitle.length > 0) {
       this.setState({
         postIts: this.state.postIts.concat([{
           id: +(new Date()),
-          title: postTitle
+          title: postTitle,
+          description: postItDescription
         }]),
         displayDialog: false
       });

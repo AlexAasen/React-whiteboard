@@ -20896,9 +20896,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var PostItDialog = function PostItDialog(props) {
   var postItTitle = void 0;
+  var postItDescription = void 0;
 
   function handleSave() {
-    props.onAdd(postItTitle.value);
+    props.onAdd(postItTitle.value, postItDescription.value);
   }
 
   if (props.isVisible) {
@@ -20921,6 +20922,14 @@ var PostItDialog = function PostItDialog(props) {
             postItTitle = c;
           }
         }),
+        _react2.default.createElement("input", {
+          type: "text",
+          name: "list-field",
+          placeholder: "Description",
+          ref: function ref(c) {
+            postItDescription = c;
+          }
+        }),
         _react2.default.createElement(
           "nav",
           { className: "post-it-container" },
@@ -20936,23 +20945,23 @@ var PostItDialog = function PostItDialog(props) {
               "div",
               { className: "dropdown-content" },
               _react2.default.createElement(
-                "a",
-                { href: "#yellow", id: "yellow" },
+                "button",
+                { className: "button-color3", id: "yellow" },
                 "Yellow"
               ),
               _react2.default.createElement(
-                "a",
-                { href: "#pink", id: "pink" },
+                "button",
+                { className: "button-color2", id: "pink" },
                 "Pink"
               ),
               _react2.default.createElement(
-                "a",
-                { href: "#blue", id: "blue" },
+                "button",
+                { className: "button-color1", id: "blue" },
                 "Blue"
               ),
               _react2.default.createElement(
-                "a",
-                { href: "#green", id: "green" },
+                "button",
+                { className: "button-color4", id: "green" },
                 "Green"
               )
             )
@@ -21005,7 +21014,8 @@ var PostIt = function PostIt(props) {
     },
     _react2.default.createElement(
       "div",
-      { className: "post-it color3" },
+      { className: "post-it color1" },
+      props.color,
       _react2.default.createElement(
         "h3",
         { className: "title" },
@@ -21013,15 +21023,15 @@ var PostIt = function PostIt(props) {
       ),
       _react2.default.createElement(
         "p",
-        null,
-        "Do something"
+        { className: "description" },
+        props.description
       ),
+      _react2.default.createElement("img", { src: "img/edit24.png", id: "edit", alt: "edit post-it" }),
       _react2.default.createElement(
         "button",
         { className: "close", onClick: removePostIt },
         "\u2715"
-      ),
-      _react2.default.createElement("img", { src: "img/edit24.png", alt: "edit post-it" })
+      )
     )
   );
 };
@@ -21029,6 +21039,8 @@ PostIt.propTypes = function () {
   return {
     id: _react2.default.PropTypes.number.isRequired,
     title: _react2.default.PropTypes.string,
+    color: _react2.default.PropTypes.string,
+    description: _react2.default.PropTypes.string,
     onRemove: _react2.default.PropTypes.func
   };
 };
@@ -21042,6 +21054,7 @@ var PostItList = function PostItList(props) {
         key: postIt.id,
         id: postIt.id,
         title: postIt.title,
+        description: postIt.description,
         onRemove: props.onRemove
       });
     }).reverse()
@@ -21053,7 +21066,8 @@ PostItList.propTypes = function () {
     postIts: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
       id: _react2.default.PropTypes.number,
       title: _react2.default.PropTypes.string,
-      color: _react2.default.PropTypes.string
+      color: _react2.default.PropTypes.string,
+      description: _react2.default.PropTypes.string
     })),
     onRemove: _react2.default.PropTypes.func
   };
@@ -21122,13 +21136,15 @@ var WhiteboardContainer = function (_React$Component) {
     }
   }, {
     key: 'handleAdd',
-    value: function handleAdd(postItTitle) {
+    value: function handleAdd(postItTitle, postItDescription) {
       var postTitle = postItTitle.trim();
+
       if (postTitle.length > 0) {
         this.setState({
           postIts: this.state.postIts.concat([{
             id: +new Date(),
-            title: postTitle
+            title: postTitle,
+            description: postItDescription
           }]),
           displayDialog: false
         });

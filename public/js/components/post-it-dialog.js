@@ -2,9 +2,10 @@ import React from 'react';
 
 const PostItDialog = (props) => {
   let postItTitle;
+  let postItDescription;
 
   function handleSave() {
-    props.onAdd(postItTitle.value);
+    props.onAdd(postItTitle.value, postItDescription.value);
   }
 
   if (props.isVisible) {
@@ -18,14 +19,20 @@ const PostItDialog = (props) => {
             placeholder="Title"
             ref={(c) => { postItTitle = c; }}
           />
+          <input
+            type="text"
+            name="list-field"
+            placeholder="Description"
+            ref={(c) => { postItDescription = c; }}
+          />
           <nav className="post-it-container">
             <div className="dropdown">
               <button className="pick-color-button">Color</button>
               <div className="dropdown-content">
-                <a href="#yellow" id="yellow">Yellow</a>
-                <a href="#pink" id="pink">Pink</a>
-                <a href="#blue" id="blue">Blue</a>
-                <a href="#green" id="green">Green</a>
+                <button className="button-color3" id="yellow">Yellow</button>
+                <button className="button-color2" id="pink">Pink</button>
+                <button className="button-color1" id="blue">Blue</button>
+                <button className="button-color4" id="green">Green</button>
               </div>
             </div>
             <button className="add-listitem-button">List</button>

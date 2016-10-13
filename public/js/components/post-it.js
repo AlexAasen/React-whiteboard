@@ -8,11 +8,12 @@ const PostIt = (props) => {
     <li
       className="post-it-container"
     >
-      <div className="post-it color3">
+      <div className="post-it color1">
+        { props.color }
         <h3 className="title">{props.title}</h3>
-        <p>Do something</p>
+        <p className="description">{props.description}</p>
+        <img src="img/edit24.png" id="edit" alt="edit post-it" />
         <button className="close" onClick={removePostIt}>&#10005;</button>
-        <img src="img/edit24.png" alt="edit post-it" />
       </div>
     </li>
   );
@@ -20,6 +21,8 @@ const PostIt = (props) => {
 PostIt.propTypes = () => ({
   id: React.PropTypes.number.isRequired,
   title: React.PropTypes.string,
+  color: React.PropTypes.string,
+  description: React.PropTypes.string,
   onRemove: React.PropTypes.func
 });
 
@@ -29,6 +32,7 @@ const PostItList = props => (<ul className="ul-colstyle">{
     key={postIt.id}
     id={postIt.id}
     title={postIt.title}
+    description={postIt.description}
     onRemove={props.onRemove}
   />
 )).reverse()
@@ -39,7 +43,8 @@ PostItList.propTypes = () => ({
     React.PropTypes.shape({
       id: React.PropTypes.number,
       title: React.PropTypes.string,
-      color: React.PropTypes.string
+      color: React.PropTypes.string,
+      description: React.PropTypes.string
     })
   ),
   onRemove: React.PropTypes.func

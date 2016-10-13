@@ -174,6 +174,7 @@ input {
   height: 2em;
   margin-left: 5px;
   padding-left: 5px;
+  display: block;
 }
 
 .dropdown {
@@ -280,4 +281,34 @@ button:focus {
 .close:hover {
   background: rgba(220, 220, 220, 0);
   color: #AAA;
+}
+
+#edit {
+  font-family: Helvetica;
+  line-height: 25px;
+  background: rgba(220, 220, 220, 0);
+  color: #CCC;
+  position: absolute;
+  left: 1px;
+  text-align: center;
+  font-weight: bold;
+  top: 10px;
+  width: 15px;
+  text-decoration: none;
+  border: none;
+  border-radius: none;
+  box-shadow: none;
+  margin: 0px;
+  padding: 5px;
+}
+
+.button-color1, .button-color2, .button-color3, .button-color4 {
+  border: none;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  margin: 0px;
+  border-radius: none;
+  box-shadow: none;
+  background: rgba(220, 220, 220, 0);
 }
