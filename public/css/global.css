@@ -155,7 +155,7 @@ p {
   margin-top: 7px;
 }
 
-input {
+input, textarea {
   border-radius: 5px;
   border: 1px solid #dcdcdc;
   box-shadow: inset 0px 1px 0px 0px #ffffff;
@@ -163,6 +163,7 @@ input {
   margin-left: 5px;
   margin-top: 7px;
   padding-left: 5px;
+  resize: none;
 }
 
 #description {
@@ -193,11 +194,11 @@ input {
   background: linear-gradient(to bottom, #ffe764 5%, #faea96 100%);
 }
 
-.green {
+.blue {
   background: linear-gradient(to bottom, #26a8ff 5%, #7ac7fb 100%);
 }
 
-.blue {
+.green {
   background: linear-gradient(to bottom, #6ee73e 5%, #9df27b 100%);
 }
 
@@ -213,11 +214,11 @@ input {
   background: -webkit-linear-gradient(#fff, #ffc7e0);
 }
 
-.blue:hover {
+.green:hover {
   background: -webkit-linear-gradient(#fff, #afe132);
 }
 
-.green:hover {
+.blue:hover {
   background: -webkit-linear-gradient(#fff, #64dcff);
 }
 

@@ -15,7 +15,9 @@ const PostItDialog = (props) => {
   }
   function handleSelect(event) {
     colorSelect = event.currentTarget.id;
-    console.log(colorSelect);
+  }
+  function handleList() {
+    console.log('bajs');
   }
 
   if (props.isVisible) {
@@ -30,7 +32,7 @@ const PostItDialog = (props) => {
               placeholder="Title"
               ref={(c) => { postItTitle = c; }}
             />
-            <input
+            <textarea
               id="description"
               type="text"
               name="list-field"
@@ -60,18 +62,18 @@ const PostItDialog = (props) => {
                   className="button-color green"
                   id="green"
                   onClick={handleSelect}
-                >Blue
+                >Green
                 </button>
                 <button
                   className="button-color blue"
                   id="blue"
                   onClick={handleSelect}
                 >
-                Green
+                Blue
                 </button>
               </div>
             </div>
-            <button className="add-listitem-button">List</button>
+            <button className="add-listitem-button" onClick={handleList}>List</button>
             <button className="save-button" onClick={handleSave}>Save</button>
           </nav>
         </div>

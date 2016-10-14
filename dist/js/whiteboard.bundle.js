@@ -20909,7 +20909,9 @@ var PostItDialog = function PostItDialog(props) {
   }
   function handleSelect(event) {
     colorSelect = event.currentTarget.id;
-    console.log(colorSelect);
+  }
+  function handleList() {
+    console.log('bajs');
   }
 
   if (props.isVisible) {
@@ -20935,7 +20937,7 @@ var PostItDialog = function PostItDialog(props) {
               postItTitle = c;
             }
           }),
-          _react2.default.createElement('input', {
+          _react2.default.createElement('textarea', {
             id: 'description',
             type: 'text',
             name: 'list-field',
@@ -20984,7 +20986,7 @@ var PostItDialog = function PostItDialog(props) {
                   id: 'green',
                   onClick: handleSelect
                 },
-                'Blue'
+                'Green'
               ),
               _react2.default.createElement(
                 'button',
@@ -20993,13 +20995,13 @@ var PostItDialog = function PostItDialog(props) {
                   id: 'blue',
                   onClick: handleSelect
                 },
-                'Green'
+                'Blue'
               )
             )
           ),
           _react2.default.createElement(
             'button',
-            { className: 'add-listitem-button' },
+            { className: 'add-listitem-button', onClick: handleList },
             'List'
           ),
           _react2.default.createElement(
@@ -21052,7 +21054,7 @@ var PostIt = function PostIt(props) {
         props.title
       ),
       _react2.default.createElement(
-        "p",
+        "li",
         { className: "description" },
         props.description
       ),
