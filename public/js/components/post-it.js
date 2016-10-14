@@ -8,8 +8,7 @@ const PostIt = (props) => {
     <li
       className="post-it-container"
     >
-      <div className="post-it color1">
-        { props.color }
+      <div className={`post-it ${props.color}`}>
         <h3 className="title">{props.title}</h3>
         <p className="description">{props.description}</p>
         <img src="img/edit24.png" id="edit" alt="edit post-it" />
@@ -32,6 +31,7 @@ const PostItList = props => (<ul className="ul-colstyle">{
     key={postIt.id}
     id={postIt.id}
     title={postIt.title}
+    color={postIt.color}
     description={postIt.description}
     onRemove={props.onRemove}
   />

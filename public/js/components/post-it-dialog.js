@@ -3,9 +3,19 @@ import React from 'react';
 const PostItDialog = (props) => {
   let postItTitle;
   let postItDescription;
+  let colorSelect = '';
 
   function handleSave() {
-    props.onAdd(postItTitle.value, postItDescription.value);
+    if (colorSelect.trim().length > 0) {
+      props.onAdd(postItTitle.value, postItDescription.value, colorSelect);
+    } else {
+      colorSelect = 'green';
+      props.onAdd(postItTitle.value, postItDescription.value, colorSelect);
+    }
+  }
+  function handleSelect(event) {
+    colorSelect = event.currentTarget.id;
+    console.log(colorSelect);
   }
 
   if (props.isVisible) {
@@ -13,26 +23,52 @@ const PostItDialog = (props) => {
       <div className="main-dialog-container">
         <div className="dialog-container">
           <button className="close" onClick={props.onHandleClose}>&#10005;</button>
-          <input
-            type="text"
-            name="title-field"
-            placeholder="Title"
-            ref={(c) => { postItTitle = c; }}
-          />
-          <input
-            type="text"
-            name="list-field"
-            placeholder="Description"
-            ref={(c) => { postItDescription = c; }}
-          />
+          <div className="text-area">
+            <input
+              type="text"
+              name="title-field"
+              placeholder="Title"
+              ref={(c) => { postItTitle = c; }}
+            />
+            <input
+              id="description"
+              type="text"
+              name="list-field"
+              placeholder="Description"
+              ref={(c) => { postItDescription = c; }}
+            />
+          </div>
           <nav className="post-it-container">
             <div className="dropdown">
               <button className="pick-color-button">Color</button>
               <div className="dropdown-content">
-                <button className="button-color3" id="yellow">Yellow</button>
-                <button className="button-color2" id="pink">Pink</button>
-                <button className="button-color1" id="blue">Blue</button>
-                <button className="button-color4" id="green">Green</button>
+                <button
+                  className="button-color yellow"
+                  id="yellow"
+                  onClick={handleSelect}
+                >
+                  Yellow
+                </button>
+                <button
+                  className="button-color pink"
+                  id="pink"
+                  onClick={handleSelect}
+                >
+                    Pink
+                </button>
+                <button
+                  className="button-color green"
+                  id="green"
+                  onClick={handleSelect}
+                >Blue
+                </button>
+                <button
+                  className="button-color blue"
+                  id="blue"
+                  onClick={handleSelect}
+                >
+                Green
+                </button>
               </div>
             </div>
             <button className="add-listitem-button">List</button>

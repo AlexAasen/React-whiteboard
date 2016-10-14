@@ -140,22 +140,6 @@ h3.title {
   padding-top: 20px;
 }
 
-.color1 {
-  background: linear-gradient(to bottom, #ffe764 5%, #faea96 100%);
-}
-
-.color2 {
-  background: linear-gradient(to bottom, #26a8ff 5%, #7ac7fb 100%);
-}
-
-.color3 {
-  background: linear-gradient(to bottom, #6ee73e 5%, #9df27b 100%);
-}
-
-.color4 {
-  background: linear-gradient(to bottom, #fe64ff 5%, #f98cfa 100%);
-}
-
 p {
   font-family: 'Josefin Sans';
   font-weight: 500;
@@ -166,15 +150,23 @@ p {
   font-size: .75rem;
 }
 
+.text-area {
+  display: block;
+  margin-top: 7px;
+}
+
 input {
   border-radius: 5px;
   border: 1px solid #dcdcdc;
   box-shadow: inset 0px 1px 0px 0px #ffffff;
-  margin-top: 5px;
   height: 2em;
   margin-left: 5px;
+  margin-top: 7px;
   padding-left: 5px;
-  display: block;
+}
+
+#description {
+  height: 7em;
 }
 
 .dropdown {
@@ -197,19 +189,35 @@ input {
   display: block;
 }
 
-#yellow:hover {
+.yellow {
+  background: linear-gradient(to bottom, #ffe764 5%, #faea96 100%);
+}
+
+.green {
+  background: linear-gradient(to bottom, #26a8ff 5%, #7ac7fb 100%);
+}
+
+.blue {
+  background: linear-gradient(to bottom, #6ee73e 5%, #9df27b 100%);
+}
+
+.pink {
+  background: linear-gradient(to bottom, #fe64ff 5%, #f98cfa 100%);
+}
+
+.yellow:hover {
   background: -webkit-linear-gradient(#fff, #f9f063);
 }
 
-#pink:hover {
+.pink:hover {
   background: -webkit-linear-gradient(#fff, #ffc7e0);
 }
 
-#green:hover {
+.blue:hover {
   background: -webkit-linear-gradient(#fff, #afe132);
 }
 
-#blue:hover {
+.green:hover {
   background: -webkit-linear-gradient(#fff, #64dcff);
 }
 
@@ -302,7 +310,7 @@ button:focus {
   padding: 5px;
 }
 
-.button-color1, .button-color2, .button-color3, .button-color4 {
+.button-color {
   border: none;
   width: 100%;
   height: 100%;

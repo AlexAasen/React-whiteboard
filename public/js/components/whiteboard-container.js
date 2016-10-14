@@ -22,7 +22,7 @@ class WhiteboardContainer extends React.Component {
     });
   }
 
-  handleAdd(postItTitle, postItDescription) {
+  handleAdd(postItTitle, postItDescription, postItColor) {
     const postTitle = postItTitle.trim();
 
     if (postTitle.length > 0) {
@@ -30,7 +30,8 @@ class WhiteboardContainer extends React.Component {
         postIts: this.state.postIts.concat([{
           id: +(new Date()),
           title: postTitle,
-          description: postItDescription
+          description: postItDescription,
+          color: postItColor
         }]),
         displayDialog: false
       });

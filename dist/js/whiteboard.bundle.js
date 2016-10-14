@@ -20882,13 +20882,13 @@ AddButton.propTypes = function () {
 exports.default = AddButton;
 
 },{"react":171}],174:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -20897,84 +20897,115 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var PostItDialog = function PostItDialog(props) {
   var postItTitle = void 0;
   var postItDescription = void 0;
+  var colorSelect = '';
 
   function handleSave() {
-    props.onAdd(postItTitle.value, postItDescription.value);
+    if (colorSelect.trim().length > 0) {
+      props.onAdd(postItTitle.value, postItDescription.value, colorSelect);
+    } else {
+      colorSelect = 'green';
+      props.onAdd(postItTitle.value, postItDescription.value, colorSelect);
+    }
+  }
+  function handleSelect(event) {
+    colorSelect = event.currentTarget.id;
+    console.log(colorSelect);
   }
 
   if (props.isVisible) {
     return _react2.default.createElement(
-      "div",
-      { className: "main-dialog-container" },
+      'div',
+      { className: 'main-dialog-container' },
       _react2.default.createElement(
-        "div",
-        { className: "dialog-container" },
+        'div',
+        { className: 'dialog-container' },
         _react2.default.createElement(
-          "button",
-          { className: "close", onClick: props.onHandleClose },
-          "\u2715"
+          'button',
+          { className: 'close', onClick: props.onHandleClose },
+          '\u2715'
         ),
-        _react2.default.createElement("input", {
-          type: "text",
-          name: "title-field",
-          placeholder: "Title",
-          ref: function ref(c) {
-            postItTitle = c;
-          }
-        }),
-        _react2.default.createElement("input", {
-          type: "text",
-          name: "list-field",
-          placeholder: "Description",
-          ref: function ref(c) {
-            postItDescription = c;
-          }
-        }),
         _react2.default.createElement(
-          "nav",
-          { className: "post-it-container" },
+          'div',
+          { className: 'text-area' },
+          _react2.default.createElement('input', {
+            type: 'text',
+            name: 'title-field',
+            placeholder: 'Title',
+            ref: function ref(c) {
+              postItTitle = c;
+            }
+          }),
+          _react2.default.createElement('input', {
+            id: 'description',
+            type: 'text',
+            name: 'list-field',
+            placeholder: 'Description',
+            ref: function ref(c) {
+              postItDescription = c;
+            }
+          })
+        ),
+        _react2.default.createElement(
+          'nav',
+          { className: 'post-it-container' },
           _react2.default.createElement(
-            "div",
-            { className: "dropdown" },
+            'div',
+            { className: 'dropdown' },
             _react2.default.createElement(
-              "button",
-              { className: "pick-color-button" },
-              "Color"
+              'button',
+              { className: 'pick-color-button' },
+              'Color'
             ),
             _react2.default.createElement(
-              "div",
-              { className: "dropdown-content" },
+              'div',
+              { className: 'dropdown-content' },
               _react2.default.createElement(
-                "button",
-                { className: "button-color3", id: "yellow" },
-                "Yellow"
+                'button',
+                {
+                  className: 'button-color yellow',
+                  id: 'yellow',
+                  onClick: handleSelect
+                },
+                'Yellow'
               ),
               _react2.default.createElement(
-                "button",
-                { className: "button-color2", id: "pink" },
-                "Pink"
+                'button',
+                {
+                  className: 'button-color pink',
+                  id: 'pink',
+                  onClick: handleSelect
+                },
+                'Pink'
               ),
               _react2.default.createElement(
-                "button",
-                { className: "button-color1", id: "blue" },
-                "Blue"
+                'button',
+                {
+                  className: 'button-color green',
+                  id: 'green',
+                  onClick: handleSelect
+                },
+                'Blue'
               ),
               _react2.default.createElement(
-                "button",
-                { className: "button-color4", id: "green" },
-                "Green"
+                'button',
+                {
+                  className: 'button-color blue',
+                  id: 'blue',
+                  onClick: handleSelect
+                },
+                'Green'
               )
             )
           ),
           _react2.default.createElement(
-            "button",
-            { className: "add-listitem-button" },
-            "List"
+            'button',
+            { className: 'add-listitem-button' },
+            'List'
           ),
           _react2.default.createElement(
-            "button",
-            { className: "save-button", onClick: handleSave },
-            "Save"
+            'button',
+            { className: 'save-button', onClick: handleSave },
+            'Save'
           )
         )
       )
@@ -21014,8 +21045,7 @@ var PostIt = function PostIt(props) {
     },
     _react2.default.createElement(
       "div",
-      { className: "post-it color1" },
-      props.color,
+      { className: "post-it " + props.color },
       _react2.default.createElement(
         "h3",
         { className: "title" },
@@ -21054,6 +21084,7 @@ var PostItList = function PostItList(props) {
         key: postIt.id,
         id: postIt.id,
         title: postIt.title,
+        color: postIt.color,
         description: postIt.description,
         onRemove: props.onRemove
       });
@@ -21136,7 +21167,7 @@ var WhiteboardContainer = function (_React$Component) {
     }
   }, {
     key: 'handleAdd',
-    value: function handleAdd(postItTitle, postItDescription) {
+    value: function handleAdd(postItTitle, postItDescription, postItColor) {
       var postTitle = postItTitle.trim();
 
       if (postTitle.length > 0) {
@@ -21144,7 +21175,8 @@ var WhiteboardContainer = function (_React$Component) {
           postIts: this.state.postIts.concat([{
             id: +new Date(),
             title: postTitle,
-            description: postItDescription
+            description: postItDescription,
+            color: postItColor
           }]),
           displayDialog: false
         });
