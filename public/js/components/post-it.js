@@ -10,7 +10,7 @@ const PostIt = (props) => {
     >
       <div className={`post-it ${props.color}`}>
         <h3 className="title">{props.title}</h3>
-        <li className="description">{props.description}</li>
+        <p className="description">{props.description}</p>
         <img src="img/edit24.png" id="edit" alt="edit post-it" />
         <button className="close" onClick={removePostIt}>&#10005;</button>
       </div>

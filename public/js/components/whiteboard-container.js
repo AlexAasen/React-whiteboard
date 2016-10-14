@@ -2,6 +2,8 @@ import React from 'react';
 import AddButton from './add-button';
 import PostIt from './post-it';
 import PostItDialog from './post-it-dialog';
+import ColumnContent from './column-content';
+import SideBar from './side-bar';
 
 class WhiteboardContainer extends React.Component {
   constructor() {
@@ -52,19 +54,24 @@ class WhiteboardContainer extends React.Component {
 
   render() {
     return (
-      <div className="whiteboard-container">
-        <AddButton
-          showDialog={this.handleDialog}
-        />
+      <div className="main-container">
+        <SideBar>
+          <AddButton
+            showDialog={this.handleDialog}
+          />
+        </ SideBar>
         <PostItDialog
           isVisible={this.state.displayDialog}
           onAdd={this.handleAdd}
           onHandleClose={this.handleClose}
         />
-        <PostIt
-          postIts={this.state.postIts}
-          onRemove={this.handleRemove}
-        />
+
+        <ColumnContent>
+          <PostIt
+            postIts={this.state.postIts}
+            onRemove={this.handleRemove}
+          />
+        </ColumnContent>
       </div>
     );
   }

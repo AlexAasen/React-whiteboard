@@ -20850,7 +20850,7 @@ var whiteboard = _react2.default.createElement(_whiteboardContainer2.default, nu
 
 _reactDom2.default.render(whiteboard, document.querySelector('#application'));
 
-},{"./components/whiteboard-container":176,"react":171,"react-dom":27}],173:[function(require,module,exports){
+},{"./components/whiteboard-container":178,"react":171,"react-dom":27}],173:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -20882,6 +20882,197 @@ AddButton.propTypes = function () {
 exports.default = AddButton;
 
 },{"react":171}],174:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ColumnContent = function ColumnContent(props) {
+  return _react2.default.createElement(
+    "div",
+    { className: "nav wb-sections" },
+    _react2.default.createElement(
+      "ul",
+      { className: "ul-rowstyle" },
+      _react2.default.createElement(
+        "li",
+        { className: "wb-section locked", id: "backlog" },
+        _react2.default.createElement(
+          "div",
+          { className: "wb-section" },
+          _react2.default.createElement(
+            "div",
+            { className: "wb-section-title", id: "backlog" },
+            _react2.default.createElement(
+              "h2",
+              { id: "backlog" },
+              "Backlog"
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "wb-section-content" },
+            props.children
+          )
+        )
+      ),
+      _react2.default.createElement(
+        "div",
+        { className: "nav wb-sections" },
+        _react2.default.createElement(
+          "ul",
+          { className: "ul-rowstyle" },
+          _react2.default.createElement(
+            "li",
+            { className: "wb-section", id: "stories" },
+            _react2.default.createElement(
+              "div",
+              { className: "wb-section" },
+              _react2.default.createElement(
+                "div",
+                { className: "wb-section-title" },
+                _react2.default.createElement(
+                  "h2",
+                  { id: "stories" },
+                  "Stories"
+                )
+              ),
+              _react2.default.createElement(
+                "div",
+                { className: "wb-section-content" },
+                _react2.default.createElement(
+                  "p",
+                  null,
+                  "Content here"
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: "wb-section", id: "curr-sprint" },
+            _react2.default.createElement(
+              "div",
+              { className: "wb-section" },
+              _react2.default.createElement(
+                "div",
+                { className: "wb-section-title" },
+                _react2.default.createElement(
+                  "h2",
+                  { id: "curr-sprint" },
+                  "Current sprint"
+                )
+              ),
+              _react2.default.createElement(
+                "div",
+                { className: "wb-section-content" },
+                _react2.default.createElement(
+                  "p",
+                  null,
+                  "Content here"
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: "wb-section", id: "wip" },
+            _react2.default.createElement(
+              "div",
+              { className: "wb-section" },
+              _react2.default.createElement(
+                "div",
+                { className: "wb-section-title" },
+                _react2.default.createElement(
+                  "h2",
+                  { id: "wip" },
+                  "WIP"
+                )
+              ),
+              _react2.default.createElement(
+                "div",
+                { className: "wb-section-content" },
+                _react2.default.createElement(
+                  "p",
+                  null,
+                  "Content here"
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: "wb-section", id: "test" },
+            _react2.default.createElement(
+              "div",
+              { className: "wb-section" },
+              _react2.default.createElement(
+                "div",
+                { className: "wb-section-title" },
+                _react2.default.createElement(
+                  "h2",
+                  { id: "test" },
+                  "Testing"
+                )
+              ),
+              _react2.default.createElement(
+                "div",
+                { className: "wb-section-content" },
+                _react2.default.createElement(
+                  "p",
+                  null,
+                  "Content here"
+                )
+              )
+            )
+          )
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        { className: "wb-section locked", id: "done" },
+        _react2.default.createElement(
+          "div",
+          { className: "wb-section" },
+          _react2.default.createElement(
+            "div",
+            { className: "wb-section-title" },
+            _react2.default.createElement(
+              "h2",
+              { id: "done" },
+              "Done"
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "wb-section-content" },
+            _react2.default.createElement(
+              "p",
+              null,
+              "Content here"
+            )
+          )
+        )
+      )
+    )
+  );
+};
+ColumnContent.propTypes = function () {
+  return {
+    postIt: _react2.default.PropTypes.element
+  };
+};
+
+exports.default = ColumnContent;
+
+},{"react":171}],175:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20903,7 +21094,7 @@ var PostItDialog = function PostItDialog(props) {
     if (colorSelect.trim().length > 0) {
       props.onAdd(postItTitle.value, postItDescription.value, colorSelect);
     } else {
-      colorSelect = 'green';
+      colorSelect = 'yellow';
       props.onAdd(postItTitle.value, postItDescription.value, colorSelect);
     }
   }
@@ -21023,7 +21214,7 @@ PostItDialog.propTypes = function () {
 
 exports.default = PostItDialog;
 
-},{"react":171}],175:[function(require,module,exports){
+},{"react":171}],176:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21054,7 +21245,7 @@ var PostIt = function PostIt(props) {
         props.title
       ),
       _react2.default.createElement(
-        "li",
+        "p",
         { className: "description" },
         props.description
       ),
@@ -21108,7 +21299,51 @@ PostItList.propTypes = function () {
 
 exports.default = PostItList;
 
-},{"react":171}],176:[function(require,module,exports){
+},{"react":171}],177:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SideBar = function SideBar(props) {
+  return _react2.default.createElement(
+    "div",
+    { className: "nav side-menu" },
+    _react2.default.createElement(
+      "ul",
+      { className: "ul-colstyle" },
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          "div",
+          { className: "img-holder nav-menu add-col" },
+          _react2.default.createElement("img", { src: "img/add.png", alt: "add col" })
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        props.children
+      )
+    )
+  );
+};
+SideBar.propTypes = function () {
+  return {
+    addButton: _react2.default.PropTypes.element
+  };
+};
+exports.default = SideBar;
+
+},{"react":171}],178:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -21132,6 +21367,14 @@ var _postIt2 = _interopRequireDefault(_postIt);
 var _postItDialog = require('./post-it-dialog');
 
 var _postItDialog2 = _interopRequireDefault(_postItDialog);
+
+var _columnContent = require('./column-content');
+
+var _columnContent2 = _interopRequireDefault(_columnContent);
+
+var _sideBar = require('./side-bar');
+
+var _sideBar2 = _interopRequireDefault(_sideBar);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21205,19 +21448,27 @@ var WhiteboardContainer = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'whiteboard-container' },
-        _react2.default.createElement(_addButton2.default, {
-          showDialog: this.handleDialog
-        }),
+        { className: 'main-container' },
+        _react2.default.createElement(
+          _sideBar2.default,
+          null,
+          _react2.default.createElement(_addButton2.default, {
+            showDialog: this.handleDialog
+          })
+        ),
         _react2.default.createElement(_postItDialog2.default, {
           isVisible: this.state.displayDialog,
           onAdd: this.handleAdd,
           onHandleClose: this.handleClose
         }),
-        _react2.default.createElement(_postIt2.default, {
-          postIts: this.state.postIts,
-          onRemove: this.handleRemove
-        })
+        _react2.default.createElement(
+          _columnContent2.default,
+          null,
+          _react2.default.createElement(_postIt2.default, {
+            postIts: this.state.postIts,
+            onRemove: this.handleRemove
+          })
+        )
       );
     }
   }]);
@@ -21227,7 +21478,7 @@ var WhiteboardContainer = function (_React$Component) {
 
 exports.default = WhiteboardContainer;
 
-},{"./add-button":173,"./post-it":175,"./post-it-dialog":174,"react":171}]},{},[172])
+},{"./add-button":173,"./column-content":174,"./post-it":176,"./post-it-dialog":175,"./side-bar":177,"react":171}]},{},[172])
 
 
 //# sourceMappingURL=whiteboard.bundle.js.map

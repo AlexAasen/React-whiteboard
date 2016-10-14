@@ -9,7 +9,7 @@ const PostItDialog = (props) => {
     if (colorSelect.trim().length > 0) {
       props.onAdd(postItTitle.value, postItDescription.value, colorSelect);
     } else {
-      colorSelect = 'green';
+      colorSelect = 'yellow';
       props.onAdd(postItTitle.value, postItDescription.value, colorSelect);
     }
   }
