@@ -26,7 +26,7 @@ PostIt.propTypes = () => ({
 });
 
 const PostItList = props => (<ul className="ul-colstyle">{
-  props.postIts.map(postIt =>
+  props.backlogPostIts.map(postIt =>
   (<PostIt
     key={postIt.id}
     id={postIt.id}
@@ -39,7 +39,7 @@ const PostItList = props => (<ul className="ul-colstyle">{
 }</ul>);
 
 PostItList.propTypes = () => ({
-  postIts: React.PropTypes.arrayOf(
+  backlogPostIts: React.PropTypes.arrayOf(
     React.PropTypes.shape({
       id: React.PropTypes.number,
       title: React.PropTypes.string,

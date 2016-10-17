@@ -1,70 +1,46 @@
 import React from 'react';
 import AddButton from './add-button';
-import AddColButton from './add-col-button';
+//import AddColButton from './add-col-button';
 import PostItDialog from './post-it-dialog';
-import ColumnDialog from './column-dialog';
-import Columns from './columns';
-import Column from './column';
-import PostItList from './column-postits';
+//import ColumnDialog from './column-dialog';
+import Backlog from './column';
+import PostIt from './column-postits';
 import SideBar from './side-bar';
 import * as actions from '../actions';
 import { connect } from 'react-redux';
 
-const WhiteboardContainer = props => (
-  <div className="main-container">
-    <SideBar>
-      <AddColButton
-      showDialog={props.handleDialogColumn}
-      />
-      <AddButton
-        showDialog={props.handleDialogPostIt}
-      />
-    </ SideBar>
-    <PostItDialog
-      isVisiblePostIt={props.displayDialog}
-      onAddPostIt={props.onAddPostIt}
-      onHandleClose={props.handleClose}
-    />
-    <ColumnDialog
-      isVisible={props.displayColDialog}
-      onAddCol={props.handleAddCol}
-      onHandleClose={props.handleClose}
-    />
-    <div className="nav wb-sections">
-      <ul className="ul-rowstyle">
-        <Column
-          className="wb-section locked"
-          title="backlog">
-          <PostIt
-            postIts={props.backlog}
-            onRemove={props.handleRemove}
+class WhiteboardContainer extends React.Component {
+  render() {
+    return (
+      <div className="main-container">
+        <SideBar>
+          <AddButton
+            showDialog={this.props.handleDialogPostIt}
           />
-        </Column>
-        <Columns
-          className="nav wb-section"
-          columns={props.columns}
-          onRemove={props.handleRemove}
+        </ SideBar>
+        <PostItDialog
+          isVisiblePostIt={this.props.displayDialog}
+          onAddPostIt={this.props.onAddPostIt}
+          onHandleClose={this.props.onHandleClose}
         />
-        <Column
-          className="wb-section locked"
-          title="done">
-          <PostIt
-            postIts={props.done}
-            onRemove={props.handleRemove}
-          />
-        </Column>
-      </ul>
-    </div>
-  </div>
-);
+        <div className="nav wb-sections">
+          <ul className="ul-rowstyle">
+            <Backlog>
+              <PostIt
+                backlogPostIts={this.props.backlogPostIts}
+                onRemove={this.props.handleRemove}
+              />
+            </Backlog>
+          </ul>
+        </div>
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = state => ({
-  postIts: state.columns.column.postIts,
-  columns: state.columns,
-  postIt: state.columns.column.postIts.postIt,
-  isVisiblePostIt: state.postitDialog,
-  isVisibleCol: state.columnDialog
-
+  displayColDialog: state.displayDialog,
+  backlogPostIts: state.backlogPostIts
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -73,27 +49,20 @@ const mapDispatchToProps = dispatch => ({
           id: +(new Date()),
           title: postTitle,
           description: postItDescription,
+          columId: "backlog",
           color: postItColor,
     };
     dispatch(addPostIt(postIt));
   },
-  onAddCol: (colTitle) => {
-    const column = {
-          id: colTitle,
-          title: colTitle
-    };
-    dispatch(addColumn(column));
+  handleRemove: (id) => {
+    dispatch(removePostIt(id));
   },
-  handleClose: () => {
-   dispatch(setVisFilterCol(false));
+  onHandleClose: () => {
    dispatch(setVisFilterPostIt(false));
   },
   handleDialogPostIt: () =>  {
     dispatch(setVisFilterPostIt(true));
-  },
-  handleDialogColumn: () =>  {
-    dispatch(setVisFilterCol(true));
   }
 });
 
-export default WhiteboardContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(WhiteboardContainer);

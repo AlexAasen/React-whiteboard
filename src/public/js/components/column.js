@@ -1,13 +1,13 @@
 import React from 'react';
 import PostItList from './column-postits';
 
-
-const Column = (props) => {
+//får in alla columner
+const Backlog = (props) => {
   return (
-    <li className={props.className} id={props.title}>
+    <li className="wb-section locked" id="backlog">
       <div className="wb-section">
-        <div className="wb-section-title" id={props.title}>
-          <h2 className="title">{props.title}</h2>
+        <div className="wb-section-title" id="backlog">
+          <h2 className="title">"Backlog"</h2>
         </div>
         <div className="wb-section-content">
           <ul className="ul-rowstyle">
@@ -16,10 +16,6 @@ const Column = (props) => {
         </div>
       </div>
     </li>);
-  };
+}
 
-    Column.propTypes = () => ({
-      postIt: React.PropTypes.element
-    });
-
-export default Column;
+export default Backlog;

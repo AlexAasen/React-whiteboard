@@ -1,19 +1,19 @@
 import { ADD_POSTIT, REMOVE_POSTIT, UPDATE_POSTIT, UPDATE_POSTIT_COLUMN, ADD_COLUMN } from '../constants/action-types';
 
-const initialState = { backlog: [], columns: [], done: [] };
+const initialState = { backlogPostIts: [] };
 const reducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
-    case ADD_COLUMN: {
+    /*case ADD_COLUMN: {
       const newCol = Object.assign({}, action.data);
       newState = Object.assign({}, state, [...state.columns, newCol]);
       return newState;
-    }
+    }*/
     case ADD_POSTIT: {
       const postIt = Object.assign({}, action.data);
       newState = Object.assign({}, state);
       //make a new copy of first column, aka backlog and add postIt to it.
-      newState = Object.assign({}, state, [...state.backlog, postIt]);
+      newState = Object.assign({}, state, [...state.backlogPostIts, postIt]);
       return newState;
     }
     case UPDATE_POSTIT: {
@@ -22,7 +22,7 @@ const reducer = (state = initialState, action) => {
       newState = Object.assign({}, state);
       //Look through the state of columns, give an input of what to search for
       //and a value to switch the selected item to.
-      newState = Object.assign({}, state, state.backlog.map(postIt =>
+      newState = Object.assign({}, state, state.backlogPostIts.map(postIt =>
         //Is the current postIt.id equal to the id we're looking for?
         postIt.id === newPostIt.id ?
         //if it is then change the postIts values
@@ -36,7 +36,7 @@ const reducer = (state = initialState, action) => {
       const postIt = Object.assign({}, action.data);
       newState = Object.assign({}, state);
       //Filter through the column in which the postIt lives and return the column without it
-      newState = Object.assign({}, state, state.backlog.filter(postit => postit.id !== postIt.id));
+      newState = Object.assign({}, state, state.backlogPostIts.filter(postit => postit.id !== postIt.id));
       return newState;
     }
     case UPDATE_POSTIT_COLUMN: {
