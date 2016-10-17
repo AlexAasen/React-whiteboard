@@ -22355,13 +22355,6 @@ module.exports.addPostIt = function (postIt) {
   };
 };
 
-module.exports.removePostIt = function (id) {
-  return {
-    type: types.REMOVE_POSTIT,
-    data: postIt
-  };
-};
-
 module.exports.updatePostIt = function (postIt) {
   return {
     type: types.UPDATE_POSTIT,
@@ -22375,16 +22368,6 @@ module.exports.updatePostItColumn = function (postIt) {
     data: postIt
   };
 };
-/*
-module.exports.addColumn = column => ({
-  type: types.ADD_COLUMN,
-  data: column
-});
-
-module.exports.setVisFilterCol = boolean => ({
-  type: types.SET_VISFILTER_COL,
-  data: boolean
-});*/
 
 module.exports.setVisFilterPostIt = function (boolean) {
   return {
@@ -22446,7 +22429,6 @@ var AddButton = function AddButton(props) {
     _react2.default.createElement("button", { className: "add-button", onClick: handleClick })
   );
 };
-
 AddButton.propTypes = function () {
   return {
     showDialog: _react2.default.PropTypes.func
@@ -22468,122 +22450,185 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PostIt = function PostIt(props) {
-  function removePostIt() {
-    props.onRemove(props.postIt);
-  }
+var ColumnContent = function ColumnContent(props) {
   return _react2.default.createElement(
-    "li",
-    {
-      className: "post-it-container"
-    },
+    "div",
+    { className: "nav wb-sections" },
     _react2.default.createElement(
-      "div",
-      { className: "post-it " + props.postIt.color },
+      "ul",
+      { className: "ul-rowstyle" },
       _react2.default.createElement(
-        "h3",
-        { className: "title" },
-        props.postIt.title
+        "li",
+        { className: "wb-section locked", id: "backlog" },
+        _react2.default.createElement(
+          "div",
+          { className: "wb-section" },
+          _react2.default.createElement(
+            "div",
+            { className: "wb-section-title", id: "backlog" },
+            _react2.default.createElement(
+              "h2",
+              { id: "backlog" },
+              "Backlog"
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "wb-section-content" },
+            props.children
+          )
+        )
       ),
       _react2.default.createElement(
-        "p",
-        { className: "description" },
-        props.postIt.description
+        "div",
+        { className: "nav wb-sections" },
+        _react2.default.createElement(
+          "ul",
+          { className: "ul-rowstyle" },
+          _react2.default.createElement(
+            "li",
+            { className: "wb-section", id: "stories" },
+            _react2.default.createElement(
+              "div",
+              { className: "wb-section" },
+              _react2.default.createElement(
+                "div",
+                { className: "wb-section-title" },
+                _react2.default.createElement(
+                  "h2",
+                  { id: "stories" },
+                  "Stories"
+                )
+              ),
+              _react2.default.createElement(
+                "div",
+                { className: "wb-section-content" },
+                _react2.default.createElement(
+                  "p",
+                  null,
+                  "Content here"
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: "wb-section", id: "curr-sprint" },
+            _react2.default.createElement(
+              "div",
+              { className: "wb-section" },
+              _react2.default.createElement(
+                "div",
+                { className: "wb-section-title" },
+                _react2.default.createElement(
+                  "h2",
+                  { id: "curr-sprint" },
+                  "Current sprint"
+                )
+              ),
+              _react2.default.createElement(
+                "div",
+                { className: "wb-section-content" },
+                _react2.default.createElement(
+                  "p",
+                  null,
+                  "Content here"
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: "wb-section", id: "wip" },
+            _react2.default.createElement(
+              "div",
+              { className: "wb-section" },
+              _react2.default.createElement(
+                "div",
+                { className: "wb-section-title" },
+                _react2.default.createElement(
+                  "h2",
+                  { id: "wip" },
+                  "WIP"
+                )
+              ),
+              _react2.default.createElement(
+                "div",
+                { className: "wb-section-content" },
+                _react2.default.createElement(
+                  "p",
+                  null,
+                  "Content here"
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "li",
+            { className: "wb-section", id: "test" },
+            _react2.default.createElement(
+              "div",
+              { className: "wb-section" },
+              _react2.default.createElement(
+                "div",
+                { className: "wb-section-title" },
+                _react2.default.createElement(
+                  "h2",
+                  { id: "test" },
+                  "Testing"
+                )
+              ),
+              _react2.default.createElement(
+                "div",
+                { className: "wb-section-content" },
+                _react2.default.createElement(
+                  "p",
+                  null,
+                  "Content here"
+                )
+              )
+            )
+          )
+        )
       ),
-      _react2.default.createElement("img", { src: "img/edit24.png", id: "edit", alt: "edit post-it" }),
       _react2.default.createElement(
-        "button",
-        { className: "close", onClick: removePostIt },
-        "\u2715"
+        "li",
+        { className: "wb-section locked", id: "done" },
+        _react2.default.createElement(
+          "div",
+          { className: "wb-section" },
+          _react2.default.createElement(
+            "div",
+            { className: "wb-section-title" },
+            _react2.default.createElement(
+              "h2",
+              { id: "done" },
+              "Done"
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "wb-section-content" },
+            _react2.default.createElement(
+              "p",
+              null,
+              "Content here"
+            )
+          )
+        )
       )
     )
   );
 };
-PostIt.propTypes = function () {
+ColumnContent.propTypes = function () {
   return {
-    id: _react2.default.PropTypes.number.isRequired,
-    title: _react2.default.PropTypes.string,
-    color: _react2.default.PropTypes.string,
-    description: _react2.default.PropTypes.string,
-    onRemove: _react2.default.PropTypes.func
+    postIt: _react2.default.PropTypes.element
   };
 };
 
-var PostItList = function PostItList(props) {
-  return _react2.default.createElement(
-    "ul",
-    { className: "ul-colstyle" },
-    props.backlogPostIts.map(function (postIt) {
-      return _react2.default.createElement(PostIt, {
-        key: postIt.id,
-        postIt: postIt,
-        onRemove: props.onRemove
-      });
-    }).reverse()
-  );
-};
-
-PostItList.propTypes = function () {
-  return {
-    backlogPostIts: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
-      postIt: _react2.default.PropTypes.Object
-    })),
-    onRemove: _react2.default.PropTypes.func
-  };
-};
-
-exports.default = PostItList;
+exports.default = ColumnContent;
 
 },{"react":184}],203:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _columnPostits = require('./column-postits');
-
-var _columnPostits2 = _interopRequireDefault(_columnPostits);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//får in alla columner
-var Backlog = function Backlog(props) {
-  return _react2.default.createElement(
-    'li',
-    { className: 'wb-section locked', id: 'backlog' },
-    _react2.default.createElement(
-      'div',
-      { className: 'wb-section' },
-      _react2.default.createElement(
-        'div',
-        { className: 'wb-section-title', id: 'backlog' },
-        _react2.default.createElement(
-          'h2',
-          { className: 'title' },
-          '"Backlog"'
-        )
-      ),
-      _react2.default.createElement(
-        'div',
-        { className: 'wb-section-content' },
-        _react2.default.createElement(
-          'ul',
-          { className: 'ul-rowstyle' },
-          props.children
-        )
-      )
-    )
-  );
-};
-
-exports.default = Backlog;
-
-},{"./column-postits":202,"react":184}],204:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22603,24 +22648,21 @@ var PostItDialog = function PostItDialog(props) {
 
   function handleSave() {
     if (colorSelect.trim().length > 0) {
-      props.onAddPostIt(postItTitle.value, postItDescription.value, colorSelect);
+      props.onAdd(postItTitle.value, postItDescription.value, colorSelect);
     } else {
       colorSelect = 'yellow';
-      props.onAddPostIt(postItTitle.value, postItDescription.value, colorSelect);
+      props.onAdd(postItTitle.value, postItDescription.value, colorSelect);
     }
   }
   function handleSelect(event) {
     colorSelect = event.currentTarget.id;
-  }
-  function handleList() {
-    console.log('bajs');
   }
   function handleClose() {
     var visfilter = { filter: false };
     props.showDialog(visfilter);
   }
 
-  if (props.isVisiblePostIt) {
+  if (props.isVisible) {
     return _react2.default.createElement(
       'div',
       { className: 'main-dialog-container' },
@@ -22707,11 +22749,6 @@ var PostItDialog = function PostItDialog(props) {
           ),
           _react2.default.createElement(
             'button',
-            { className: 'add-listitem-button', onClick: handleList },
-            'List'
-          ),
-          _react2.default.createElement(
-            'button',
             { className: 'save-button', onClick: handleSave },
             'Save'
           )
@@ -22723,13 +22760,96 @@ var PostItDialog = function PostItDialog(props) {
 };
 PostItDialog.propTypes = function () {
   return {
-    isVisiblePostIt: _react2.default.PropTypes.boolean,
-    showDialog: _react2.default.PropTypes.func,
-    onAddPostIt: _react2.default.PropTypes.func
+    isVisible: _react2.default.PropTypes.bool
   };
 };
 
 exports.default = PostItDialog;
+
+},{"react":184}],204:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var PostIt = function PostIt(props) {
+  function removePostIt() {
+    props.onRemove(props.id);
+  }
+  return _react2.default.createElement(
+    "li",
+    {
+      className: "post-it-container"
+    },
+    _react2.default.createElement(
+      "div",
+      { className: "post-it " + props.color },
+      _react2.default.createElement(
+        "h3",
+        { className: "title" },
+        props.title
+      ),
+      _react2.default.createElement(
+        "p",
+        { className: "description" },
+        props.description
+      ),
+      _react2.default.createElement("img", { src: "img/edit24.png", id: "edit", alt: "edit post-it" }),
+      _react2.default.createElement(
+        "button",
+        { className: "close", onClick: removePostIt },
+        "\u2715"
+      )
+    )
+  );
+};
+PostIt.propTypes = function () {
+  return {
+    id: _react2.default.PropTypes.number.isRequired,
+    title: _react2.default.PropTypes.string,
+    color: _react2.default.PropTypes.string,
+    description: _react2.default.PropTypes.string,
+    onRemove: _react2.default.PropTypes.func
+  };
+};
+
+var PostItList = function PostItList(props) {
+  return _react2.default.createElement(
+    "ul",
+    { className: "ul-colstyle" },
+    props.postIts.map(function (postIt) {
+      return _react2.default.createElement(PostIt, {
+        key: postIt.id,
+        id: postIt.id,
+        title: postIt.title,
+        color: postIt.color,
+        description: postIt.description,
+        onRemove: props.onRemove
+      });
+    }).reverse()
+  );
+};
+
+PostItList.propTypes = function () {
+  return {
+    postIts: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
+      id: _react2.default.PropTypes.number,
+      title: _react2.default.PropTypes.string,
+      color: _react2.default.PropTypes.string,
+      description: _react2.default.PropTypes.string
+    })),
+    onRemove: _react2.default.PropTypes.func
+  };
+};
+
+exports.default = PostItList;
 
 },{"react":184}],205:[function(require,module,exports){
 "use strict";
@@ -22751,7 +22871,20 @@ var SideBar = function SideBar(props) {
     _react2.default.createElement(
       "ul",
       { className: "ul-colstyle" },
-      props.children
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          "div",
+          { className: "img-holder nav-menu add-col" },
+          _react2.default.createElement("img", { src: "img/add.png", alt: "add col" })
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        props.children
+      )
     )
   );
 };
@@ -22775,29 +22908,29 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = require('react-redux');
+
+var _actions = require('../actions');
+
 var _addButton = require('./add-button');
 
 var _addButton2 = _interopRequireDefault(_addButton);
+
+var _postIt = require('./post-it');
+
+var _postIt2 = _interopRequireDefault(_postIt);
 
 var _postItDialog = require('./post-it-dialog');
 
 var _postItDialog2 = _interopRequireDefault(_postItDialog);
 
-var _column = require('./column');
+var _columnContent = require('./column-content');
 
-var _column2 = _interopRequireDefault(_column);
-
-var _columnPostits = require('./column-postits');
-
-var _columnPostits2 = _interopRequireDefault(_columnPostits);
+var _columnContent2 = _interopRequireDefault(_columnContent);
 
 var _sideBar = require('./side-bar');
 
 var _sideBar2 = _interopRequireDefault(_sideBar);
-
-var _actions = require('../actions');
-
-var _reactRedux = require('react-redux');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22806,10 +22939,81 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-//import AddColButton from './add-col-button';
 
-//import ColumnDialog from './column-dialog';
+/* class WhiteboardContainer extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      postIts: [],
+      displayDialog: false
+    };
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+    this.handleDialog = this.handleDialog.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
 
+  handleDialog() {
+    this.setState({
+      displayDialog: true
+    });
+  }
+
+  handleAdd(postItTitle, postItDescription, postItColor) {
+    const postTitle = postItTitle.trim();
+
+    if (postTitle.length > 0) {
+      this.setState({
+        postIts: this.state.postIts.concat([{
+          id: +(new Date()),
+          title: postTitle,
+          description: postItDescription,
+          color: postItColor
+        }]),
+        displayDialog: false
+      });
+    }
+  }
+
+  handleRemove(id) {
+    this.setState({
+      postIts: this.state.postIts.filter(item => item.id !== id)
+    });
+  }
+
+  handleClose() {
+    this.setState({
+      displayDialog: false
+    });
+  }
+
+  render() {
+    return (
+      <div className="main-container">
+        <SideBar>
+          <AddButton
+            showDialog={this.handleDialog}
+          />
+        </ SideBar>
+        <PostItDialog
+          isVisible={this.state.displayDialog}
+          onAdd={this.handleAdd}
+          onHandleClose={this.handleClose}
+        />
+
+        <ColumnContent>
+          <PostIt
+            postIts={this.state.postIts}
+            onRemove={this.handleRemove}
+          />
+        </ColumnContent>
+      </div>
+    );
+  }
+
+}
+
+export default WhiteboardContainer;*/
 
 var WhiteboardContainer = function (_React$Component) {
   _inherits(WhiteboardContainer, _React$Component);
@@ -22834,21 +23038,17 @@ var WhiteboardContainer = function (_React$Component) {
           })
         ),
         _react2.default.createElement(_postItDialog2.default, {
-          isVisiblePostIt: this.props.isVisiblePostIt,
-          onAddPostIt: this.props.onAddPostIt,
+          isVisible: this.props.isVisible,
+          onAdd: this.props.onAdd,
           showDialog: this.props.showDialog
         }),
         _react2.default.createElement(
-          'div',
-          { className: 'nav wb-sections' },
-          _react2.default.createElement(
-            'ul',
-            { className: 'ul-rowstyle' },
-            _react2.default.createElement(_column2.default, {
-              backlogPostIts: this.props.backlogPostIts,
-              onRemove: this.props.onRemove
-            })
-          )
+          _columnContent2.default,
+          null,
+          _react2.default.createElement(_postIt2.default, {
+            postIts: this.props.postIts,
+            onRemove: this.handleRemove
+          })
         )
       );
     }
@@ -22859,25 +23059,21 @@ var WhiteboardContainer = function (_React$Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    isVisiblePostIt: state.visfilter.filter,
-    backlogPostIts: state.backlogPostIts
+    isVisible: state.visfilter.filter,
+    postIts: state.postIts
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onAddPostIt: function onAddPostIt(postItTitle, postItDescription, postItColor) {
+    onAdd: function onAdd(postItTitle, postItDescription, postItColor) {
       var postIt = {
         id: +new Date(),
         title: postItTitle,
         description: postItDescription,
-        columId: "backlog",
         color: postItColor
       };
       dispatch((0, _actions.addPostIt)(postIt));
-    },
-    onRemove: function onRemove(postIt) {
-      dispatch((0, _actions.removePostIt)(id));
     },
     showDialog: function showDialog(visfilter) {
       dispatch((0, _actions.setVisFilterPostIt)(visfilter));
@@ -22887,7 +23083,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(WhiteboardContainer);
 
-},{"../actions":199,"./add-button":201,"./column":203,"./column-postits":202,"./post-it-dialog":204,"./side-bar":205,"react":184,"react-redux":32}],207:[function(require,module,exports){
+},{"../actions":199,"./add-button":201,"./column-content":202,"./post-it":204,"./post-it-dialog":203,"./side-bar":205,"react":184,"react-redux":32}],207:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22908,86 +23104,41 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _redux = require('redux');
 
-var _actionTypes = require('../constants/action-types');
+var _postIt = require('./post-it');
+
+var _postIt2 = _interopRequireDefault(_postIt);
+
+var _visfilter = require('./visfilter');
+
+var _visfilter2 = _interopRequireDefault(_visfilter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = (0, _redux.combineReducers)({
+  postIts: _postIt2.default,
+  visfilter: _visfilter2.default
+});
+
+},{"./post-it":209,"./visfilter":210,"redux":190}],209:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var reducer = function reducer() {
+exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments[1];
 
-  var newState = void 0;
   switch (action.type) {
-    /*case ADD_COLUMN: {
-      const newCol = Object.assign({}, action.data);
-      newState = Object.assign({}, state, [...state.columns, newCol]);
-      return newState;
-    }*/
-    case _actionTypes.ADD_POSTIT:
+    case 'ADD_POSTIT':
       {
-        var _postIt = Object.assign({}, action.data);
-        newState = [].concat(_toConsumableArray(state), [_postIt]);
-        return newState;
-      }
-    case _actionTypes.UPDATE_POSTIT:
-      {
-        var _ret = function () {
-          var newPostIt = Object.assign({}, action.data);
-          //Make a copy of columns state
-          //Look through the state of columns, give an input of what to search for
-          //and a value to switch the selected item to.
-          newState = Object.assign({}, state, state.map(function (postIt) {
-            return (
-              //Is the current postIt.id equal to the id we're looking for?
-              postIt.id === newPostIt.id ?
-              //if it is then change the postIts values
-              Object.assign({}, postIt, newPostIt) :
-              //if it isn't, then leave the value as it was
-              postIt
-            );
-          }));
-          return {
-            v: newState
-          };
-        }();
-
-        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-      }
-    case _actionTypes.REMOVE_POSTIT:
-      {
-        var _ret2 = function () {
-          var postIt = Object.assign({}, action.data);
-          //Filter through the column in which the postIt lives and return the column without it
-          newState = state.filter(function (postit) {
-            return postit.id !== postIt.id;
-          });
-          return {
-            v: newState
-          };
-        }();
-
-        if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
-      }
-    case _actionTypes.UPDATE_POSTIT_COLUMN:
-      {
-        var _ret3 = function () {
-          var newPostIt = Object.assign({}, action.data);
-          var oldPostIt = Object.assign({}, action.oldData);
-          newState = Object.assign({}, columns);
-          //Begin by loading the oldPostits column and filtering the postIt out.
-          newState[oldPostIt.columnId] = newState[oldPostIt.columnId].filter(function (postit) {
-            return postit.id !== oldPostIt.id;
-          });
-          //Then add the postIt to the new column
-          newState[newPostIt.columnId] = [].concat(_toConsumableArray(newState[newPostIt.columnId]), [postIt]);
-          return {
-            v: newState
-          };
-        }();
-
-        if ((typeof _ret3 === 'undefined' ? 'undefined' : _typeof(_ret3)) === "object") return _ret3.v;
+        var newPostIt = Object.assign({}, action.data, { id: action.data.id || state.legth });
+        return [].concat(_toConsumableArray(state), [newPostIt]);
       }
     default:
       {
@@ -22996,43 +23147,7 @@ var reducer = function reducer() {
   }
 };
 
-exports.default = reducer;
-
-},{"../constants/action-types":207}],209:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _redux = require('redux');
-
-var _columns = require('./columns');
-
-var _columns2 = _interopRequireDefault(_columns);
-
-var _visFilter = require('./visFilter');
-
-var _visFilter2 = _interopRequireDefault(_visFilter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/*
-const reducer = (state, action) => ({
-  basket: basket(state.basket, action),
-  user: user(state.user, action),
-  pets: pets(state.pets, action)
-});
-*/
-
-var reducer = (0, _redux.combineReducers)({
-  columns: _columns2.default,
-  visfilter: _visFilter2.default
-});
-
-exports.default = reducer;
-
-},{"./columns":208,"./visFilter":210,"redux":190}],210:[function(require,module,exports){
+},{}],210:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23047,7 +23162,7 @@ var reducer = function reducer() {
 
   var newState = void 0;
   switch (action.type) {
-    /*case SET_VISFILTER_COL: {
+    /* case SET_VISFILTER_COL: {
       const boolean = Object.assign({}, action.data);
       newState = Object.assign({}, state, Object.assign({}, state.displayColDialog: boolean));
       return newState;
@@ -23084,7 +23199,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var store = (0, _redux.createStore)(_reducers2.default);
 exports.default = store;
 
-},{"../reducers":209,"redux":190}]},{},[200])
+},{"../reducers":208,"redux":190}]},{},[200])
 
 
 //# sourceMappingURL=whiteboard.bundle.js.map

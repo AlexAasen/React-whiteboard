@@ -1,18 +1,8 @@
 import { combineReducers } from 'redux';
-import columns from './columns';
-import visfilter from './visFilter';
+import postIts from './post-it';
+import visfilter from './visfilter';
 
-/*
-const reducer = (state, action) => ({
-  basket: basket(state.basket, action),
-  user: user(state.user, action),
-  pets: pets(state.pets, action)
-});
-*/
-
-const reducer = combineReducers({
-  columns,
+export default combineReducers({
+  postIts,
   visfilter
 });
-
-export default reducer;

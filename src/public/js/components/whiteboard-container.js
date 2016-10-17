@@ -1,13 +1,86 @@
 import React from 'react';
-import AddButton from './add-button';
-//import AddColButton from './add-col-button';
-import PostItDialog from './post-it-dialog';
-//import ColumnDialog from './column-dialog';
-import Backlog from './column';
-import PostIt from './column-postits';
-import SideBar from './side-bar';
-import { addPostIt, setVisFilterPostIt, removePostIt } from '../actions';
 import { connect } from 'react-redux';
+import { addPostIt, setVisFilterPostIt } from '../actions';
+import AddButton from './add-button';
+import PostIt from './post-it';
+import PostItDialog from './post-it-dialog';
+import ColumnContent from './column-content';
+import SideBar from './side-bar';
+
+/* class WhiteboardContainer extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      postIts: [],
+      displayDialog: false
+    };
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+    this.handleDialog = this.handleDialog.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
+
+  handleDialog() {
+    this.setState({
+      displayDialog: true
+    });
+  }
+
+  handleAdd(postItTitle, postItDescription, postItColor) {
+    const postTitle = postItTitle.trim();
+
+    if (postTitle.length > 0) {
+      this.setState({
+        postIts: this.state.postIts.concat([{
+          id: +(new Date()),
+          title: postTitle,
+          description: postItDescription,
+          color: postItColor
+        }]),
+        displayDialog: false
+      });
+    }
+  }
+
+  handleRemove(id) {
+    this.setState({
+      postIts: this.state.postIts.filter(item => item.id !== id)
+    });
+  }
+
+  handleClose() {
+    this.setState({
+      displayDialog: false
+    });
+  }
+
+  render() {
+    return (
+      <div className="main-container">
+        <SideBar>
+          <AddButton
+            showDialog={this.handleDialog}
+          />
+        </ SideBar>
+        <PostItDialog
+          isVisible={this.state.displayDialog}
+          onAdd={this.handleAdd}
+          onHandleClose={this.handleClose}
+        />
+
+        <ColumnContent>
+          <PostIt
+            postIts={this.state.postIts}
+            onRemove={this.handleRemove}
+          />
+        </ColumnContent>
+      </div>
+    );
+  }
+
+}
+
+export default WhiteboardContainer;*/
 
 class WhiteboardContainer extends React.Component {
   render() {
@@ -19,43 +92,38 @@ class WhiteboardContainer extends React.Component {
           />
         </ SideBar>
         <PostItDialog
-          isVisiblePostIt={this.props.isVisiblePostIt}
-          onAddPostIt={this.props.onAddPostIt}
+          isVisible={this.props.isVisible}
+          onAdd={this.props.onAdd}
           showDialog={this.props.showDialog}
         />
-        <div className="nav wb-sections">
-          <ul className="ul-rowstyle">
-            <Backlog
-              backlogPostIts={this.props.backlogPostIts}
-              onRemove={this.props.onRemove}
-            />
-          </ul>
-        </div>
+
+        <ColumnContent>
+          <PostIt
+            postIts={this.props.postIts}
+            onRemove={this.handleRemove}
+          />
+        </ColumnContent>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  isVisiblePostIt: state.visfilter.filter,
-  backlogPostIts: state.backlogPostIts
+  isVisible: state.visfilter.filter,
+  postIts: state.postIts
 });
 
 const mapDispatchToProps = dispatch => ({
-  onAddPostIt: (postItTitle, postItDescription, postItColor) => {
+  onAdd: (postItTitle, postItDescription, postItColor) => {
     const postIt = {
-          id: +(new Date()),
-          title: postItTitle,
-          description: postItDescription,
-          columId: "backlog",
-          color: postItColor,
+      id: +(new Date()),
+      title: postItTitle,
+      description: postItDescription,
+      color: postItColor
     };
     dispatch(addPostIt(postIt));
   },
-  onRemove: (postIt) => {
-    dispatch(removePostIt(id));
-  },
-  showDialog: (visfilter) =>  {
+  showDialog: (visfilter) => {
     dispatch(setVisFilterPostIt(visfilter));
   }
 });
