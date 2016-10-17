@@ -22393,7 +22393,7 @@ module.exports.setVisFilterPostIt = function (boolean) {
   };
 };
 
-},{"../constants/action-types":207}],200:[function(require,module,exports){
+},{"../constants/action-types":206}],200:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -22422,7 +22422,7 @@ _reactDom2.default.render(_react2.default.createElement(
   _react2.default.createElement(_whiteboardContainer2.default, null)
 ), document.querySelector('#application'));
 
-},{"./components/whiteboard-container":206,"./store":211,"react":184,"react-dom":29,"react-redux":32}],201:[function(require,module,exports){
+},{"./components/whiteboard-container":205,"./store":210,"react":184,"react-dom":29,"react-redux":32}],201:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22535,55 +22535,6 @@ PostItList.propTypes = function () {
 exports.default = PostItList;
 
 },{"react":184}],203:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _columnPostits = require('./column-postits');
-
-var _columnPostits2 = _interopRequireDefault(_columnPostits);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//får in alla columner
-var Backlog = function Backlog(props) {
-  return _react2.default.createElement(
-    'li',
-    { className: 'wb-section locked', id: 'backlog' },
-    _react2.default.createElement(
-      'div',
-      { className: 'wb-section' },
-      _react2.default.createElement(
-        'div',
-        { className: 'wb-section-title', id: 'backlog' },
-        _react2.default.createElement(
-          'h2',
-          { className: 'title' },
-          '"Backlog"'
-        )
-      ),
-      _react2.default.createElement(
-        'div',
-        { className: 'wb-section-content' },
-        _react2.default.createElement(
-          'ul',
-          { className: 'ul-rowstyle' },
-          props.children
-        )
-      )
-    )
-  );
-};
-
-exports.default = Backlog;
-
-},{"./column-postits":202,"react":184}],204:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22731,7 +22682,7 @@ PostItDialog.propTypes = function () {
 
 exports.default = PostItDialog;
 
-},{"react":184}],205:[function(require,module,exports){
+},{"react":184}],204:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22762,7 +22713,7 @@ SideBar.propTypes = function () {
 };
 exports.default = SideBar;
 
-},{"react":184}],206:[function(require,module,exports){
+},{"react":184}],205:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22782,10 +22733,6 @@ var _addButton2 = _interopRequireDefault(_addButton);
 var _postItDialog = require('./post-it-dialog');
 
 var _postItDialog2 = _interopRequireDefault(_postItDialog);
-
-var _column = require('./column');
-
-var _column2 = _interopRequireDefault(_column);
 
 var _columnPostits = require('./column-postits');
 
@@ -22844,7 +22791,7 @@ var WhiteboardContainer = function (_React$Component) {
           _react2.default.createElement(
             'ul',
             { className: 'ul-rowstyle' },
-            _react2.default.createElement(_column2.default, {
+            _react2.default.createElement(_columnPostits2.default, {
               backlogPostIts: this.props.backlogPostIts,
               onRemove: this.props.onRemove
             })
@@ -22887,7 +22834,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(WhiteboardContainer);
 
-},{"../actions":199,"./add-button":201,"./column":203,"./column-postits":202,"./post-it-dialog":204,"./side-bar":205,"react":184,"react-redux":32}],207:[function(require,module,exports){
+},{"../actions":199,"./add-button":201,"./column-postits":202,"./post-it-dialog":203,"./side-bar":204,"react":184,"react-redux":32}],206:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22901,7 +22848,7 @@ var UPDATE_POSTIT = exports.UPDATE_POSTIT = 'UPDATE_POSTIT';
 var SET_VISFILTER_COL = exports.SET_VISFILTER_COL = 'SET_VISFILTER_COL';
 var SET_VISFILTER_POSTIT = exports.SET_VISFILTER_POSTIT = 'SET_VISFILTER_POSTIT';
 
-},{}],208:[function(require,module,exports){
+},{}],207:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22998,7 +22945,7 @@ var reducer = function reducer() {
 
 exports.default = reducer;
 
-},{"../constants/action-types":207}],209:[function(require,module,exports){
+},{"../constants/action-types":206}],208:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23032,7 +22979,7 @@ var reducer = (0, _redux.combineReducers)({
 
 exports.default = reducer;
 
-},{"./columns":208,"./visFilter":210,"redux":190}],210:[function(require,module,exports){
+},{"./columns":207,"./visFilter":209,"redux":190}],209:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23066,7 +23013,7 @@ var reducer = function reducer() {
 
 exports.default = reducer;
 
-},{"../constants/action-types":207}],211:[function(require,module,exports){
+},{"../constants/action-types":206}],210:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23084,7 +23031,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var store = (0, _redux.createStore)(_reducers2.default);
 exports.default = store;
 
-},{"../reducers":209,"redux":190}]},{},[200])
+},{"../reducers":208,"redux":190}]},{},[200])
 
 
 //# sourceMappingURL=whiteboard.bundle.js.map

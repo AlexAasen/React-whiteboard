@@ -25,15 +25,29 @@ PostIt.propTypes = () => ({
   onRemove: React.PropTypes.func
 });
 
-const PostItList = props => (<ul className="ul-colstyle">{
-  props.backlogPostIts.map(postIt =>
-  (<PostIt
-    key={postIt.id}
-    postIt={postIt}
-    onRemove={props.onRemove}
-  />
-)).reverse()
-}</ul>);
+const Backlog = props => (
+  <li className="wb-section locked" id="backlog">
+    <div className="wb-section">
+      <div className="wb-section-title" id="backlog">
+        <h2 className="title">"Backlog"</h2>
+      </div>
+      <div className="wb-section-content">
+        <ul className="ul-rowstyle">
+          <ul className="ul-colstyle">{
+            props.backlogPostIts.map(postIt =>
+              (<PostIt
+              key={postIt.id}
+              postIt={postIt}
+              onRemove={props.onRemove}
+              />
+            )).reverse()
+          }</ul>
+        </ul>
+      </div>
+    </div>
+  </li>);
+
+
 
 PostItList.propTypes = () => ({
   backlogPostIts: React.PropTypes.arrayOf(
@@ -44,4 +58,4 @@ PostItList.propTypes = () => ({
   onRemove: React.PropTypes.func
 });
 
-export default PostItList;
+export default Backlog;
