@@ -2,7 +2,8 @@ import React from 'react';
 
 const AddButton = (props) => {
   function handleClick() {
-    props.showDialog();
+    const visfilter = { filter: true };
+    props.showDialog(visfilter);
   }
   return (
     <div className="img-holder nav-menu add-post-it">

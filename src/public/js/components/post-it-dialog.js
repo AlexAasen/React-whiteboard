@@ -19,12 +19,16 @@ const PostItDialog = (props) => {
   function handleList() {
     console.log('bajs');
   }
+  function handleClose() {
+    const visfilter = { filter: false };
+    props.showDialog(visfilter);
+  }
 
-  if (props.isVisible) {
+  if (props.isVisiblePostIt) {
     return (
       <div className="main-dialog-container">
         <div className="dialog-container">
-          <button className="close" onClick={props.onHandleClose}>&#10005;</button>
+          <button className="close" onClick={handleClose}>&#10005;</button>
           <div className="text-area">
             <input
               type="text"
@@ -83,7 +87,9 @@ const PostItDialog = (props) => {
   return null;
 };
 PostItDialog.propTypes = () => ({
-  isVisible: React.PropTypes.bool
+  isVisiblePostIt: React.PropTypes.boolean,
+  showDialog: React.PropTypes.func,
+  onAddPostIt: React.PropTypes.func
 });
 
 export default PostItDialog;

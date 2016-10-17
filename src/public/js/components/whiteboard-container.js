@@ -6,7 +6,7 @@ import PostItDialog from './post-it-dialog';
 import Backlog from './column';
 import PostIt from './column-postits';
 import SideBar from './side-bar';
-import * as actions from '../actions';
+import { addPostIt, setVisFilterPostIt, removePostIt } from '../actions';
 import { connect } from 'react-redux';
 
 class WhiteboardContainer extends React.Component {
@@ -19,9 +19,9 @@ class WhiteboardContainer extends React.Component {
           />
         </ SideBar>
         <PostItDialog
-          isVisiblePostIt={this.props.showDialog}
+          isVisiblePostIt={this.props.isVisiblePostIt}
           onAddPostIt={this.props.onAddPostIt}
-          onHandleClose={this.props.onHandleClose}
+          showDialog={this.props.showDialog}
         />
         <div className="nav wb-sections">
           <ul className="ul-rowstyle">
@@ -37,7 +37,7 @@ class WhiteboardContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  isVisiblePostIt: state.showDialog,
+  isVisiblePostIt: state.visfilter.filter,
   backlogPostIts: state.backlogPostIts
 });
 
@@ -45,7 +45,7 @@ const mapDispatchToProps = dispatch => ({
   onAddPostIt: (postItTitle, postItDescription, postItColor) => {
     const postIt = {
           id: +(new Date()),
-          title: postTitle,
+          title: postItTitle,
           description: postItDescription,
           columId: "backlog",
           color: postItColor,
@@ -53,13 +53,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch(addPostIt(postIt));
   },
   onRemove: (postIt) => {
-    dispatch(actions.removePostIt(id));
+    dispatch(removePostIt(id));
   },
-  onHandleClose: () => {
-    dispatch(setVisFilterPostIt(false));
-  },
-  showDialog: () =>  {
-    dispatch(actions.setVisFilterPostIt(true));
+  showDialog: (visfilter) =>  {
+    dispatch(setVisFilterPostIt(visfilter));
   }
 });
 

@@ -1,7 +1,6 @@
 import { ADD_POSTIT, REMOVE_POSTIT, UPDATE_POSTIT, UPDATE_POSTIT_COLUMN, ADD_COLUMN } from '../constants/action-types';
 
-const initialState = { backlogPostIts: [] };
-const reducer = (state = initialState, action) => {
+const reducer = (state = [], action) => {
   let newState;
   switch (action.type) {
     /*case ADD_COLUMN: {
@@ -11,18 +10,15 @@ const reducer = (state = initialState, action) => {
     }*/
     case ADD_POSTIT: {
       const postIt = Object.assign({}, action.data);
-      newState = Object.assign({}, state);
-      //make a new copy of first column, aka backlog and add postIt to it.
-      newState = Object.assign({}, state, [...state.backlogPostIts, postIt]);
+      newState = [...state, postIt];
       return newState;
     }
     case UPDATE_POSTIT: {
       const newPostIt = Object.assign({}, action.data);
       //Make a copy of columns state
-      newState = Object.assign({}, state);
       //Look through the state of columns, give an input of what to search for
       //and a value to switch the selected item to.
-      newState = Object.assign({}, state, state.backlogPostIts.map(postIt =>
+      newState = Object.assign({}, state, state.map(postIt =>
         //Is the current postIt.id equal to the id we're looking for?
         postIt.id === newPostIt.id ?
         //if it is then change the postIts values
@@ -34,9 +30,8 @@ const reducer = (state = initialState, action) => {
     }
     case REMOVE_POSTIT: {
       const postIt = Object.assign({}, action.data);
-      newState = Object.assign({}, state);
       //Filter through the column in which the postIt lives and return the column without it
-      newState = Object.assign({}, state, state.backlogPostIts.filter(postit => postit.id !== postIt.id));
+      newState = state.filter(postit => postit.id !== postIt.id);
       return newState;
     }
     case UPDATE_POSTIT_COLUMN: {
