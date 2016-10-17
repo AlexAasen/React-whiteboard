@@ -1,179 +1,100 @@
 import React from 'react';
+import AddButton from './add-button';
+import AddColButton from './add-col-button';
+import PostIt from './post-it';
+import PostItDialog from './post-it-dialog';
+import ColumnDialog from './column-dialog';
+import Columns from './columns';
+import Column from './column';
+import PostItList from './column-postits';
+import SideBar from './side-bar';
+import * as actions from '../actions';
 import { connect } from 'react-redux';
 
 const WhiteboardContainer = props => (
-  <div class="main-container">
-      <div class="nav side-menu">
-        <ul class="ul-colstyle">
-          <li>
-            <div class="img-holder nav-menu add-col">
-            <img
-              src="img/add.png"
-              alt="add col"
-              onClick={handleClick}/>
-            </div>
-          </li>
-          <li>
-            <div class="img-holder nav-menu add-post-it">
-              <img src="img/post-its.png" alt="add post-it"/>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="nav wb-sections">
-        <ul class="ul-rowstyle">
-          <li class="wb-section locked" id="backlog">
-            <div class="wb-section">
-              <div class="wb-section-title">
-                <h2 id="backlog">Backlog</h2>
-              </div>
-              <div class="wb-section-content">
-                <ul class="ul-colstyle">
-                  <li class="post-it-container">
-                    <div class="post-it color1">
-                      <h3 class="title">Do something</h3>
-                      <p>Description of something</p>
-                    </div>
-                  </li>
-                  <li class="post-it-container">
-                    <div class="post-it color2">
-                      <h3 class="title">Do something</h3>
-                      <p>Description of something</p>
-                    </div>
-                  </li>
-                  <li class="post-it-container">
-                    <div class="post-it color3">
-                      <h3 class="title">Do something</h3>
-                      <p>Description of something</p>
-                    </div>
-                  </li>
-                  <li class="post-it-container">
-                    <div class="post-it color4">
-                      <h3 class="title">Do something</h3>
-                      <p>Description of something</p>
-                    </div>
-                  </li>
-                  <li class="post-it-container">
-                    <div class="post-it color1">
-                      <h3 class="title">Do something</h3>
-                      <p>Description of something</p>
-                    </div>
-                  </li>
-                  <li class="post-it-container">
-                    <div class="post-it color2">
-                      <h3 class="title">Do something</h3>
-                      <p>Description of something</p>
-                    </div>
-                  </li>
-                  <li class="post-it-container">
-                    <div class="post-it color3">
-                      <h3 class="title">Do something</h3>
-                      <p>Description of something</p>
-                    </div>
-                  </li>
-                  <li class="post-it-container">
-                    <div class="post-it color4">
-                      <h3 class="title">Do something</h3>
-                      <p>Description of something</p>
-                    </div>
-                  </li>
-                  <li class="post-it-container">
-                    <div class="post-it color1">
-                      <h3 class="title">Do something</h3>
-                      <p>Description of something</p>
-                    </div>
-                  </li>
-                  <li class="post-it-container">
-                    <div class="post-it color2">
-                      <h3 class="title">Do something</h3>
-                      <p>Description of something</p>
-                    </div>
-                  </li>
-                  <li class="post-it-container">
-                    <div class="post-it color3">
-                      <h3 class="title">Do something</h3>
-                      <p>Description of something</p>
-                    </div>
-                  </li>
-                  <li class="post-it-container">
-                    <div class="post-it color4">
-                      <h3 class="title">Do something</h3>
-                      <p>Description of something</p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              </div>
-          </li>
-
-          <div class="nav wb-sections">
-            <ul class="ul-rowstyle">
-              <li class="wb-section" id="stories">
-                <div class="wb-section">
-                  <div class="wb-section-title">
-                    <h2 id="stories">Stories</h2>
-                  </div>
-                  <div class="wb-section-content">
-                    <p>Content here</p>
-                  </div>
-                </div>
-              </li>
-              <li class="wb-section" id="curr-sprint">
-                <div class="wb-section">
-                  <div class="wb-section-title">
-                    <h2 id="curr-sprint">Current sprint</h2>
-                  </div>
-                  <div class="wb-section-content">
-                    <p>Content here</p>
-                  </div>
-                </div>
-              </li>
-              <li class="wb-section" id="wip">
-                <div class="wb-section">
-                  <div class="wb-section-title">
-                    <h2 id="wip">WIP</h2>
-                  </div>
-                  <div class="wb-section-content">
-                    <p>Content here</p>
-                  </div>
-                </div>
-              </li>
-              <li class="wb-section" id="test">
-                <div class="wb-section">
-                  <div class="wb-section-title">
-                    <h2 id="test">Testing</h2>
-                  </div>
-                  <div class="wb-section-content">
-                    <p>Content here</p>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <li class="wb-section locked" id="done">
-            <div class="wb-section">
-              <div class="wb-section-title">
-                <h2 id="done">Done</h2>
-              </div>
-              <div class="wb-section-content">
-                <p>Content here</p>
-              </div>
-            </div>
-          </li>
-
-        </ul>
-      </div>
+  <div className="main-container">
+    <SideBar>
+      <AddColButton
+      showDialog={props.handleDialogColumn}
+      />
+      <AddButton
+        showDialog={props.handleDialogPostIt}
+      />
+    </ SideBar>
+    <PostItDialog
+      isVisiblePostIt={props.displayDialog}
+      onAddPostIt={props.onAddPostIt}
+      onHandleClose={props.handleClose}
+    />
+    <ColumnDialog
+      isVisible={props.displayColDialog}
+      onAddCol={props.handleAddCol}
+      onHandleClose={props.handleClose}
+    />
+    <div className="nav wb-sections">
+      <ul className="ul-rowstyle">
+        <Column
+          className="wb-section locked"
+          title="backlog">
+          <PostIt
+            postIts={props.backlog}
+            onRemove={props.handleRemove}
+          />
+        </Column>
+        <Columns
+          className="nav wb-section"
+          columns={props.columns}
+          onRemove={props.handleRemove}
+        />
+        <Column
+          className="wb-section locked"
+          title="done">
+          <PostIt
+            postIts={props.done}
+            onRemove={props.handleRemove}
+          />
+        </Column>
+      </ul>
     </div>
+  </div>
 );
 
 const mapStateToProps = state => ({
+  postIts: state.columns.column.postIts,
+  columns: state.columns,
+  postIt: state.columns.column.postIts.postIt,
+  isVisiblePostIt: state.postitDialog,
+  isVisibleCol: state.columnDialog
 
 });
 
 const mapDispatchToProps = dispatch => ({
-
+  onAddPostIt: (postItTitle, postItDescription, postItColor) => {
+    const postIt = {
+          id: +(new Date()),
+          title: postTitle,
+          description: postItDescription,
+          color: postItColor,
+    };
+    dispatch(addPostIt(postIt));
+  },
+  onAddCol: (colTitle) => {
+    const column = {
+          id: colTitle,
+          title: colTitle
+    };
+    dispatch(addColumn(column));
+  },
+  handleClose: () => {
+   dispatch(setVisFilterCol(false));
+   dispatch(setVisFilterPostIt(false));
+  },
+  handleDialogPostIt: () =>  {
+    dispatch(setVisFilterPostIt(true));
+  },
+  handleDialogColumn: () =>  {
+    dispatch(setVisFilterCol(true));
+  }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(WhiteboardContainer);
+export default WhiteboardContainer;

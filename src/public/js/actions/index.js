@@ -18,10 +18,19 @@ module.exports.updatePostIt = postIt => ({
 module.exports.updatePostItColumn = postIt => ({
   type: types.UPDATE_POSTIT_COLUMN,
   data: postIt,
-  oldData: postIt
 });
 
 module.exports.addColumn = column => ({
   type: types.ADD_COLUMN,
-  data: column;
+  data: column
+});
+
+module.exports.setVisFilterCol = boolean => ({
+  type: types.SET_VISFILTER_COL,
+  data: boolean
+});
+
+module.exports.setVisFilterPostIt = boolean => ({
+  type: types.SET_VISFILTER_POSTIT,
+  data: boolean
 });
