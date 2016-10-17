@@ -22350,14 +22350,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 module.exports.addPostIt = function (postIt) {
   return {
-    type: types.ADD_POSTIT,
-    data: postIt
-  };
-};
-
-module.exports.removePostIt = function (id) {
-  return {
-    type: types.REMOVE_POSTIT,
+    type: types.ADD_POSTIT_TO_BACKLOG,
     data: postIt
   };
 };
@@ -22375,16 +22368,6 @@ module.exports.updatePostItColumn = function (postIt) {
     data: postIt
   };
 };
-/*
-module.exports.addColumn = column => ({
-  type: types.ADD_COLUMN,
-  data: column
-});
-
-module.exports.setVisFilterCol = boolean => ({
-  type: types.SET_VISFILTER_COL,
-  data: boolean
-});*/
 
 module.exports.setVisFilterPostIt = function (boolean) {
   return {
@@ -22393,7 +22376,14 @@ module.exports.setVisFilterPostIt = function (boolean) {
   };
 };
 
-},{"../constants/action-types":206}],200:[function(require,module,exports){
+module.exports.removePostIt = function (number) {
+  return {
+    type: types.REMOVE_POSTIT,
+    data: number
+  };
+};
+
+},{"../constants/action-types":212}],200:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -22422,7 +22412,7 @@ _reactDom2.default.render(_react2.default.createElement(
   _react2.default.createElement(_whiteboardContainer2.default, null)
 ), document.querySelector('#application'));
 
-},{"./components/whiteboard-container":205,"./store":210,"react":184,"react-dom":29,"react-redux":32}],201:[function(require,module,exports){
+},{"./components/whiteboard-container":210,"./store":221,"react":184,"react-dom":29,"react-redux":32}],201:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22446,7 +22436,6 @@ var AddButton = function AddButton(props) {
     _react2.default.createElement("button", { className: "add-button", onClick: handleClick })
   );
 };
-
 AddButton.propTypes = function () {
   return {
     showDialog: _react2.default.PropTypes.func
@@ -22468,73 +22457,131 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PostIt = function PostIt(props) {
-  function removePostIt() {
-    props.onRemove(props.postIt);
-  }
+var Backlog = function Backlog(props) {
   return _react2.default.createElement(
     "li",
-    {
-      className: "post-it-container"
-    },
+    { className: "wb-section", id: "backlog" },
     _react2.default.createElement(
       "div",
-      { className: "post-it " + props.postIt.color },
+      { className: "wb-section" },
       _react2.default.createElement(
-        "h3",
-        { className: "title" },
-        props.postIt.title
+        "div",
+        { className: "wb-section-title", id: "backlog" },
+        _react2.default.createElement(
+          "h2",
+          { id: "backlog" },
+          "Backlog"
+        )
       ),
       _react2.default.createElement(
-        "p",
-        { className: "description" },
-        props.postIt.description
-      ),
-      _react2.default.createElement("img", { src: "img/edit24.png", id: "edit", alt: "edit post-it" }),
-      _react2.default.createElement(
-        "button",
-        { className: "close", onClick: removePostIt },
-        "\u2715"
+        "div",
+        { className: "wb-section-content" },
+        props.children
       )
     )
   );
 };
-PostIt.propTypes = function () {
+Backlog.propTypes = function () {
   return {
-    id: _react2.default.PropTypes.number.isRequired,
-    title: _react2.default.PropTypes.string,
-    color: _react2.default.PropTypes.string,
-    description: _react2.default.PropTypes.string,
-    onRemove: _react2.default.PropTypes.func
+    postIt: _react2.default.PropTypes.element
   };
 };
 
-var PostItList = function PostItList(props) {
+exports.default = Backlog;
+
+},{"react":184}],203:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CurrSprint = function CurrSprint(props) {
   return _react2.default.createElement(
-    "ul",
-    { className: "ul-colstyle" },
-    props.backlogPostIts.map(function (postIt) {
-      return _react2.default.createElement(PostIt, {
-        key: postIt.id,
-        postIt: postIt,
-        onRemove: props.onRemove
-      });
-    }).reverse()
+    "li",
+    { className: "wb-section", id: "curr-sprint" },
+    _react2.default.createElement(
+      "div",
+      { className: "wb-section" },
+      _react2.default.createElement(
+        "div",
+        { className: "wb-section-title" },
+        _react2.default.createElement(
+          "h2",
+          { id: "curr-sprint" },
+          "Current sprint"
+        )
+      ),
+      _react2.default.createElement(
+        "div",
+        { className: "wb-section-content" },
+        props.children
+      )
+    )
   );
 };
 
-PostItList.propTypes = function () {
+CurrSprint.propTypes = function () {
   return {
-    backlogPostIts: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
-      postIt: _react2.default.PropTypes.Object
-    })),
-    onRemove: _react2.default.PropTypes.func
+    postIt: _react2.default.PropTypes.element
   };
 };
 
-exports.default = PostItList;
+exports.default = CurrSprint;
 
-},{"react":184}],203:[function(require,module,exports){
+},{"react":184}],204:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Done = function Done(props) {
+  return _react2.default.createElement(
+    "li",
+    { className: "wb-section", id: "done" },
+    _react2.default.createElement(
+      "div",
+      { className: "wb-section" },
+      _react2.default.createElement(
+        "div",
+        { className: "wb-section-title" },
+        _react2.default.createElement(
+          "h2",
+          { id: "done" },
+          "Done"
+        )
+      ),
+      _react2.default.createElement(
+        "div",
+        { className: "wb-section-content" },
+        props.children
+      )
+    )
+  );
+};
+
+Done.propTypes = function () {
+  return {
+    postIt: _react2.default.PropTypes.element
+  };
+};
+
+exports.default = Done;
+
+},{"react":184}],205:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22554,24 +22601,21 @@ var PostItDialog = function PostItDialog(props) {
 
   function handleSave() {
     if (colorSelect.trim().length > 0) {
-      props.onAddPostIt(postItTitle.value, postItDescription.value, colorSelect);
+      props.onAdd(postItTitle.value, postItDescription.value, colorSelect);
     } else {
       colorSelect = 'yellow';
-      props.onAddPostIt(postItTitle.value, postItDescription.value, colorSelect);
+      props.onAdd(postItTitle.value, postItDescription.value, colorSelect);
     }
   }
   function handleSelect(event) {
     colorSelect = event.currentTarget.id;
-  }
-  function handleList() {
-    console.log('bajs');
   }
   function handleClose() {
     var visfilter = { filter: false };
     props.showDialog(visfilter);
   }
 
-  if (props.isVisiblePostIt) {
+  if (props.isVisible) {
     return _react2.default.createElement(
       'div',
       { className: 'main-dialog-container' },
@@ -22658,11 +22702,6 @@ var PostItDialog = function PostItDialog(props) {
           ),
           _react2.default.createElement(
             'button',
-            { className: 'add-listitem-button', onClick: handleList },
-            'List'
-          ),
-          _react2.default.createElement(
-            'button',
             { className: 'save-button', onClick: handleSave },
             'Save'
           )
@@ -22674,15 +22713,99 @@ var PostItDialog = function PostItDialog(props) {
 };
 PostItDialog.propTypes = function () {
   return {
-    isVisiblePostIt: _react2.default.PropTypes.boolean,
-    showDialog: _react2.default.PropTypes.func,
-    onAddPostIt: _react2.default.PropTypes.func
+    isVisible: _react2.default.PropTypes.bool
   };
 };
 
 exports.default = PostItDialog;
 
-},{"react":184}],204:[function(require,module,exports){
+},{"react":184}],206:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var PostIt = function PostIt(props) {
+  function removePostIt() {
+    var id = props.id;
+    props.onRemove(id);
+  }
+  return _react2.default.createElement(
+    "li",
+    {
+      className: "post-it-container"
+    },
+    _react2.default.createElement(
+      "div",
+      { className: "post-it " + props.color },
+      _react2.default.createElement(
+        "h3",
+        { className: "title" },
+        props.title
+      ),
+      _react2.default.createElement(
+        "p",
+        { className: "description" },
+        props.description
+      ),
+      _react2.default.createElement("img", { src: "img/edit24.png", id: "edit", alt: "edit post-it" }),
+      _react2.default.createElement(
+        "button",
+        { className: "close", onClick: removePostIt },
+        "\u2715"
+      )
+    )
+  );
+};
+PostIt.propTypes = function () {
+  return {
+    id: _react2.default.PropTypes.number.isRequired,
+    title: _react2.default.PropTypes.string,
+    color: _react2.default.PropTypes.string,
+    description: _react2.default.PropTypes.string,
+    onRemove: _react2.default.PropTypes.func
+  };
+};
+
+var PostItList = function PostItList(props) {
+  return _react2.default.createElement(
+    "ul",
+    { className: "ul-colstyle" },
+    props.postIts.map(function (postIt) {
+      return _react2.default.createElement(PostIt, {
+        key: postIt.id,
+        id: postIt.id,
+        title: postIt.title,
+        color: postIt.color,
+        description: postIt.description,
+        onRemove: props.onRemove
+      });
+    }).reverse()
+  );
+};
+
+PostItList.propTypes = function () {
+  return {
+    postIts: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
+      id: _react2.default.PropTypes.number,
+      title: _react2.default.PropTypes.string,
+      color: _react2.default.PropTypes.string,
+      description: _react2.default.PropTypes.string
+    })),
+    onRemove: _react2.default.PropTypes.func
+  };
+};
+
+exports.default = PostItList;
+
+},{"react":184}],207:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22702,7 +22825,11 @@ var SideBar = function SideBar(props) {
     _react2.default.createElement(
       "ul",
       { className: "ul-colstyle" },
-      props.children
+      _react2.default.createElement(
+        "li",
+        null,
+        props.children
+      )
     )
   );
 };
@@ -22713,7 +22840,99 @@ SideBar.propTypes = function () {
 };
 exports.default = SideBar;
 
-},{"react":184}],205:[function(require,module,exports){
+},{"react":184}],208:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Stories = function Stories(props) {
+  return _react2.default.createElement(
+    "li",
+    { className: "wb-section", id: "stories" },
+    _react2.default.createElement(
+      "div",
+      { className: "wb-section" },
+      _react2.default.createElement(
+        "div",
+        { className: "wb-section-title" },
+        _react2.default.createElement(
+          "h2",
+          { id: "stories" },
+          "Stories"
+        )
+      ),
+      _react2.default.createElement(
+        "div",
+        { className: "wb-section-content" },
+        props.children
+      )
+    )
+  );
+};
+
+Stories.propTypes = function () {
+  return {
+    postIt: _react2.default.PropTypes.element
+  };
+};
+
+exports.default = Stories;
+
+},{"react":184}],209:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Test = function Test(props) {
+  return _react2.default.createElement(
+    "li",
+    { className: "wb-section", id: "test" },
+    _react2.default.createElement(
+      "div",
+      { className: "wb-section" },
+      _react2.default.createElement(
+        "div",
+        { className: "wb-section-title" },
+        _react2.default.createElement(
+          "h2",
+          { id: "test" },
+          "Testing"
+        )
+      ),
+      _react2.default.createElement(
+        "div",
+        { className: "wb-section-content" },
+        props.children
+      )
+    )
+  );
+};
+
+Test.propTypes = function () {
+  return {
+    postIt: _react2.default.PropTypes.element
+  };
+};
+
+exports.default = Test;
+
+},{"react":184}],210:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22726,25 +22945,49 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = require('react-redux');
+
+var _actions = require('../actions');
+
 var _addButton = require('./add-button');
 
 var _addButton2 = _interopRequireDefault(_addButton);
+
+var _postIt = require('./post-it');
+
+var _postIt2 = _interopRequireDefault(_postIt);
 
 var _postItDialog = require('./post-it-dialog');
 
 var _postItDialog2 = _interopRequireDefault(_postItDialog);
 
-var _columnPostits = require('./column-postits');
+var _backlog = require('./backlog');
 
-var _columnPostits2 = _interopRequireDefault(_columnPostits);
+var _backlog2 = _interopRequireDefault(_backlog);
+
+var _stories = require('./stories');
+
+var _stories2 = _interopRequireDefault(_stories);
+
+var _wip = require('./wip');
+
+var _wip2 = _interopRequireDefault(_wip);
+
+var _currSprint = require('./curr-sprint');
+
+var _currSprint2 = _interopRequireDefault(_currSprint);
+
+var _test = require('./test');
+
+var _test2 = _interopRequireDefault(_test);
+
+var _done = require('./done');
+
+var _done2 = _interopRequireDefault(_done);
 
 var _sideBar = require('./side-bar');
 
 var _sideBar2 = _interopRequireDefault(_sideBar);
-
-var _actions = require('../actions');
-
-var _reactRedux = require('react-redux');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22753,10 +22996,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-//import AddColButton from './add-col-button';
-
-//import ColumnDialog from './column-dialog';
-
 
 var WhiteboardContainer = function (_React$Component) {
   _inherits(WhiteboardContainer, _React$Component);
@@ -22781,8 +23020,8 @@ var WhiteboardContainer = function (_React$Component) {
           })
         ),
         _react2.default.createElement(_postItDialog2.default, {
-          isVisiblePostIt: this.props.isVisiblePostIt,
-          onAddPostIt: this.props.onAddPostIt,
+          isVisible: this.props.isVisible,
+          onAdd: this.props.onAdd,
           showDialog: this.props.showDialog
         }),
         _react2.default.createElement(
@@ -22791,10 +23030,54 @@ var WhiteboardContainer = function (_React$Component) {
           _react2.default.createElement(
             'ul',
             { className: 'ul-rowstyle' },
-            _react2.default.createElement(_columnPostits2.default, {
-              backlogPostIts: this.props.backlogPostIts,
-              onRemove: this.props.onRemove
-            })
+            _react2.default.createElement(
+              _backlog2.default,
+              null,
+              _react2.default.createElement(_postIt2.default, {
+                postIts: this.props.backlogPostIts,
+                onRemove: this.props.onRemove
+              })
+            ),
+            _react2.default.createElement(
+              _stories2.default,
+              null,
+              _react2.default.createElement(_postIt2.default, {
+                postIts: this.props.storiesPostIts,
+                onRemove: this.props.onRemove
+              })
+            ),
+            _react2.default.createElement(
+              _currSprint2.default,
+              null,
+              _react2.default.createElement(_postIt2.default, {
+                postIts: this.props.currSprintPostIts,
+                onRemove: this.props.onRemove
+              })
+            ),
+            _react2.default.createElement(
+              _wip2.default,
+              null,
+              _react2.default.createElement(_postIt2.default, {
+                postIts: this.props.wipPostIts,
+                onRemove: this.props.onRemove
+              })
+            ),
+            _react2.default.createElement(
+              _test2.default,
+              null,
+              _react2.default.createElement(_postIt2.default, {
+                postIts: this.props.testPostIts,
+                onRemove: this.props.onRemove
+              })
+            ),
+            _react2.default.createElement(
+              _done2.default,
+              null,
+              _react2.default.createElement(_postIt2.default, {
+                postIts: this.props.donePostIts,
+                onRemove: this.props.onRemove
+              })
+            )
           )
         )
       );
@@ -22806,24 +23089,30 @@ var WhiteboardContainer = function (_React$Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    isVisiblePostIt: state.visfilter.filter,
-    backlogPostIts: state.backlogPostIts
+    isVisible: state.visfilter.filter,
+    backlogPostIts: state.backlog,
+    testPostIts: state.test,
+    wipPostIts: state.wip,
+    donePostIts: state.done,
+    storiesPostIts: state.stories,
+    currSprintPostIts: state.currsprint
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onAddPostIt: function onAddPostIt(postItTitle, postItDescription, postItColor) {
+    onAdd: function onAdd(postItTitle, postItDescription, postItColor) {
       var postIt = {
         id: +new Date(),
         title: postItTitle,
         description: postItDescription,
-        columId: "backlog",
         color: postItColor
       };
       dispatch((0, _actions.addPostIt)(postIt));
+      var visfilter = { filter: false };
+      dispatch((0, _actions.setVisFilterPostIt)(visfilter));
     },
-    onRemove: function onRemove(postIt) {
+    onRemove: function onRemove(id) {
       dispatch((0, _actions.removePostIt)(id));
     },
     showDialog: function showDialog(visfilter) {
@@ -22834,21 +23123,66 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(WhiteboardContainer);
 
-},{"../actions":199,"./add-button":201,"./column-postits":202,"./post-it-dialog":203,"./side-bar":204,"react":184,"react-redux":32}],206:[function(require,module,exports){
+},{"../actions":199,"./add-button":201,"./backlog":202,"./curr-sprint":203,"./done":204,"./post-it":206,"./post-it-dialog":205,"./side-bar":207,"./stories":208,"./test":209,"./wip":211,"react":184,"react-redux":32}],211:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Wip = function Wip(props) {
+  return _react2.default.createElement(
+    "li",
+    { className: "wb-section", id: "wip" },
+    _react2.default.createElement(
+      "div",
+      { className: "wb-section" },
+      _react2.default.createElement(
+        "div",
+        { className: "wb-section-title" },
+        _react2.default.createElement(
+          "h2",
+          { id: "wip" },
+          "WIP"
+        )
+      ),
+      _react2.default.createElement(
+        "div",
+        { className: "wb-section-content" },
+        props.children
+      )
+    )
+  );
+};
+
+Wip.propTypes = function () {
+  return {
+    postIt: _react2.default.PropTypes.element
+  };
+};
+
+exports.default = Wip;
+
+},{"react":184}],212:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var ADD_POSTIT = exports.ADD_POSTIT = 'ADD_POSTIT';
+var ADD_POSTIT_TO_BACKLOG = exports.ADD_POSTIT_TO_BACKLOG = 'ADD_POSTIT_TO_BACKLOG';
 var UPDATE_POSTIT_COLUMN = exports.UPDATE_POSTIT_COLUMN = 'UPDATE_POSTIT';
 var REMOVE_POSTIT = exports.REMOVE_POSTIT = 'REMOVE_POSTIT';
-var ADD_COLUMN = exports.ADD_COLUMN = 'ADD_COLUMN';
 var UPDATE_POSTIT = exports.UPDATE_POSTIT = 'UPDATE_POSTIT';
-var SET_VISFILTER_COL = exports.SET_VISFILTER_COL = 'SET_VISFILTER_COL';
 var SET_VISFILTER_POSTIT = exports.SET_VISFILTER_POSTIT = 'SET_VISFILTER_POSTIT';
 
-},{}],207:[function(require,module,exports){
+},{}],213:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22867,24 +23201,29 @@ var reducer = function reducer() {
 
   var newState = void 0;
   switch (action.type) {
-    /*case ADD_COLUMN: {
-      const newCol = Object.assign({}, action.data);
-      newState = Object.assign({}, state, [...state.columns, newCol]);
-      return newState;
-    }*/
-    case _actionTypes.ADD_POSTIT:
+    case _actionTypes.ADD_POSTIT_TO_BACKLOG:
       {
-        var _postIt = Object.assign({}, action.data);
-        newState = [].concat(_toConsumableArray(state), [_postIt]);
-        return newState;
+        var newPostIt = Object.assign({}, action.data);
+        return [].concat(_toConsumableArray(state), [newPostIt]);
+      }
+    case _actionTypes.REMOVE_POSTIT:
+      {
+        var _ret = function () {
+          var id = action.data;
+          newState = state.filter(function (postit) {
+            return postit.id !== id;
+          });
+          return {
+            v: newState
+          };
+        }();
+
+        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
       }
     case _actionTypes.UPDATE_POSTIT:
       {
-        var _ret = function () {
+        var _ret2 = function () {
           var newPostIt = Object.assign({}, action.data);
-          //Make a copy of columns state
-          //Look through the state of columns, give an input of what to search for
-          //and a value to switch the selected item to.
           newState = Object.assign({}, state, state.map(function (postIt) {
             return (
               //Is the current postIt.id equal to the id we're looking for?
@@ -22900,41 +23239,7 @@ var reducer = function reducer() {
           };
         }();
 
-        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-      }
-    case _actionTypes.REMOVE_POSTIT:
-      {
-        var _ret2 = function () {
-          var postIt = Object.assign({}, action.data);
-          //Filter through the column in which the postIt lives and return the column without it
-          newState = state.filter(function (postit) {
-            return postit.id !== postIt.id;
-          });
-          return {
-            v: newState
-          };
-        }();
-
         if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
-      }
-    case _actionTypes.UPDATE_POSTIT_COLUMN:
-      {
-        var _ret3 = function () {
-          var newPostIt = Object.assign({}, action.data);
-          var oldPostIt = Object.assign({}, action.oldData);
-          newState = Object.assign({}, columns);
-          //Begin by loading the oldPostits column and filtering the postIt out.
-          newState[oldPostIt.columnId] = newState[oldPostIt.columnId].filter(function (postit) {
-            return postit.id !== oldPostIt.id;
-          });
-          //Then add the postIt to the new column
-          newState[newPostIt.columnId] = [].concat(_toConsumableArray(newState[newPostIt.columnId]), [postIt]);
-          return {
-            v: newState
-          };
-        }();
-
-        if ((typeof _ret3 === 'undefined' ? 'undefined' : _typeof(_ret3)) === "object") return _ret3.v;
       }
     default:
       {
@@ -22945,7 +23250,101 @@ var reducer = function reducer() {
 
 exports.default = reducer;
 
-},{"../constants/action-types":206}],208:[function(require,module,exports){
+},{"../constants/action-types":212}],214:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _actionTypes = require('../constants/action-types');
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var reducer = function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  var newState = void 0;
+  switch (action.type) {
+    case _actionTypes.ADD_POSTIT:
+      {
+        var newPostIt = Object.assign({}, action.data);
+        return [].concat(_toConsumableArray(state), [newPostIt]);
+      }
+    case _actionTypes.REMOVE_POSTIT:
+      {
+        var _ret = function () {
+          var id = Object.assign({}, action.data);
+          newState = state.filter(function (postit) {
+            return postit.id !== id;
+          });
+          return {
+            v: newState
+          };
+        }();
+
+        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+      }
+    default:
+      {
+        return state;
+      }
+  }
+};
+
+exports.default = reducer;
+
+},{"../constants/action-types":212}],215:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _actionTypes = require('../constants/action-types');
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var reducer = function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  var newState = void 0;
+  switch (action.type) {
+    case _actionTypes.ADD_POSTIT:
+      {
+        var newPostIt = Object.assign({}, action.data);
+        return [].concat(_toConsumableArray(state), [newPostIt]);
+      }
+    case _actionTypes.REMOVE_POSTIT:
+      {
+        var _ret = function () {
+          var id = Object.assign({}, action.data);
+          newState = state.filter(function (postit) {
+            return postit.id !== id;
+          });
+          return {
+            v: newState
+          };
+        }();
+
+        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+      }
+    default:
+      {
+        return state;
+      }
+  }
+};
+
+exports.default = reducer;
+
+},{"../constants/action-types":212}],216:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22954,32 +23353,141 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = require('redux');
 
-var _columns = require('./columns');
+var _backlog = require('./backlog');
 
-var _columns2 = _interopRequireDefault(_columns);
+var _backlog2 = _interopRequireDefault(_backlog);
 
-var _visFilter = require('./visFilter');
+var _stories = require('./stories');
 
-var _visFilter2 = _interopRequireDefault(_visFilter);
+var _stories2 = _interopRequireDefault(_stories);
+
+var _currsprint = require('./currsprint');
+
+var _currsprint2 = _interopRequireDefault(_currsprint);
+
+var _wip = require('./wip');
+
+var _wip2 = _interopRequireDefault(_wip);
+
+var _test = require('./test');
+
+var _test2 = _interopRequireDefault(_test);
+
+var _done = require('./done');
+
+var _done2 = _interopRequireDefault(_done);
+
+var _visfilter = require('./visfilter');
+
+var _visfilter2 = _interopRequireDefault(_visfilter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/*
-const reducer = (state, action) => ({
-  basket: basket(state.basket, action),
-  user: user(state.user, action),
-  pets: pets(state.pets, action)
+exports.default = (0, _redux.combineReducers)({
+  backlog: _backlog2.default,
+  stories: _stories2.default,
+  currsprint: _currsprint2.default,
+  wip: _wip2.default,
+  test: _test2.default,
+  done: _done2.default,
+  visfilter: _visfilter2.default
 });
-*/
 
-var reducer = (0, _redux.combineReducers)({
-  columns: _columns2.default,
-  visfilter: _visFilter2.default
+},{"./backlog":213,"./currsprint":214,"./done":215,"./stories":217,"./test":218,"./visfilter":219,"./wip":220,"redux":190}],217:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _actionTypes = require('../constants/action-types');
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var reducer = function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  var newState = void 0;
+  switch (action.type) {
+    case _actionTypes.ADD_POSTIT:
+      {
+        var newPostIt = Object.assign({}, action.data);
+        return [].concat(_toConsumableArray(state), [newPostIt]);
+      }
+    case _actionTypes.REMOVE_POSTIT:
+      {
+        var _ret = function () {
+          var id = Object.assign({}, action.data);
+          newState = state.filter(function (postit) {
+            return postit.id !== id;
+          });
+          return {
+            v: newState
+          };
+        }();
+
+        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+      }
+    default:
+      {
+        return state;
+      }
+  }
+};
 
 exports.default = reducer;
 
-},{"./columns":207,"./visFilter":209,"redux":190}],209:[function(require,module,exports){
+},{"../constants/action-types":212}],218:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _actionTypes = require('../constants/action-types');
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var reducer = function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  var newState = void 0;
+  switch (action.type) {
+    case _actionTypes.ADD_POSTIT:
+      {
+        var newPostIt = Object.assign({}, action.data);
+        return [].concat(_toConsumableArray(state), [newPostIt]);
+      }
+    case _actionTypes.REMOVE_POSTIT:
+      {
+        var _ret = function () {
+          var id = Object.assign({}, action.data);
+          newState = state.filter(function (postit) {
+            return postit.id !== id;
+          });
+          return {
+            v: newState
+          };
+        }();
+
+        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+      }
+    default:
+      {
+        return state;
+      }
+  }
+};
+
+exports.default = reducer;
+
+},{"../constants/action-types":212}],219:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22994,7 +23502,7 @@ var reducer = function reducer() {
 
   var newState = void 0;
   switch (action.type) {
-    /*case SET_VISFILTER_COL: {
+    /* case SET_VISFILTER_COL: {
       const boolean = Object.assign({}, action.data);
       newState = Object.assign({}, state, Object.assign({}, state.displayColDialog: boolean));
       return newState;
@@ -23013,7 +23521,54 @@ var reducer = function reducer() {
 
 exports.default = reducer;
 
-},{"../constants/action-types":206}],210:[function(require,module,exports){
+},{"../constants/action-types":212}],220:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _actionTypes = require('../constants/action-types');
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var reducer = function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  var newState = void 0;
+  switch (action.type) {
+    case _actionTypes.ADD_POSTIT:
+      {
+        var newPostIt = Object.assign({}, action.data);
+        return [].concat(_toConsumableArray(state), [newPostIt]);
+      }
+    case _actionTypes.REMOVE_POSTIT:
+      {
+        var _ret = function () {
+          var id = Object.assign({}, action.data);
+          newState = state.filter(function (postit) {
+            return postit.id !== id;
+          });
+          return {
+            v: newState
+          };
+        }();
+
+        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+      }
+    default:
+      {
+        return state;
+      }
+  }
+};
+
+exports.default = reducer;
+
+},{"../constants/action-types":212}],221:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23031,7 +23586,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var store = (0, _redux.createStore)(_reducers2.default);
 exports.default = store;
 
-},{"../reducers":208,"redux":190}]},{},[200])
+},{"../reducers":216,"redux":190}]},{},[200])
 
 
 //# sourceMappingURL=whiteboard.bundle.js.map

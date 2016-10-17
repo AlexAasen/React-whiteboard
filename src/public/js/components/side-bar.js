@@ -4,7 +4,10 @@ const SideBar = (props) => {
   return (
     <div className="nav side-menu">
       <ul className="ul-colstyle">
+        <li>
           {props.children}
+        </li>
+
       </ul>
     </div>
   );

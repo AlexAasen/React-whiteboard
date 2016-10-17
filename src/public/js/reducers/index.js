@@ -1,18 +1,18 @@
 import { combineReducers } from 'redux';
-import columns from './columns';
-import visfilter from './visFilter';
+import backlog from './backlog';
+import stories from './stories';
+import currsprint from './currsprint';
+import wip from './wip';
+import test from './test';
+import done from './done';
+import visfilter from './visfilter';
 
-/*
-const reducer = (state, action) => ({
-  basket: basket(state.basket, action),
-  user: user(state.user, action),
-  pets: pets(state.pets, action)
-});
-*/
-
-const reducer = combineReducers({
-  columns,
+export default combineReducers({
+  backlog,
+  stories,
+  currsprint,
+  wip,
+  test,
+  done,
   visfilter
 });
-
-export default reducer;

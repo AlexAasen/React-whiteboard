@@ -1,12 +1,16 @@
 import React from 'react';
-import AddButton from './add-button';
-//import AddColButton from './add-col-button';
-import PostItDialog from './post-it-dialog';
-//import ColumnDialog from './column-dialog';
-import Backlog from './column-postits';
-import SideBar from './side-bar';
-import { addPostIt, setVisFilterPostIt, removePostIt } from '../actions';
 import { connect } from 'react-redux';
+import { addPostIt, setVisFilterPostIt, removePostIt } from '../actions';
+import AddButton from './add-button';
+import PostIt from './post-it';
+import PostItDialog from './post-it-dialog';
+import Backlog from './backlog';
+import Stories from './stories';
+import Wip from './wip';
+import CurrSprint from './curr-sprint';
+import Test from './test';
+import Done from './done';
+import SideBar from './side-bar';
 
 class WhiteboardContainer extends React.Component {
   render() {
@@ -18,43 +22,81 @@ class WhiteboardContainer extends React.Component {
           />
         </ SideBar>
         <PostItDialog
-          isVisiblePostIt={this.props.isVisiblePostIt}
-          onAddPostIt={this.props.onAddPostIt}
+          isVisible={this.props.isVisible}
+          onAdd={this.props.onAdd}
           showDialog={this.props.showDialog}
         />
         <div className="nav wb-sections">
           <ul className="ul-rowstyle">
-            <Backlog
-              backlogPostIts={this.props.backlogPostIts}
-              onRemove={this.props.onRemove}
-            />
-          </ul>
-        </div>
+        <Backlog>
+          <PostIt
+            postIts={this.props.backlogPostIts}
+            onRemove={this.props.onRemove}
+          />
+        </Backlog>
+        <Stories>
+          <PostIt
+            postIts={this.props.storiesPostIts}
+            onRemove={this.props.onRemove}
+          />
+        </Stories>
+        <CurrSprint>
+          <PostIt
+            postIts={this.props.currSprintPostIts}
+            onRemove={this.props.onRemove}
+          />
+        </CurrSprint>
+        <Wip>
+          <PostIt
+            postIts={this.props.wipPostIts}
+            onRemove={this.props.onRemove}
+          />
+        </Wip>
+        <Test>
+          <PostIt
+            postIts={this.props.testPostIts}
+            onRemove={this.props.onRemove}
+          />
+        </Test>
+        <Done>
+          <PostIt
+            postIts={this.props.donePostIts}
+            onRemove={this.props.onRemove}
+          />
+        </Done>
+        </ul>
+      </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  isVisiblePostIt: state.visfilter.filter,
-  backlogPostIts: state.backlogPostIts
+  isVisible: state.visfilter.filter,
+  backlogPostIts: state.backlog,
+  testPostIts: state.test,
+  wipPostIts: state.wip,
+  donePostIts: state.done,
+  storiesPostIts: state.stories,
+  currSprintPostIts: state.currsprint
 });
 
 const mapDispatchToProps = dispatch => ({
-  onAddPostIt: (postItTitle, postItDescription, postItColor) => {
+  onAdd: (postItTitle, postItDescription, postItColor) => {
     const postIt = {
-          id: +(new Date()),
-          title: postItTitle,
-          description: postItDescription,
-          columId: "backlog",
-          color: postItColor,
+      id: +(new Date()),
+      title: postItTitle,
+      description: postItDescription,
+      color: postItColor
     };
     dispatch(addPostIt(postIt));
+    const visfilter = { filter: false };
+    dispatch(setVisFilterPostIt(visfilter));
   },
-  onRemove: (postIt) => {
+  onRemove: (id) => {
     dispatch(removePostIt(id));
   },
-  showDialog: (visfilter) =>  {
+  showDialog: (visfilter) => {
     dispatch(setVisFilterPostIt(visfilter));
   }
 });

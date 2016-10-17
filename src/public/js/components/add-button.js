@@ -11,7 +11,6 @@ const AddButton = (props) => {
     </div>
   );
 };
-
 AddButton.propTypes = () => ({
   showDialog: React.PropTypes.func
 });

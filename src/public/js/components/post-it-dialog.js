@@ -7,24 +7,21 @@ const PostItDialog = (props) => {
 
   function handleSave() {
     if (colorSelect.trim().length > 0) {
-      props.onAddPostIt(postItTitle.value, postItDescription.value, colorSelect);
+      props.onAdd(postItTitle.value, postItDescription.value, colorSelect);
     } else {
       colorSelect = 'yellow';
-      props.onAddPostIt(postItTitle.value, postItDescription.value, colorSelect);
+      props.onAdd(postItTitle.value, postItDescription.value, colorSelect);
     }
   }
   function handleSelect(event) {
     colorSelect = event.currentTarget.id;
-  }
-  function handleList() {
-    console.log('bajs');
   }
   function handleClose() {
     const visfilter = { filter: false };
     props.showDialog(visfilter);
   }
 
-  if (props.isVisiblePostIt) {
+  if (props.isVisible) {
     return (
       <div className="main-dialog-container">
         <div className="dialog-container">
@@ -77,7 +74,6 @@ const PostItDialog = (props) => {
                 </button>
               </div>
             </div>
-            <button className="add-listitem-button" onClick={handleList}>List</button>
             <button className="save-button" onClick={handleSave}>Save</button>
           </nav>
         </div>
@@ -87,9 +83,7 @@ const PostItDialog = (props) => {
   return null;
 };
 PostItDialog.propTypes = () => ({
-  isVisiblePostIt: React.PropTypes.boolean,
-  showDialog: React.PropTypes.func,
-  onAddPostIt: React.PropTypes.func
+  isVisible: React.PropTypes.bool
 });
 
 export default PostItDialog;
