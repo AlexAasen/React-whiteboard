@@ -1,7 +1,6 @@
 import React from 'react';
 import AddButton from './add-button';
 import AddColButton from './add-col-button';
-import PostIt from './post-it';
 import PostItDialog from './post-it-dialog';
 import ColumnDialog from './column-dialog';
 import Columns from './columns';

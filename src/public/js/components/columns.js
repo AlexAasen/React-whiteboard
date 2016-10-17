@@ -6,26 +6,13 @@ const Columns = (props) => {
   return (
     <div className={props.className}>
       <ul className="ul-rowstyle"> {
-        props.columns.map(column =>
-          (<Column
-            key={column.id}
-            id={column.id}
-            columnTitle={column.title}
-            onRemove={props.onRemove}
-            />
-          )).reverse()
-        }
+        {props.children}
       </ul>
     </div>);
 };
 
 Columns.propTypes = () => ({
-  columns: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      id:React.PropTypes.string,
-      title: React.PropTypes.string.isRequired
-    })
-  ),
+  column: React.PropTypes.element,
   onRemove: React.PropTypes.func
 });
 
