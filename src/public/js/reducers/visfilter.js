@@ -1,7 +1,6 @@
 import { SET_VISFILTER_COL,  SET_VISFILTER_POSTIT } from '../constants/action-types';
 
-const initialState = { displayDialog: false, displayColDialog: false }
-const reducer = (state = initialState, action) => {
+const reducer = (state = [], action) => {
   let newState;
   switch (action.type) {
     /*case SET_VISFILTER_COL: {
@@ -11,7 +10,7 @@ const reducer = (state = initialState, action) => {
     }*/
     case SET_VISFILTER_POSTIT: {
       const boolean = Object.assign({}, action.data);
-      newState = Object.assign({}, state, Object.assign({}, state.displayDialog = boolean));
+      newState = Object.assign({}, boolean);
       return newState;
     }
     default: {

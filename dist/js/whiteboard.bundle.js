@@ -22469,7 +22469,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var PostIt = function PostIt(props) {
   function removePostIt() {
-    props.onRemove(props.id);
+    props.onRemove(props.postIt);
   }
   return _react2.default.createElement(
     "li",
@@ -22478,16 +22478,16 @@ var PostIt = function PostIt(props) {
     },
     _react2.default.createElement(
       "div",
-      { className: "post-it " + props.color },
+      { className: "post-it " + props.postIt.color },
       _react2.default.createElement(
         "h3",
         { className: "title" },
-        props.title
+        props.postIt.title
       ),
       _react2.default.createElement(
         "p",
         { className: "description" },
-        props.description
+        props.postIt.description
       ),
       _react2.default.createElement("img", { src: "img/edit24.png", id: "edit", alt: "edit post-it" }),
       _react2.default.createElement(
@@ -22515,10 +22515,7 @@ var PostItList = function PostItList(props) {
     props.backlogPostIts.map(function (postIt) {
       return _react2.default.createElement(PostIt, {
         key: postIt.id,
-        id: postIt.id,
-        title: postIt.title,
-        color: postIt.color,
-        description: postIt.description,
+        postIt: postIt,
         onRemove: props.onRemove
       });
     }).reverse()
@@ -22528,10 +22525,7 @@ var PostItList = function PostItList(props) {
 PostItList.propTypes = function () {
   return {
     backlogPostIts: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
-      id: _react2.default.PropTypes.number,
-      title: _react2.default.PropTypes.string,
-      color: _react2.default.PropTypes.string,
-      description: _react2.default.PropTypes.string
+      postIt: _react2.default.PropTypes.Object
     })),
     onRemove: _react2.default.PropTypes.func
   };
@@ -22833,11 +22827,11 @@ var WhiteboardContainer = function (_React$Component) {
           _sideBar2.default,
           null,
           _react2.default.createElement(_addButton2.default, {
-            showDialog: this.props.handleDialogPostIt
+            showDialog: this.props.showDialog
           })
         ),
         _react2.default.createElement(_postItDialog2.default, {
-          isVisiblePostIt: this.props.displayDialog,
+          isVisiblePostIt: this.props.showDialog,
           onAddPostIt: this.props.onAddPostIt,
           onHandleClose: this.props.onHandleClose
         }),
@@ -22847,14 +22841,10 @@ var WhiteboardContainer = function (_React$Component) {
           _react2.default.createElement(
             'ul',
             { className: 'ul-rowstyle' },
-            _react2.default.createElement(
-              _column2.default,
-              null,
-              _react2.default.createElement(_columnPostits2.default, {
-                backlogPostIts: this.props.backlogPostIts,
-                onRemove: this.props.handleRemove
-              })
-            )
+            _react2.default.createElement(_column2.default, {
+              backlogPostIts: this.props.backlogPostIts,
+              onRemove: this.props.onRemove
+            })
           )
         )
       );
@@ -22866,7 +22856,7 @@ var WhiteboardContainer = function (_React$Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    displayColDialog: state.displayDialog,
+    isVisiblePostIt: state.showDialog,
     backlogPostIts: state.backlogPostIts
   };
 };
@@ -22883,14 +22873,14 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       };
       dispatch(addPostIt(postIt));
     },
-    handleRemove: function handleRemove(id) {
-      dispatch(removePostIt(id));
+    onRemove: function onRemove(postIt) {
+      dispatch(actions.removePostIt(id));
     },
     onHandleClose: function onHandleClose() {
       dispatch(setVisFilterPostIt(false));
     },
-    handleDialogPostIt: function handleDialogPostIt() {
-      dispatch(setVisFilterPostIt(true));
+    showDialog: function showDialog() {
+      dispatch(actions.setVisFilterPostIt(true));
     }
   };
 };
@@ -23042,7 +23032,7 @@ const reducer = (state, action) => ({
 
 var reducer = (0, _redux.combineReducers)({
   columns: _columns2.default,
-  visFilter: _visFilter2.default
+  visfilter: _visFilter2.default
 });
 
 exports.default = reducer;
@@ -23056,9 +23046,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _actionTypes = require('../constants/action-types');
 
-var initialState = { displayDialog: false, displayColDialog: false };
 var reducer = function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments[1];
 
   var newState = void 0;
@@ -23071,7 +23060,7 @@ var reducer = function reducer() {
     case _actionTypes.SET_VISFILTER_POSTIT:
       {
         var boolean = Object.assign({}, action.data);
-        newState = Object.assign({}, state, Object.assign({}, state.displayDialog = boolean));
+        newState = Object.assign({}, boolean);
         return newState;
       }
     default:

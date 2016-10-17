@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import columns from './columns';
-import visFilter from './visFilter';
+import visfilter from './visFilter';
 
 /*
 const reducer = (state, action) => ({
@@ -12,7 +12,7 @@ const reducer = (state, action) => ({
 
 const reducer = combineReducers({
   columns,
-  visFilter
+  visfilter
 });
 
 export default reducer;

@@ -15,22 +15,20 @@ class WhiteboardContainer extends React.Component {
       <div className="main-container">
         <SideBar>
           <AddButton
-            showDialog={this.props.handleDialogPostIt}
+            showDialog={this.props.showDialog}
           />
         </ SideBar>
         <PostItDialog
-          isVisiblePostIt={this.props.displayDialog}
+          isVisiblePostIt={this.props.showDialog}
           onAddPostIt={this.props.onAddPostIt}
           onHandleClose={this.props.onHandleClose}
         />
         <div className="nav wb-sections">
           <ul className="ul-rowstyle">
-            <Backlog>
-              <PostIt
-                backlogPostIts={this.props.backlogPostIts}
-                onRemove={this.props.handleRemove}
-              />
-            </Backlog>
+            <Backlog
+              backlogPostIts={this.props.backlogPostIts}
+              onRemove={this.props.onRemove}
+            />
           </ul>
         </div>
       </div>
@@ -39,7 +37,7 @@ class WhiteboardContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  displayColDialog: state.displayDialog,
+  isVisiblePostIt: state.showDialog,
   backlogPostIts: state.backlogPostIts
 });
 
@@ -54,14 +52,14 @@ const mapDispatchToProps = dispatch => ({
     };
     dispatch(addPostIt(postIt));
   },
-  handleRemove: (id) => {
-    dispatch(removePostIt(id));
+  onRemove: (postIt) => {
+    dispatch(actions.removePostIt(id));
   },
   onHandleClose: () => {
-   dispatch(setVisFilterPostIt(false));
+    dispatch(setVisFilterPostIt(false));
   },
-  handleDialogPostIt: () =>  {
-    dispatch(setVisFilterPostIt(true));
+  showDialog: () =>  {
+    dispatch(actions.setVisFilterPostIt(true));
   }
 });
 
