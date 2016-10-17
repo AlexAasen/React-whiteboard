@@ -11,17 +11,22 @@ function update() {
 }
 
 module.exports.getAll = function() {
-  var newColumns;
+  var newColumns = [];
+  var newPostits = [];
 
   newColumns = storage.getColumns().filter(function(column) {
-    column.column.postits = storage.getPostits().filter(function(postit){
+    newPostits = [];
+    storage.getPostits().filter(function(postit){
       if(column.column.column === postit.postit.column){
-        return postit;
+        newPostits.push(postit);
       }
     });
-    return column;
+    return column.column.post = newPostits;
   });
-  return newColumns;
+
+  return storage.correctingColumnsOrder(newColumns);
+
+  // return newColumns;
 };
 
 module.exports.get = function(id) {

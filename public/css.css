@@ -1,0 +1,20 @@
+.column {
+  width: 100px;
+  height: 100px;
+  background-color: grey;
+  text-align: center;
+}
+.postit {
+  margin-top: 10px;
+  width: 100px;
+  height: 100px;
+  background-color: grey;
+  text-align: center;
+}
+.postitput {
+  margin-top: 10px;
+  width: 100px;
+  height: 100px;
+  background-color: grey;
+  text-align: center;
+}

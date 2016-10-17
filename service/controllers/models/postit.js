@@ -44,7 +44,7 @@ module.exports.delete = function(id) {
   var newPostits = storage.getPostits().filter(function(postit) {
     return (postit.id !== id);
   });
-  
+
   storage.setPostits(newPostits);
   update();
   return true;
@@ -54,8 +54,9 @@ module.exports.update = function(id, updatedPostit) {
   id = parseInt(id);
   postits = storage.getPostits().filter(function(postit) {
     if (postit.id === id) {
-      postit.postit = updatedPostit;
-      updatedPostit = postit;
+      postit.postit = updatedPostit.postit;
+      console.log(postit.postit + ' <--- ' + updatedPostit.postit);
+      updatedPostit = postit.postit;
       return postit;
     } else {
       return postit;

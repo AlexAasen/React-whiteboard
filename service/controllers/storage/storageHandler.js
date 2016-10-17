@@ -29,3 +29,22 @@ module.exports.setColumns = function(newColumns){
 module.exports.setPostits = function(newPostits){
   postits = newPostits;
 };
+
+module.exports.correctingColumnsOrder = function(columns){
+  columns.sort(function(a, b){
+    return a.column.column - b.column.column;
+  });
+  // console.log(columns[0].postits.length);
+  console.log(columns[0].column.post.length);
+  for(var i = 0; i < columns.length; i++){
+    columns[i].column.column = i+1;
+    for(var j = 0; j < columns[i].column.post.length; j++){
+      columns[i].column.post[j].postit.column = i+1;
+    }
+  }
+  return columns;
+}
+
+function correctingPostitsOrder(postitStorage){
+
+}
