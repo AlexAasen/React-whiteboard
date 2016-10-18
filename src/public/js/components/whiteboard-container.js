@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addPostIt, setVisFilterPostIt, removePostIt } from '../actions';
 import AddButton from './add-button';
-import PostIt from './post-it';
 import PostItDialog from './post-it-dialog';
 import Backlog from './backlog';
 import Stories from './stories';
@@ -28,42 +27,30 @@ class WhiteboardContainer extends React.Component {
         />
         <div className="nav wb-sections">
           <ul className="ul-rowstyle">
-        <Backlog>
-          <PostIt
+        <Backlog
             postIts={this.props.backlogPostIts}
             onRemove={this.props.onRemove}
           />
-        </Backlog>
-        <Stories>
-          <PostIt
+        <Stories
             postIts={this.props.storiesPostIts}
             onRemove={this.props.onRemove}
           />
-        </Stories>
-        <CurrSprint>
-          <PostIt
+        <CurrSprint
             postIts={this.props.currSprintPostIts}
             onRemove={this.props.onRemove}
           />
-        </CurrSprint>
-        <Wip>
-          <PostIt
+        <Wip
             postIts={this.props.wipPostIts}
             onRemove={this.props.onRemove}
           />
-        </Wip>
-        <Test>
-          <PostIt
+        <Test
             postIts={this.props.testPostIts}
             onRemove={this.props.onRemove}
           />
-        </Test>
-        <Done>
-          <PostIt
+        <Done
             postIts={this.props.donePostIts}
             onRemove={this.props.onRemove}
           />
-        </Done>
         </ul>
       </div>
       </div>

@@ -22383,7 +22383,7 @@ module.exports.removePostIt = function (number) {
   };
 };
 
-},{"../constants/action-types":212}],200:[function(require,module,exports){
+},{"../constants/action-types":211}],200:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -22412,7 +22412,7 @@ _reactDom2.default.render(_react2.default.createElement(
   _react2.default.createElement(_whiteboardContainer2.default, null)
 ), document.querySelector('#application'));
 
-},{"./components/whiteboard-container":210,"./store":221,"react":184,"react-dom":2,"react-redux":5}],201:[function(require,module,exports){
+},{"./components/whiteboard-container":209,"./store":220,"react":184,"react-dom":2,"react-redux":5}],201:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22457,6 +22457,48 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var PostIt = function PostIt(props) {
+  function removePostIt() {
+    var id = props.id;
+    props.onRemove(id);
+  }
+  return _react2.default.createElement(
+    "li",
+    {
+      className: "post-it-container"
+    },
+    _react2.default.createElement(
+      "div",
+      { className: "post-it " + props.color },
+      _react2.default.createElement(
+        "h3",
+        { className: "title" },
+        props.title
+      ),
+      _react2.default.createElement(
+        "p",
+        { className: "description" },
+        props.description
+      ),
+      _react2.default.createElement("img", { src: "img/edit24.png", id: "edit", alt: "edit post-it" }),
+      _react2.default.createElement(
+        "button",
+        { className: "close", onClick: removePostIt },
+        "\u2715"
+      )
+    )
+  );
+};
+PostIt.propTypes = function () {
+  return {
+    id: _react2.default.PropTypes.number.isRequired,
+    title: _react2.default.PropTypes.string,
+    color: _react2.default.PropTypes.string,
+    description: _react2.default.PropTypes.string,
+    onRemove: _react2.default.PropTypes.func
+  };
+};
+
 var Backlog = function Backlog(props) {
   return _react2.default.createElement(
     "li",
@@ -22476,14 +22518,33 @@ var Backlog = function Backlog(props) {
       _react2.default.createElement(
         "div",
         { className: "wb-section-content" },
-        props.children
+        _react2.default.createElement(
+          "ul",
+          { className: "ul-colstyle" },
+          props.postIts.map(function (postIt) {
+            return _react2.default.createElement(PostIt, {
+              key: postIt.id,
+              id: postIt.id,
+              title: postIt.title,
+              color: postIt.color,
+              description: postIt.description,
+              onRemove: props.onRemove
+            });
+          }).reverse()
+        )
       )
     )
   );
 };
 Backlog.propTypes = function () {
   return {
-    postIt: _react2.default.PropTypes.element
+    postIts: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
+      id: _react2.default.PropTypes.number,
+      title: _react2.default.PropTypes.string,
+      color: _react2.default.PropTypes.string,
+      description: _react2.default.PropTypes.string
+    })),
+    onRemove: _react2.default.PropTypes.func
   };
 };
 
@@ -22501,6 +22562,48 @@ var _react = require("react");
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var PostIt = function PostIt(props) {
+  function removePostIt() {
+    var id = props.id;
+    props.onRemove(id);
+  }
+  return _react2.default.createElement(
+    "li",
+    {
+      className: "post-it-container"
+    },
+    _react2.default.createElement(
+      "div",
+      { className: "post-it " + props.color },
+      _react2.default.createElement(
+        "h3",
+        { className: "title" },
+        props.title
+      ),
+      _react2.default.createElement(
+        "p",
+        { className: "description" },
+        props.description
+      ),
+      _react2.default.createElement("img", { src: "img/edit24.png", id: "edit", alt: "edit post-it" }),
+      _react2.default.createElement(
+        "button",
+        { className: "close", onClick: removePostIt },
+        "\u2715"
+      )
+    )
+  );
+};
+PostIt.propTypes = function () {
+  return {
+    id: _react2.default.PropTypes.number.isRequired,
+    title: _react2.default.PropTypes.string,
+    color: _react2.default.PropTypes.string,
+    description: _react2.default.PropTypes.string,
+    onRemove: _react2.default.PropTypes.func
+  };
+};
 
 var CurrSprint = function CurrSprint(props) {
   return _react2.default.createElement(
@@ -22521,7 +22624,20 @@ var CurrSprint = function CurrSprint(props) {
       _react2.default.createElement(
         "div",
         { className: "wb-section-content" },
-        props.children
+        _react2.default.createElement(
+          "ul",
+          { className: "ul-colstyle" },
+          props.postIts.map(function (postIt) {
+            return _react2.default.createElement(PostIt, {
+              key: postIt.id,
+              id: postIt.id,
+              title: postIt.title,
+              color: postIt.color,
+              description: postIt.description,
+              onRemove: props.onRemove
+            });
+          }).reverse()
+        )
       )
     )
   );
@@ -22548,6 +22664,48 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var PostIt = function PostIt(props) {
+  function removePostIt() {
+    var id = props.id;
+    props.onRemove(id);
+  }
+  return _react2.default.createElement(
+    "li",
+    {
+      className: "post-it-container"
+    },
+    _react2.default.createElement(
+      "div",
+      { className: "post-it " + props.color },
+      _react2.default.createElement(
+        "h3",
+        { className: "title" },
+        props.title
+      ),
+      _react2.default.createElement(
+        "p",
+        { className: "description" },
+        props.description
+      ),
+      _react2.default.createElement("img", { src: "img/edit24.png", id: "edit", alt: "edit post-it" }),
+      _react2.default.createElement(
+        "button",
+        { className: "close", onClick: removePostIt },
+        "\u2715"
+      )
+    )
+  );
+};
+PostIt.propTypes = function () {
+  return {
+    id: _react2.default.PropTypes.number.isRequired,
+    title: _react2.default.PropTypes.string,
+    color: _react2.default.PropTypes.string,
+    description: _react2.default.PropTypes.string,
+    onRemove: _react2.default.PropTypes.func
+  };
+};
+
 var Done = function Done(props) {
   return _react2.default.createElement(
     "li",
@@ -22567,7 +22725,20 @@ var Done = function Done(props) {
       _react2.default.createElement(
         "div",
         { className: "wb-section-content" },
-        props.children
+        _react2.default.createElement(
+          "ul",
+          { className: "ul-colstyle" },
+          props.postIts.map(function (postIt) {
+            return _react2.default.createElement(PostIt, {
+              key: postIt.id,
+              id: postIt.id,
+              title: postIt.title,
+              color: postIt.color,
+              description: postIt.description,
+              onRemove: props.onRemove
+            });
+          }).reverse()
+        )
       )
     )
   );
@@ -22732,6 +22903,41 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var SideBar = function SideBar(props) {
+  return _react2.default.createElement(
+    "div",
+    { className: "nav side-menu" },
+    _react2.default.createElement(
+      "ul",
+      { className: "ul-colstyle" },
+      _react2.default.createElement(
+        "li",
+        null,
+        props.children
+      )
+    )
+  );
+};
+SideBar.propTypes = function () {
+  return {
+    addButton: _react2.default.PropTypes.element
+  };
+};
+exports.default = SideBar;
+
+},{"react":184}],207:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var PostIt = function PostIt(props) {
   function removePostIt() {
     var id = props.id;
@@ -22774,85 +22980,6 @@ PostIt.propTypes = function () {
   };
 };
 
-var PostItList = function PostItList(props) {
-  return _react2.default.createElement(
-    "ul",
-    { className: "ul-colstyle" },
-    props.postIts.map(function (postIt) {
-      return _react2.default.createElement(PostIt, {
-        key: postIt.id,
-        id: postIt.id,
-        title: postIt.title,
-        color: postIt.color,
-        description: postIt.description,
-        onRemove: props.onRemove
-      });
-    }).reverse()
-  );
-};
-
-PostItList.propTypes = function () {
-  return {
-    postIts: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
-      id: _react2.default.PropTypes.number,
-      title: _react2.default.PropTypes.string,
-      color: _react2.default.PropTypes.string,
-      description: _react2.default.PropTypes.string
-    })),
-    onRemove: _react2.default.PropTypes.func
-  };
-};
-
-exports.default = PostItList;
-
-},{"react":184}],207:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var SideBar = function SideBar(props) {
-  return _react2.default.createElement(
-    "div",
-    { className: "nav side-menu" },
-    _react2.default.createElement(
-      "ul",
-      { className: "ul-colstyle" },
-      _react2.default.createElement(
-        "li",
-        null,
-        props.children
-      )
-    )
-  );
-};
-SideBar.propTypes = function () {
-  return {
-    addButton: _react2.default.PropTypes.element
-  };
-};
-exports.default = SideBar;
-
-},{"react":184}],208:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var Stories = function Stories(props) {
   return _react2.default.createElement(
     "li",
@@ -22872,7 +22999,20 @@ var Stories = function Stories(props) {
       _react2.default.createElement(
         "div",
         { className: "wb-section-content" },
-        props.children
+        _react2.default.createElement(
+          "ul",
+          { className: "ul-colstyle" },
+          props.postIts.map(function (postIt) {
+            return _react2.default.createElement(PostIt, {
+              key: postIt.id,
+              id: postIt.id,
+              title: postIt.title,
+              color: postIt.color,
+              description: postIt.description,
+              onRemove: props.onRemove
+            });
+          }).reverse()
+        )
       )
     )
   );
@@ -22886,7 +23026,7 @@ Stories.propTypes = function () {
 
 exports.default = Stories;
 
-},{"react":184}],209:[function(require,module,exports){
+},{"react":184}],208:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22898,6 +23038,48 @@ var _react = require("react");
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var PostIt = function PostIt(props) {
+  function removePostIt() {
+    var id = props.id;
+    props.onRemove(id);
+  }
+  return _react2.default.createElement(
+    "li",
+    {
+      className: "post-it-container"
+    },
+    _react2.default.createElement(
+      "div",
+      { className: "post-it " + props.color },
+      _react2.default.createElement(
+        "h3",
+        { className: "title" },
+        props.title
+      ),
+      _react2.default.createElement(
+        "p",
+        { className: "description" },
+        props.description
+      ),
+      _react2.default.createElement("img", { src: "img/edit24.png", id: "edit", alt: "edit post-it" }),
+      _react2.default.createElement(
+        "button",
+        { className: "close", onClick: removePostIt },
+        "\u2715"
+      )
+    )
+  );
+};
+PostIt.propTypes = function () {
+  return {
+    id: _react2.default.PropTypes.number.isRequired,
+    title: _react2.default.PropTypes.string,
+    color: _react2.default.PropTypes.string,
+    description: _react2.default.PropTypes.string,
+    onRemove: _react2.default.PropTypes.func
+  };
+};
 
 var Test = function Test(props) {
   return _react2.default.createElement(
@@ -22918,7 +23100,20 @@ var Test = function Test(props) {
       _react2.default.createElement(
         "div",
         { className: "wb-section-content" },
-        props.children
+        _react2.default.createElement(
+          "ul",
+          { className: "ul-colstyle" },
+          props.postIts.map(function (postIt) {
+            return _react2.default.createElement(PostIt, {
+              key: postIt.id,
+              id: postIt.id,
+              title: postIt.title,
+              color: postIt.color,
+              description: postIt.description,
+              onRemove: props.onRemove
+            });
+          }).reverse()
+        )
       )
     )
   );
@@ -22932,7 +23127,7 @@ Test.propTypes = function () {
 
 exports.default = Test;
 
-},{"react":184}],210:[function(require,module,exports){
+},{"react":184}],209:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22952,10 +23147,6 @@ var _actions = require('../actions');
 var _addButton = require('./add-button');
 
 var _addButton2 = _interopRequireDefault(_addButton);
-
-var _postIt = require('./post-it');
-
-var _postIt2 = _interopRequireDefault(_postIt);
 
 var _postItDialog = require('./post-it-dialog');
 
@@ -23030,54 +23221,30 @@ var WhiteboardContainer = function (_React$Component) {
           _react2.default.createElement(
             'ul',
             { className: 'ul-rowstyle' },
-            _react2.default.createElement(
-              _backlog2.default,
-              null,
-              _react2.default.createElement(_postIt2.default, {
-                postIts: this.props.backlogPostIts,
-                onRemove: this.props.onRemove
-              })
-            ),
-            _react2.default.createElement(
-              _stories2.default,
-              null,
-              _react2.default.createElement(_postIt2.default, {
-                postIts: this.props.storiesPostIts,
-                onRemove: this.props.onRemove
-              })
-            ),
-            _react2.default.createElement(
-              _currSprint2.default,
-              null,
-              _react2.default.createElement(_postIt2.default, {
-                postIts: this.props.currSprintPostIts,
-                onRemove: this.props.onRemove
-              })
-            ),
-            _react2.default.createElement(
-              _wip2.default,
-              null,
-              _react2.default.createElement(_postIt2.default, {
-                postIts: this.props.wipPostIts,
-                onRemove: this.props.onRemove
-              })
-            ),
-            _react2.default.createElement(
-              _test2.default,
-              null,
-              _react2.default.createElement(_postIt2.default, {
-                postIts: this.props.testPostIts,
-                onRemove: this.props.onRemove
-              })
-            ),
-            _react2.default.createElement(
-              _done2.default,
-              null,
-              _react2.default.createElement(_postIt2.default, {
-                postIts: this.props.donePostIts,
-                onRemove: this.props.onRemove
-              })
-            )
+            _react2.default.createElement(_backlog2.default, {
+              postIts: this.props.backlogPostIts,
+              onRemove: this.props.onRemove
+            }),
+            _react2.default.createElement(_stories2.default, {
+              postIts: this.props.storiesPostIts,
+              onRemove: this.props.onRemove
+            }),
+            _react2.default.createElement(_currSprint2.default, {
+              postIts: this.props.currSprintPostIts,
+              onRemove: this.props.onRemove
+            }),
+            _react2.default.createElement(_wip2.default, {
+              postIts: this.props.wipPostIts,
+              onRemove: this.props.onRemove
+            }),
+            _react2.default.createElement(_test2.default, {
+              postIts: this.props.testPostIts,
+              onRemove: this.props.onRemove
+            }),
+            _react2.default.createElement(_done2.default, {
+              postIts: this.props.donePostIts,
+              onRemove: this.props.onRemove
+            })
           )
         )
       );
@@ -23123,7 +23290,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(WhiteboardContainer);
 
-},{"../actions":199,"./add-button":201,"./backlog":202,"./curr-sprint":203,"./done":204,"./post-it":206,"./post-it-dialog":205,"./side-bar":207,"./stories":208,"./test":209,"./wip":211,"react":184,"react-redux":5}],211:[function(require,module,exports){
+},{"../actions":199,"./add-button":201,"./backlog":202,"./curr-sprint":203,"./done":204,"./post-it-dialog":205,"./side-bar":206,"./stories":207,"./test":208,"./wip":210,"react":184,"react-redux":5}],210:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23135,6 +23302,48 @@ var _react = require("react");
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var PostIt = function PostIt(props) {
+  function removePostIt() {
+    var id = props.id;
+    props.onRemove(id);
+  }
+  return _react2.default.createElement(
+    "li",
+    {
+      className: "post-it-container"
+    },
+    _react2.default.createElement(
+      "div",
+      { className: "post-it " + props.color },
+      _react2.default.createElement(
+        "h3",
+        { className: "title" },
+        props.title
+      ),
+      _react2.default.createElement(
+        "p",
+        { className: "description" },
+        props.description
+      ),
+      _react2.default.createElement("img", { src: "img/edit24.png", id: "edit", alt: "edit post-it" }),
+      _react2.default.createElement(
+        "button",
+        { className: "close", onClick: removePostIt },
+        "\u2715"
+      )
+    )
+  );
+};
+PostIt.propTypes = function () {
+  return {
+    id: _react2.default.PropTypes.number.isRequired,
+    title: _react2.default.PropTypes.string,
+    color: _react2.default.PropTypes.string,
+    description: _react2.default.PropTypes.string,
+    onRemove: _react2.default.PropTypes.func
+  };
+};
 
 var Wip = function Wip(props) {
   return _react2.default.createElement(
@@ -23155,7 +23364,20 @@ var Wip = function Wip(props) {
       _react2.default.createElement(
         "div",
         { className: "wb-section-content" },
-        props.children
+        _react2.default.createElement(
+          "ul",
+          { className: "ul-colstyle" },
+          props.postIts.map(function (postIt) {
+            return _react2.default.createElement(PostIt, {
+              key: postIt.id,
+              id: postIt.id,
+              title: postIt.title,
+              color: postIt.color,
+              description: postIt.description,
+              onRemove: props.onRemove
+            });
+          }).reverse()
+        )
       )
     )
   );
@@ -23169,7 +23391,7 @@ Wip.propTypes = function () {
 
 exports.default = Wip;
 
-},{"react":184}],212:[function(require,module,exports){
+},{"react":184}],211:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23182,7 +23404,7 @@ var REMOVE_POSTIT = exports.REMOVE_POSTIT = 'REMOVE_POSTIT';
 var UPDATE_POSTIT = exports.UPDATE_POSTIT = 'UPDATE_POSTIT';
 var SET_VISFILTER_POSTIT = exports.SET_VISFILTER_POSTIT = 'SET_VISFILTER_POSTIT';
 
-},{}],213:[function(require,module,exports){
+},{}],212:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23250,7 +23472,7 @@ var reducer = function reducer() {
 
 exports.default = reducer;
 
-},{"../constants/action-types":212}],214:[function(require,module,exports){
+},{"../constants/action-types":211}],213:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23297,7 +23519,7 @@ var reducer = function reducer() {
 
 exports.default = reducer;
 
-},{"../constants/action-types":212}],215:[function(require,module,exports){
+},{"../constants/action-types":211}],214:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23344,7 +23566,7 @@ var reducer = function reducer() {
 
 exports.default = reducer;
 
-},{"../constants/action-types":212}],216:[function(require,module,exports){
+},{"../constants/action-types":211}],215:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23393,7 +23615,7 @@ exports.default = (0, _redux.combineReducers)({
   visfilter: _visfilter2.default
 });
 
-},{"./backlog":213,"./currsprint":214,"./done":215,"./stories":217,"./test":218,"./visfilter":219,"./wip":220,"redux":190}],217:[function(require,module,exports){
+},{"./backlog":212,"./currsprint":213,"./done":214,"./stories":216,"./test":217,"./visfilter":218,"./wip":219,"redux":190}],216:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23440,7 +23662,7 @@ var reducer = function reducer() {
 
 exports.default = reducer;
 
-},{"../constants/action-types":212}],218:[function(require,module,exports){
+},{"../constants/action-types":211}],217:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23487,7 +23709,7 @@ var reducer = function reducer() {
 
 exports.default = reducer;
 
-},{"../constants/action-types":212}],219:[function(require,module,exports){
+},{"../constants/action-types":211}],218:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23521,7 +23743,7 @@ var reducer = function reducer() {
 
 exports.default = reducer;
 
-},{"../constants/action-types":212}],220:[function(require,module,exports){
+},{"../constants/action-types":211}],219:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23568,7 +23790,7 @@ var reducer = function reducer() {
 
 exports.default = reducer;
 
-},{"../constants/action-types":212}],221:[function(require,module,exports){
+},{"../constants/action-types":211}],220:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -23586,7 +23808,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var store = (0, _redux.createStore)(_reducers2.default);
 exports.default = store;
 
-},{"../reducers":216,"redux":190}]},{},[200])
+},{"../reducers":215,"redux":190}]},{},[200])
 
 
 //# sourceMappingURL=whiteboard.bundle.js.map
