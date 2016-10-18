@@ -1,6 +1,6 @@
 import * as types from '../constants/action-types';
 
-module.exports.addPostIt = postIt => ({
+const internalAddPostIt = postIt => ({
   type: types.ADD_POSTIT_TO_BACKLOG,
   data: postIt
 });
@@ -20,7 +20,24 @@ module.exports.setVisFilterPostIt = boolean => ({
   data: boolean
 });
 
-module.exports.removePostIt = number => ({
+const internalRemovePostIt = number => ({
   type: types.REMOVE_POSTIT,
   data: number
 });
+
+export const addPostIt = postIt => (dispatch) => {
+    dispatch(setLoading());
+    return axios.post(`${TODOS_URL}/v1/backlogPostIts`, postIt)
+      .then((response) => {
+      //  const localTodo = {
+      //    id: response.data.id,
+      //    text: todo.text
+      //  };
+      //  dispatch(internalAddTodo(localTodo));
+        dispatch(setLoaded);
+        dispatch(clearError());
+      })
+    .catch(() => {
+      dispatch(setError('Couldn\'t add data from server'));
+    });
+};

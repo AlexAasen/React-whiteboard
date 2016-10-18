@@ -34,11 +34,18 @@ html, body {
   background: -moz-linear-gradient(#fff, #999);
   background: -webkit-linear-gradient(#fff, #999);
   background: -o-linear-gradient(#fff, #999);
+  height: 400px;
 }
 
 .dialog-container {
   display: flex;
-  width: 70%;
+  width: 100%;
+}
+
+.dialog-container-col {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .nav.side-menu {
@@ -155,6 +162,7 @@ input, textarea {
   margin-top: 7px;
   padding-left: 5px;
   resize: none;
+  width: 140px;
 }
 
 #description {
@@ -228,10 +236,13 @@ button, a.button-link {
   font-size: 13px;
   padding: 9px 20px;
   margin-top: 5px;
-  margin-left: 40px;
+  margin-left: 30px;
   text-decoration: none;
   text-shadow: 0px 1px 0px #ffffff;
   width: 100px;
+}
+.btn-primary{
+  margin-left: 50px;
 }
 
 a.button-link {
