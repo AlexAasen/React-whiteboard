@@ -4,28 +4,27 @@ var http = require('http').Server(app);
 var socket = require('socket.io')(http);
 var bodyParser = require('body-parser');
 var corsFilter = require('./middleware/cors-filter');
-var columnRoutesCtr = require('./controllers/routes/column');
-var postitRoutesCtr = require('./controllers/routes/postit');
+var floggitCtr = require('./controllers/routes/floggit');
 var sockets = require('./controllers/socket/socketHandler');
 
 app.use(bodyParser.json());
 
 app.use(corsFilter);
 
-app.get('/floggit/postit', postitRoutesCtr.getAll);
-app.get('/floggit/postit/:id', postitRoutesCtr.get);
-app.post('/floggit/postit', postitRoutesCtr.add);
-app.put('/floggit/postit/:id', postitRoutesCtr.update);
-app.delete('/floggit/postit/:id', postitRoutesCtr.delete);
+app.get('/floggit/all', floggitCtr.get);
+app.get('/floggit/:columnID', floggitCtr.get);
+app.get('/floggit/:columnID/:postitID', floggitCtr.get);
 
-app.get('/floggit/column', columnRoutesCtr.getAll);
-app.get('/floggit/column/:id', columnRoutesCtr.get);
-app.post('/floggit/column', columnRoutesCtr.add);
-app.put('/floggit/column/:id', columnRoutesCtr.update);
-app.delete('/floggit/column/:id', columnRoutesCtr.delete);
+app.post('/floggit/:columnID', floggitCtr.add);
+app.post('/floggit/', floggitCtr.add);
+
+app.put('/floggit/:columnID/:postitID', floggitCtr.update);
+app.put('/floggit/:columnID', floggitCtr.update);
+
+app.delete('/floggit/:columnID/:postitID', floggitCtr.delete);
 
 socket.on('connection', sockets);
 
-http.listen(1337, function() {
-  console.log('Server started 1337');
+http.listen(8081, function() {
+  console.log('Server started 8081');
 });

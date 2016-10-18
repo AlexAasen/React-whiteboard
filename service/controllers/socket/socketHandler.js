@@ -1,13 +1,13 @@
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
-var columns = require('../models/column');
+var floggitModel = require('../models/floggit');
 
 module.exports = function(socket){
   function onChange(items){
     socket.emit('broadcast', items);
   }
 
-  onChange(columns.getAll());
+  onChange(floggitModel.getAll());
 
   on('socket', onChange);
 
@@ -17,7 +17,7 @@ module.exports = function(socket){
 };
 
 module.exports.update = function(){
-  eventEmitter.emit('socket', columns.getAll());
+  eventEmitter.emit('socket', floggitModel.getAll());
 };
 
 function on(name, func){
