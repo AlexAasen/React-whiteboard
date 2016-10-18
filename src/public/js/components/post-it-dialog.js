@@ -16,15 +16,16 @@ const PostItDialog = (props) => {
   function handleSelect(event) {
     colorSelect = event.currentTarget.id;
   }
-  function handleList() {
-    console.log('bajs');
+  function handleClose() {
+    const visfilter = { filter: false };
+    props.showDialog(visfilter);
   }
 
   if (props.isVisible) {
     return (
       <div className="main-dialog-container">
         <div className="dialog-container">
-          <button className="close" onClick={props.onHandleClose}>&#10005;</button>
+          <button className="close" onClick={handleClose}>&#10005;</button>
           <div className="text-area">
             <input
               type="text"
@@ -73,7 +74,6 @@ const PostItDialog = (props) => {
                 </button>
               </div>
             </div>
-            <button className="add-listitem-button" onClick={handleList}>List</button>
             <button className="save-button" onClick={handleSave}>Save</button>
           </nav>
         </div>

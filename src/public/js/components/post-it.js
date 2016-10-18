@@ -2,7 +2,8 @@ import React from 'react';
 
 const PostIt = (props) => {
   function removePostIt() {
-    props.onRemove(props.id);
+    const id = props.id;
+    props.onRemove(id);
   }
   return (
     <li

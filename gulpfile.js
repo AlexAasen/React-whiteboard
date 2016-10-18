@@ -22,7 +22,7 @@ gulp.task('browserSync', () =>
 );
 
 gulp.task('css', () =>
-  gulp.src(['./public/css/reset.css', './public/css/global.css'])
+  gulp.src(['./src/public/css/reset.css', './src/public/css/global.css'])
   .pipe(sourcemaps.init())
   .pipe(autoprefixer())
   .pipe(concat('master.css'))
@@ -34,7 +34,7 @@ gulp.task('css', () =>
   }))
 );
 
-gulp.task('html', () => gulp.src('./public/**/*.html')
+gulp.task('html', () => gulp.src('./src/public/**/*.html')
   .pipe(htmlmin({
     collapseWhitespace: true
   }))
@@ -44,11 +44,11 @@ gulp.task('html', () => gulp.src('./public/**/*.html')
   }))
 );
 
-gulp.task('images', () => gulp.src('./public/img/**.*')
+gulp.task('images', () => gulp.src('./src/public/img/**.*')
   .pipe(gulp.dest('./dist/img'))
 );
 
-gulp.task('javascript', () => browserify('./public/js/app.js', {
+gulp.task('javascript', () => browserify('./src/public/js/app.js', {
   debug: true
 })
   .transform(babelify)
@@ -66,8 +66,8 @@ gulp.task('javascript', () => browserify('./public/js/app.js', {
 );
 
 gulp.task('default', ['browserSync', 'html', 'css', 'javascript', 'images'], () => {
-  gulp.watch('./public/css/**/*.css', ['css']);
-  gulp.watch('./public/src/img/**.*', ['images']);
-  gulp.watch('./public/js/**/*.js*', ['javascript']);
-  gulp.watch('./public/**/*.html', ['html']);
+  gulp.watch('./src/public/css/**/*.css', ['css']);
+  gulp.watch('./src/public/src/img/**.*', ['images']);
+  gulp.watch('./src/public/js/**/*.js*', ['javascript']);
+  gulp.watch('./src/public/**/*.html', ['html']);
 });
