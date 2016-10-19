@@ -11,10 +11,10 @@ const PostItDialog = (props) => {
 
   function handleSave() {
     if (colorSelect.trim().length > 0) {
-      props.onAdd(postItTitle.value, postItDescription.value, colorSelect);
+      props.onAdd(postItTitle.value, postItDescription.value, colorSelect, props.requirements);
     } else {
       colorSelect = 'yellow';
-      props.onAdd(postItTitle.value, postItDescription.value, colorSelect);
+      props.onAdd(postItTitle.value, postItDescription.value, colorSelect, props.requirements);
     }
   }
   function handleSelect(event) {

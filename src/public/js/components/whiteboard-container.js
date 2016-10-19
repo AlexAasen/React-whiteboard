@@ -69,12 +69,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onAdd: (postItTitle, postItDescription, postItColor) => {
+  onAdd: (postItTitle, postItDescription, postItColor, postItRequirements) => {
     const postIt = {
       id: +(new Date()),
       title: postItTitle,
       description: postItDescription,
-      color: postItColor
+      color: postItColor,
+      requirements: postItRequirements
     };
     dispatch(addPostItToBacklog(postIt));
     const visfilter = { filter: false };

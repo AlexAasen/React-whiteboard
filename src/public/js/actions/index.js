@@ -1,6 +1,6 @@
 import * as types from '../constants/action-types';
 import { WHITEBOARD_URL } from '../constants/service';
-import axios from 'axios';
+import request from '../crud/requests';
 import socketIOClient from 'socket.io-client';
 
 export const addRequirement = requirement => ({
@@ -21,6 +21,11 @@ const internalAddPostItToBacklog = postIt => ({
   type: types.ADD_POSTIT_TO_BACKLOG,
   data: postIt
 });
+
+export const updateBacklogPostIts = postIts => ({
+  type: types.UPDATE_ALL_POSTITS,
+  data: postIts
+})
 
 module.exports.updatePostIt = postIt => ({
   type: types.UPDATE_POSTIT,
@@ -64,35 +69,13 @@ export const clearError = () => ({
 
 export const addPostItToBacklog = postIt => (dispatch) => {
     dispatch(setLoading());
-    return axios.post(`${WHITEBOARD_URL}/:backlog`, postIt)
-      .then((response) => {
-        const localPostIt = {
-          id: response.data.id,
-          title: postIt.title,
-          color: postIt.color,
-          description: postIt.description,
-          requirements: postIt.requirements
-        };
-        dispatch(internalAddPostItToBacklog(localPostIt));
-        dispatch(setLoaded);
-        dispatch(clearError());
-      })
-    .catch(() => {
-      dispatch(setError('Couldn\'t add data from server'));
-    });
+    request('POST', 'backlog', function(response){
+    }, postIt);
+    dispatch(setLoaded);
 };
 
 export const removePostItFromBacklog = id => (dispatch) => {
-  dispatch(setLoading());
-  return axios.delete(`${WHITEBOARD_URL}/:backlog/:${id}`)
-      .then(() => {
-        dispatch(internalRemovePostItFromBacklog(id));
-        dispatch(setLoaded);
-        dispatch(clearError());
-      })
-    .catch(() => {
-      dispatch(setError('Couldn\'t remove data from server'));
-    });
+
 };
 
 export const startSocket = () => (dispatch) => {
@@ -100,50 +83,30 @@ export const startSocket = () => (dispatch) => {
   socket.on('connect', () => {
     dispatch(setSocketActive);
   });
-  socket.on('broadcast', (data) => {
-    const backlog = data.backlog;
-    backlog.map(postIt => ({
-      id: postIt.id,
-      title: postIt.obj.title,
-      color: postIt.obj.color,
-      description: postIt.obj.description,
-      requirements: postIt.obj.requirements
-    })
-    );
-    dispatch(updateBacklogPostIts(backlog));
+  socket.on('broadcast', (columns) => {
+    console.log(columns);
+    for(let i = 0; i < columns.length; i++){
+      if (columns[i].postits) {
+        const postIts = columns[i].postits.map(postIt => ({
+          id: postIt.id,
+          title: postIt.obj.title,
+          color: postIt.obj.color,
+          description: postIt.obj.description,
+          requirements: postIt.obj.requirements
+        }));
+        console.log('we are here', postIts);
+        switch(columns[i].id){
+          case "backlog": {
+            return dispatch(updateBacklogPostIts(postIts));
+          }
+          default: {
+            return undefined;
+          }
+        }
+      }
 
-    const stories = data.stories;
-    stories.map(postIt => ({
-      id: postIt.id,
-      title: postIt.obj.title,
-      color: postIt.obj.color,
-      description: postIt.obj.description,
-      requirements: postIt.obj.requirements
-    })
-    );
-    dispatch(updateStoriesPostIts(stories));
 
-    const currsprint = data.currsprint;
-    currsprint.map(postIt => ({
-      id: postIt.id,
-      title: postIt.obj.title,
-      color: postIt.obj.color,
-      description: postIt.obj.description,
-      requirements: postIt.obj.requirements
-    })
-    );
-    dispatch(updateCurrsprintPostIts(currsprint));
-
-    const wip = data.wip;
-    wip.map(postIt => ({
-      id: postIt.id,
-      title: postIt.obj.title,
-      color: postIt.obj.color,
-      description: postIt.obj.description,
-      requirements: postIt.obj.requirements
-    })
-    );
-    dispatch(updateWipPostIts(wip));
+    }
   });
   socket.on('disconnect', () => {
     dispatch(setSocketInActive());

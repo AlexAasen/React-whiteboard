@@ -1,1 +1,1 @@
-export const WHITEBOARD_URL = 'http://localhost:8081/floggit';
+export const WHITEBOARD_URL = 'http://localhost:8081';
