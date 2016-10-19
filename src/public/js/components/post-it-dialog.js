@@ -4,7 +4,6 @@ import RequirementList from './requirement-list';
 import { connect } from 'react-redux';
 import { addRequirement, removeRequirement } from '../actions';
 
-
 const PostItDialog = (props) => {
   let postItTitle;
   let postItDescription;

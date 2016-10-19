@@ -100,8 +100,9 @@ export const startSocket = () => (dispatch) => {
   socket.on('connect', () => {
     dispatch(setSocketActive);
   });
-  socket.on('postIt-update', (data) => {
-    const postIts = data.map(postIt => ({
+  socket.on('broadcast', (data) => {
+    const backlog = data.backlog;
+    backlog.map(postIt => ({
       id: postIt.id,
       title: postIt.obj.title,
       color: postIt.obj.color,
@@ -109,7 +110,40 @@ export const startSocket = () => (dispatch) => {
       requirements: postIt.obj.requirements
     })
     );
-    dispatch(updateAllPostIts(todos));
+    dispatch(updateBacklogPostIts(backlog));
+
+    const stories = data.stories;
+    stories.map(postIt => ({
+      id: postIt.id,
+      title: postIt.obj.title,
+      color: postIt.obj.color,
+      description: postIt.obj.description,
+      requirements: postIt.obj.requirements
+    })
+    );
+    dispatch(updateStoriesPostIts(stories));
+
+    const currsprint = data.currsprint;
+    currsprint.map(postIt => ({
+      id: postIt.id,
+      title: postIt.obj.title,
+      color: postIt.obj.color,
+      description: postIt.obj.description,
+      requirements: postIt.obj.requirements
+    })
+    );
+    dispatch(updateCurrsprintPostIts(currsprint));
+
+    const wip = data.wip;
+    wip.map(postIt => ({
+      id: postIt.id,
+      title: postIt.obj.title,
+      color: postIt.obj.color,
+      description: postIt.obj.description,
+      requirements: postIt.obj.requirements
+    })
+    );
+    dispatch(updateWipPostIts(wip));
   });
   socket.on('disconnect', () => {
     dispatch(setSocketInActive());

@@ -4,11 +4,11 @@ const Requirement = (props) => {
   function remove() {
     props.onRemove(props.id);
   }
-  return (<li className="dialog-container">
-    <div className="text-area">
-      {props.requirement}
+  return (<li className="requirement-container">
+    <div className="dialog-container">
+      <div className="requirement">{props.requirement}</div>
+      <button className="badge" onClick={remove}>X</button>
     </div>
-    <button className="badge" onClick={remove}>X</button>
   </li>);
 };
 
