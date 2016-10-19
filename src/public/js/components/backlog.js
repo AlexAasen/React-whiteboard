@@ -19,7 +19,7 @@ const PostIt = (props) => {
   }
   return (
     <li
-      className="post-it-container"
+      className="post-it-content"
     >
       <div className={`post-it ${props.color}`}>
         <h3 className="title">{props.title}</h3>

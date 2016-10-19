@@ -32726,7 +32726,7 @@ var PostIt = function PostIt(props) {
   return _react2.default.createElement(
     'li',
     {
-      className: 'post-it-container'
+      className: 'post-it-content'
     },
     _react2.default.createElement(
       'div',
