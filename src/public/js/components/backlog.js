@@ -2,8 +2,11 @@ import React from 'react';
 
 const PostIt = (props) => {
   function removePostIt() {
-    const id = props.id;
-    props.onRemove(id);
+    const userPick = confirm('Do you wanna remove me taxnos?');
+
+    if (userPick === true) {
+      props.onRemove(props.id);
+    }
   }
   function editPost() {
     props.onShowEditDialog({

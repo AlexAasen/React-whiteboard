@@ -4,11 +4,6 @@ import { addPostIt, showDialog, hideDialog, showEditDialog, hideEditDialog, remo
 import AddButton from './add-button';
 import PostItDialog from './post-it-dialog';
 import Backlog from './backlog';
-import Stories from './stories';
-import Wip from './wip';
-import CurrSprint from './curr-sprint';
-import Test from './test';
-import Done from './done';
 import SideBar from './side-bar';
 import EditDialog from './edit-dialog';
 
@@ -36,40 +31,21 @@ const WhiteboardContainer = props => (
           onRemove={props.onRemove}
           onShowEditDialog={props.onShowEditDialog}
         />
-        <Stories
-          postIts={props.backlogPostIts}
-          onRemove={props.onRemove}
-        />
-        <CurrSprint
-          postIts={props.backlogPostIts}
-          onRemove={props.onRemove}
-        />
-        <Wip
-          postIts={props.backlogPostIts}
-          onRemove={props.onRemove}
-        />
-        <Test
-          postIts={props.backlogPostIts}
-          onRemove={props.onRemove}
-        />
-        <Done
-          postIts={props.backlogPostIts}
-          onRemove={props.onRemove}
-        />
       </ul>
     </div>
   </div>
 );
+WhiteboardContainer.propTypes = () => ({
+  onShowDialog: React.PropTypes.func,
+  isVisible: React.PropTypes.bool,
+  onAdd: React.PropTypes.func,
+  onHideDialog: React.PropTypes.func
+});
 
 const mapStateToProps = state => ({
   isVisible: state.add.displayDialog,
   showEdit: state.edit,
-  backlogPostIts: state.backlog,
-  testPostIts: state.test,
-  wipPostIts: state.wip,
-  donePostIts: state.done,
-  storiesPostIts: state.stories,
-  currSprintPostIts: state.currsprint
+  backlogPostIts: state.backlog
 });
 
 const mapDispatchToProps = dispatch => ({
