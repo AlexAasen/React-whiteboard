@@ -235,18 +235,22 @@ input, textarea {
 
 .yellow:hover {
   background: -webkit-linear-gradient(#ffe764, #fff);
+  border-radius: 0;
 }
 
 .pink:hover {
   background: -webkit-linear-gradient(#fe64ff, #fff);
+  border-radius: 0;
 }
 
 .green:hover {
   background: -webkit-linear-gradient(#6ee73e, #fff);
+  border-radius: 0;
 }
 
 .blue:hover {
   background: -webkit-linear-gradient(#26a8ff, #fff);
+  border-radius: 0;
 }
 
 .dropdown:hover .dropdown-content {
@@ -294,7 +298,7 @@ button:focus {
   outline: 0;
 }
 
-.add-button {
+.add-button, .add-button:hover {
   background: url("../img/post-its.png");
   background-repeat: no-repeat;
   width: 40px;
@@ -302,20 +306,6 @@ button:focus {
   border: none;
   box-shadow: none;
   margin-left: 0;
-}
-
-.add-button-col{
-  background: url("../img/add.png");
-  background-repeat: no-repeat;
-  width: 40px;
-  height: 43px;
-  border: none;
-  box-shadow: none;
-  margin-left: 10px;
-}
-
-.add-button:hover {
-  background: url("../img/post-its.png") no-repeat;
 }
 
 .close {
@@ -342,17 +332,19 @@ button:focus {
   color: #AAA;
 }
 
-#edit {
+.edit, .edit:hover {
   font-family: Helvetica;
   line-height: 25px;
-  background: rgba(220, 220, 220, 0);
+  background: url("../img/edit24.png") no-repeat;
+  background-size: 80%;
   color: #CCC;
   position: absolute;
   left: 1px;
   text-align: center;
   font-weight: bold;
   top: 10px;
-  width: 15px;
+  width: 20px;
+  height: 20px;
   text-decoration: none;
   border: none;
   border-radius: none;

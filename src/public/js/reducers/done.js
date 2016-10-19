@@ -1,6 +1,6 @@
 import { ADD_POSTIT, REMOVE_POSTIT } from '../constants/action-types';
 
-const reducer =  (state = [], action) => {
+const reducer = (state = [], action) => {
   let newState;
   switch (action.type) {
     case ADD_POSTIT: {

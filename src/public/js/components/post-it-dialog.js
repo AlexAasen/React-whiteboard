@@ -7,22 +7,34 @@ import { addRequirement, removeRequirement } from '../actions';
 const PostItDialog = (props) => {
   let postItTitle;
   let postItDescription;
-  let colorSelect = '';
+  let postItColor = '';
 
   function handleSave() {
-    if (colorSelect.trim().length > 0) {
-      props.onAdd(postItTitle.value, postItDescription.value, colorSelect, props.requirements);
+    if (postItColor.trim().length > 0) {
+      props.onAdd({
+        id: +(new Date()),
+        title: postItTitle.value,
+        description: postItDescription.value,
+        color: postItColor,
+        requirement: props.requirements
+      });
     } else {
-      colorSelect = 'yellow';
-      props.onAdd(postItTitle.value, postItDescription.value, colorSelect, props.requirements);
+      postItColor = 'yellow';
+      props.onAdd({
+        id: +(new Date()),
+        title: postItTitle.value,
+        description: postItDescription.value,
+        color: postItColor,
+        requirement: props.requirements
+      });
     }
+    props.onHideDialog();
   }
   function handleSelect(event) {
-    colorSelect = event.currentTarget.id;
+    postItColor = event.currentTarget.id;
   }
   function handleClose() {
-    const visfilter = { filter: false };
-    props.showDialog(visfilter);
+    props.onHideDialog();
   }
 
   if (props.isVisible) {
@@ -106,7 +118,9 @@ PostItDialog.propTypes = () => ({
     })
   ),
   handleAdd: React.PropTypes.func.isRequired,
-  handleRemove: React.PropTypes.func.isRequired
+  handleRemove: React.PropTypes.func.isRequired,
+  onhideDialog: React.PropTypes.func,
+  onAdd: React.PropTypes.func
 });
 
 const mapStateToProps = state => ({

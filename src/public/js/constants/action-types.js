@@ -1,4 +1,5 @@
 export const ADD_POSTIT = 'ADD_POSTIT';
+<<<<<<< HEAD
 export const ADD_POSTIT_TO_BACKLOG = 'ADD_POSTIT_TO_BACKLOG';
 export const REMOVE_POSTIT = 'REMOVE_POSTIT';
 export const UPDATE_POSTIT = 'UPDATE_POSTIT';
@@ -12,3 +13,12 @@ export const SET_ERROR = 'SET_ERROR';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 export const ADD_REQUIREMENT = 'ADD_REQUIREMENT';
 export const REMOVE_REQUIREMENT = 'REMOVE_REQUIREMENT';
+=======
+export const UPDATE_POSTIT_COLUMN = 'UPDATE_POSTIT';
+export const REMOVE_POSTIT = 'REMOVE_POSTIT';
+export const UPDATE_POSTIT = 'UPDATE_POSTIT';
+export const SHOW_DIALOG = 'SHOW_DIALOG';
+export const HIDE_DIALOG = 'HIDE_DIALOG';
+export const SHOW_EDIT_DIALOG = 'SHOW_EDIT_DIALOG';
+export const HIDE_EDIT_DIALOG = 'HIDE_EDIT_DIALOG';
+>>>>>>> develop

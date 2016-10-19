@@ -5,9 +5,10 @@ import currsprint from './currsprint';
 import wip from './wip';
 import test from './test';
 import done from './done';
-import visfilter from './visfilter';
 import services from './services';
 import postitrequirements from './postitrequirements';
+import add from './add';
+import edit from './edit';
 
 export default combineReducers({
   backlog,
@@ -16,7 +17,8 @@ export default combineReducers({
   wip,
   test,
   done,
-  visfilter,
   services,
   postitrequirements
+  add,
+  edit
 });

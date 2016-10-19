@@ -17,9 +17,9 @@ export const returnPostItRequirements = () => ({
   type: types.RETURN_POSTIT_REQUIREMENTS
 });
 
-const internalAddPostItToBacklog = postIt => ({
-  type: types.ADD_POSTIT_TO_BACKLOG,
-  data: postIt
+export const addPostIt = (postIt, title) => ({
+  type: types.ADD_POSTIT,
+  data: postIt, title
 });
 
 export const updateBacklogPostIts = postIts => ({
@@ -37,14 +37,23 @@ module.exports.updatePostItColumn = postIt => ({
   data: postIt
 });
 
-module.exports.setVisFilterPostIt = boolean => ({
-  type: types.SET_VISFILTER_POSTIT,
-  data: boolean
+module.exports.showDialog = () => ({
+  type: types.SHOW_DIALOG
+});
+module.exports.hideDialog = () => ({
+  type: types.HIDE_DIALOG
+});
+module.exports.showEditDialog = postIt => ({
+  type: types.SHOW_EDIT_DIALOG,
+  data: postIt
+});
+module.exports.hideEditDialog = () => ({
+  type: types.HIDE_EDIT_DIALOG
 });
 
-const internalRemovePostItFromBacklog = number => ({
+module.exports.removePostIt = postIt, title => ({
   type: types.REMOVE_POSTIT,
-  data: number
+  data: postIt, title
 });
 
 export const setLoading = () => ({
