@@ -34,11 +34,39 @@ html, body {
   background: -moz-linear-gradient(#fff, #999);
   background: -webkit-linear-gradient(#fff, #999);
   background: -o-linear-gradient(#fff, #999);
+  height: 300px;
 }
 
 .dialog-container {
   display: flex;
-  width: 70%;
+  width: 100%;
+  min-height: 28px;
+}
+
+.requirement-container {
+  width: 90%;
+  height: 28px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  position: relative;
+  display: block;
+  border-top: 1px solid #dcdcdc;
+}
+
+.requirement{
+  height: 28px;
+  margin-left: 5px;
+  padding-top: 7px;
+  padding-left: 5px;
+  resize: none;
+  width: 200px;
+  position: relative;
+}
+
+.dialog-container-col {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .nav.side-menu {
@@ -61,6 +89,14 @@ html, body {
 
 .ul-rowstyle {
   display: flex;
+}
+
+.requirements{
+  display: block;
+  overflow-y: auto;
+  height: 90px;
+  padding: 0;
+  margin:10px;
 }
 
 img {
@@ -121,14 +157,6 @@ h2 {
   position: relative;
 }
 
-.post-it-content {
-  width: 40%;
-  height: 130px;
-  padding-top: 10px;
-  padding-bottom: 5px;
-  position: relative;
-}
-
 .post-it {
   width: 100%;
   height: 100%;
@@ -163,6 +191,7 @@ input, textarea {
   margin-top: 7px;
   padding-left: 5px;
   resize: none;
+  width: 140px;
 }
 
 #description {
@@ -207,22 +236,18 @@ input, textarea {
 
 .yellow:hover {
   background: -webkit-linear-gradient(#ffe764, #fff);
-  border-radius: 0;
 }
 
 .pink:hover {
   background: -webkit-linear-gradient(#fe64ff, #fff);
-  border-radius: 0;
 }
 
 .green:hover {
   background: -webkit-linear-gradient(#6ee73e, #fff);
-  border-radius: 0;
 }
 
 .blue:hover {
   background: -webkit-linear-gradient(#26a8ff, #fff);
-  border-radius: 0;
 }
 
 .dropdown:hover .dropdown-content {
@@ -240,10 +265,43 @@ button, a.button-link {
   font-size: 13px;
   padding: 9px 20px;
   margin-top: 5px;
-  margin-left: 40px;
+  margin-left: 30px;
   text-decoration: none;
   text-shadow: 0px 1px 0px #ffffff;
   width: 100px;
+}
+.btn-primary{
+  margin-left: 50px
+}.badge{
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  position: static;
+  right:0;
+}
+
+.edit, .edit:hover {
+  font-family: Helvetica;
+  line-height: 25px;
+  background: url("../img/edit24.png") no-repeat;
+  background-size: 80%;
+  color: #CCC;
+  position: absolute;
+  left: 1px;
+  text-align: center;
+  font-weight: bold;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+  text-decoration: none;
+  border: none;
+  border-radius: none;
+  box-shadow: none;
+  margin: 0px;
+  padding: 5px;
 }
 
 a.button-link {
@@ -258,7 +316,7 @@ button:focus {
   outline: 0;
 }
 
-.add-button, .add-button:hover {
+.add-button {
   background: url("../img/post-its.png");
   background-repeat: no-repeat;
   width: 40px;
@@ -266,6 +324,20 @@ button:focus {
   border: none;
   box-shadow: none;
   margin-left: 0;
+}
+
+.add-button-col{
+  background: url("../img/add.png");
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 43px;
+  border: none;
+  box-shadow: none;
+  margin-left: 10px;
+}
+
+.add-button:hover {
+  background: url("../img/post-its.png") no-repeat;
 }
 
 .close {
@@ -292,19 +364,17 @@ button:focus {
   color: #AAA;
 }
 
-.edit, .edit:hover {
+#edit {
   font-family: Helvetica;
   line-height: 25px;
-  background: url("../img/edit24.png") no-repeat;
-  background-size: 80%;
+  background: rgba(220, 220, 220, 0);
   color: #CCC;
   position: absolute;
   left: 1px;
   text-align: center;
   font-weight: bold;
   top: 10px;
-  width: 20px;
-  height: 20px;
+  width: 15px;
   text-decoration: none;
   border: none;
   border-radius: none;
