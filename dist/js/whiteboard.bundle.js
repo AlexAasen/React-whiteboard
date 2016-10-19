@@ -32596,17 +32596,20 @@ module.exports.showDialog = function () {
     type: types.SHOW_DIALOG
   };
 };
+
 module.exports.hideDialog = function () {
   return {
     type: types.HIDE_DIALOG
   };
 };
+
 module.exports.showEditDialog = function (postIt) {
   return {
     type: types.SHOW_EDIT_DIALOG,
     data: postIt
   };
 };
+
 module.exports.hideEditDialog = function () {
   return {
     type: types.HIDE_EDIT_DIALOG
@@ -32620,7 +32623,7 @@ module.exports.removePostIt = function (postIt) {
   };
 };
 
-},{"../constants/action-types":213}],201:[function(require,module,exports){
+},{"../constants/action-types":208}],201:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -32659,7 +32662,7 @@ _reactDom2.default.render(_react2.default.createElement(
 //
 // });
 
-},{"./components/whiteboard-container":211,"./crud/requests":214,"./store":224,"react":185,"react-dom":30,"react-redux":33}],202:[function(require,module,exports){
+},{"./components/whiteboard-container":207,"./crud/requests":209,"./store":214,"react":185,"react-dom":30,"react-redux":33}],202:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32824,208 +32827,6 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PostIt = function PostIt(props) {
-  function removePostIt() {
-    var id = props.id;
-    props.onRemove(id);
-  }
-  return _react2.default.createElement(
-    "li",
-    {
-      className: "post-it-container"
-    },
-    _react2.default.createElement(
-      "div",
-      { className: "post-it " + props.color },
-      _react2.default.createElement(
-        "h3",
-        { className: "title" },
-        props.title
-      ),
-      _react2.default.createElement(
-        "p",
-        { className: "description" },
-        props.description
-      ),
-      _react2.default.createElement("img", { src: "img/edit24.png", id: "edit", alt: "edit post-it" }),
-      _react2.default.createElement(
-        "button",
-        { className: "close", onClick: removePostIt },
-        "\u2715"
-      )
-    )
-  );
-};
-PostIt.propTypes = function () {
-  return {
-    id: _react2.default.PropTypes.number.isRequired,
-    title: _react2.default.PropTypes.string,
-    color: _react2.default.PropTypes.string,
-    description: _react2.default.PropTypes.string,
-    onRemove: _react2.default.PropTypes.func
-  };
-};
-
-var CurrSprint = function CurrSprint(props) {
-  return _react2.default.createElement(
-    "li",
-    { className: "wb-section", id: "curr-sprint" },
-    _react2.default.createElement(
-      "div",
-      { className: "wb-section" },
-      _react2.default.createElement(
-        "div",
-        { className: "wb-section-title" },
-        _react2.default.createElement(
-          "h2",
-          { id: "curr-sprint" },
-          "Current sprint"
-        )
-      ),
-      _react2.default.createElement(
-        "div",
-        { className: "wb-section-content" },
-        _react2.default.createElement(
-          "ul",
-          { className: "ul-colstyle" },
-          props.postIts.map(function (postIt) {
-            return _react2.default.createElement(PostIt, {
-              key: postIt.id,
-              id: postIt.id,
-              title: postIt.title,
-              color: postIt.color,
-              description: postIt.description,
-              onRemove: props.onRemove
-            });
-          }).reverse()
-        )
-      )
-    )
-  );
-};
-
-CurrSprint.propTypes = function () {
-  return {
-    postIt: _react2.default.PropTypes.element
-  };
-};
-
-exports.default = CurrSprint;
-
-},{"react":185}],205:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var PostIt = function PostIt(props) {
-  function removePostIt() {
-    var id = props.id;
-    props.onRemove(id);
-  }
-  return _react2.default.createElement(
-    "li",
-    {
-      className: "post-it-container"
-    },
-    _react2.default.createElement(
-      "div",
-      { className: "post-it " + props.color },
-      _react2.default.createElement(
-        "h3",
-        { className: "title" },
-        props.title
-      ),
-      _react2.default.createElement(
-        "p",
-        { className: "description" },
-        props.description
-      ),
-      _react2.default.createElement("img", { src: "img/edit24.png", id: "edit", alt: "edit post-it" }),
-      _react2.default.createElement(
-        "button",
-        { className: "close", onClick: removePostIt },
-        "\u2715"
-      )
-    )
-  );
-};
-PostIt.propTypes = function () {
-  return {
-    id: _react2.default.PropTypes.number.isRequired,
-    title: _react2.default.PropTypes.string,
-    color: _react2.default.PropTypes.string,
-    description: _react2.default.PropTypes.string,
-    onRemove: _react2.default.PropTypes.func
-  };
-};
-
-var Done = function Done(props) {
-  return _react2.default.createElement(
-    "li",
-    { className: "wb-section", id: "done" },
-    _react2.default.createElement(
-      "div",
-      { className: "wb-section" },
-      _react2.default.createElement(
-        "div",
-        { className: "wb-section-title" },
-        _react2.default.createElement(
-          "h2",
-          { id: "done" },
-          "Done"
-        )
-      ),
-      _react2.default.createElement(
-        "div",
-        { className: "wb-section-content" },
-        _react2.default.createElement(
-          "ul",
-          { className: "ul-colstyle" },
-          props.postIts.map(function (postIt) {
-            return _react2.default.createElement(PostIt, {
-              key: postIt.id,
-              id: postIt.id,
-              title: postIt.title,
-              color: postIt.color,
-              description: postIt.description,
-              onRemove: props.onRemove
-            });
-          }).reverse()
-        )
-      )
-    )
-  );
-};
-
-Done.propTypes = function () {
-  return {
-    postIt: _react2.default.PropTypes.element
-  };
-};
-
-exports.default = Done;
-
-},{"react":185}],206:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var EditDialog = function EditDialog(props) {
   var postItTitle = props.showEdit.title;
   var postItDescription = props.showEdit.description;
@@ -33152,7 +32953,7 @@ EditDialog.propTypes = function () {
 
 exports.default = EditDialog;
 
-},{"react":185}],207:[function(require,module,exports){
+},{"react":185}],205:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -33302,7 +33103,7 @@ PostItDialog.propTypes = function () {
 
 exports.default = PostItDialog;
 
-},{"react":185}],208:[function(require,module,exports){
+},{"react":185}],206:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33337,209 +33138,7 @@ SideBar.propTypes = function () {
 };
 exports.default = SideBar;
 
-},{"react":185}],209:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var PostIt = function PostIt(props) {
-  function removePostIt() {
-    var id = props.id;
-    props.onRemove(id);
-  }
-  return _react2.default.createElement(
-    "li",
-    {
-      className: "post-it-container"
-    },
-    _react2.default.createElement(
-      "div",
-      { className: "post-it " + props.color },
-      _react2.default.createElement(
-        "h3",
-        { className: "title" },
-        props.title
-      ),
-      _react2.default.createElement(
-        "p",
-        { className: "description" },
-        props.description
-      ),
-      _react2.default.createElement("img", { src: "img/edit24.png", id: "edit", alt: "edit post-it" }),
-      _react2.default.createElement(
-        "button",
-        { className: "close", onClick: removePostIt },
-        "\u2715"
-      )
-    )
-  );
-};
-PostIt.propTypes = function () {
-  return {
-    id: _react2.default.PropTypes.number.isRequired,
-    title: _react2.default.PropTypes.string,
-    color: _react2.default.PropTypes.string,
-    description: _react2.default.PropTypes.string,
-    onRemove: _react2.default.PropTypes.func
-  };
-};
-
-var Stories = function Stories(props) {
-  return _react2.default.createElement(
-    "li",
-    { className: "wb-section", id: "stories" },
-    _react2.default.createElement(
-      "div",
-      { className: "wb-section" },
-      _react2.default.createElement(
-        "div",
-        { className: "wb-section-title" },
-        _react2.default.createElement(
-          "h2",
-          { id: "stories" },
-          "Stories"
-        )
-      ),
-      _react2.default.createElement(
-        "div",
-        { className: "wb-section-content" },
-        _react2.default.createElement(
-          "ul",
-          { className: "ul-colstyle" },
-          props.postIts.map(function (postIt) {
-            return _react2.default.createElement(PostIt, {
-              key: postIt.id,
-              id: postIt.id,
-              title: postIt.title,
-              color: postIt.color,
-              description: postIt.description,
-              onRemove: props.onRemove
-            });
-          }).reverse()
-        )
-      )
-    )
-  );
-};
-
-Stories.propTypes = function () {
-  return {
-    postIt: _react2.default.PropTypes.element
-  };
-};
-
-exports.default = Stories;
-
-},{"react":185}],210:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var PostIt = function PostIt(props) {
-  function removePostIt() {
-    var id = props.id;
-    props.onRemove(id);
-  }
-  return _react2.default.createElement(
-    "li",
-    {
-      className: "post-it-container"
-    },
-    _react2.default.createElement(
-      "div",
-      { className: "post-it " + props.color },
-      _react2.default.createElement(
-        "h3",
-        { className: "title" },
-        props.title
-      ),
-      _react2.default.createElement(
-        "p",
-        { className: "description" },
-        props.description
-      ),
-      _react2.default.createElement("img", { src: "img/edit24.png", id: "edit", alt: "edit post-it" }),
-      _react2.default.createElement(
-        "button",
-        { className: "close", onClick: removePostIt },
-        "\u2715"
-      )
-    )
-  );
-};
-PostIt.propTypes = function () {
-  return {
-    id: _react2.default.PropTypes.number.isRequired,
-    title: _react2.default.PropTypes.string,
-    color: _react2.default.PropTypes.string,
-    description: _react2.default.PropTypes.string,
-    onRemove: _react2.default.PropTypes.func
-  };
-};
-
-var Test = function Test(props) {
-  return _react2.default.createElement(
-    "li",
-    { className: "wb-section", id: "test" },
-    _react2.default.createElement(
-      "div",
-      { className: "wb-section" },
-      _react2.default.createElement(
-        "div",
-        { className: "wb-section-title" },
-        _react2.default.createElement(
-          "h2",
-          { id: "test" },
-          "Testing"
-        )
-      ),
-      _react2.default.createElement(
-        "div",
-        { className: "wb-section-content" },
-        _react2.default.createElement(
-          "ul",
-          { className: "ul-colstyle" },
-          props.postIts.map(function (postIt) {
-            return _react2.default.createElement(PostIt, {
-              key: postIt.id,
-              id: postIt.id,
-              title: postIt.title,
-              color: postIt.color,
-              description: postIt.description,
-              onRemove: props.onRemove
-            });
-          }).reverse()
-        )
-      )
-    )
-  );
-};
-
-Test.propTypes = function () {
-  return {
-    postIt: _react2.default.PropTypes.element
-  };
-};
-
-exports.default = Test;
-
-},{"react":185}],211:[function(require,module,exports){
+},{"react":185}],207:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -33565,26 +33164,6 @@ var _postItDialog2 = _interopRequireDefault(_postItDialog);
 var _backlog = require('./backlog');
 
 var _backlog2 = _interopRequireDefault(_backlog);
-
-var _stories = require('./stories');
-
-var _stories2 = _interopRequireDefault(_stories);
-
-var _wip = require('./wip');
-
-var _wip2 = _interopRequireDefault(_wip);
-
-var _currSprint = require('./curr-sprint');
-
-var _currSprint2 = _interopRequireDefault(_currSprint);
-
-var _test = require('./test');
-
-var _test2 = _interopRequireDefault(_test);
-
-var _done = require('./done');
-
-var _done2 = _interopRequireDefault(_done);
 
 var _sideBar = require('./side-bar');
 
@@ -33627,26 +33206,6 @@ var WhiteboardContainer = function WhiteboardContainer(props) {
           postIts: props.backlogPostIts,
           onRemove: props.onRemove,
           onShowEditDialog: props.onShowEditDialog
-        }),
-        _react2.default.createElement(_stories2.default, {
-          postIts: props.backlogPostIts,
-          onRemove: props.onRemove
-        }),
-        _react2.default.createElement(_currSprint2.default, {
-          postIts: props.backlogPostIts,
-          onRemove: props.onRemove
-        }),
-        _react2.default.createElement(_wip2.default, {
-          postIts: props.backlogPostIts,
-          onRemove: props.onRemove
-        }),
-        _react2.default.createElement(_test2.default, {
-          postIts: props.backlogPostIts,
-          onRemove: props.onRemove
-        }),
-        _react2.default.createElement(_done2.default, {
-          postIts: props.backlogPostIts,
-          onRemove: props.onRemove
         })
       )
     )
@@ -33665,12 +33224,7 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     isVisible: state.add.displayDialog,
     showEdit: state.edit,
-    backlogPostIts: state.backlog,
-    testPostIts: state.test,
-    wipPostIts: state.wip,
-    donePostIts: state.done,
-    storiesPostIts: state.stories,
-    currSprintPostIts: state.currsprint
+    backlogPostIts: state.backlog
   };
 };
 
@@ -33702,108 +33256,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(WhiteboardContainer);
 
-},{"../actions":200,"./add-button":202,"./backlog":203,"./curr-sprint":204,"./done":205,"./edit-dialog":206,"./post-it-dialog":207,"./side-bar":208,"./stories":209,"./test":210,"./wip":212,"react":185,"react-redux":33}],212:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var PostIt = function PostIt(props) {
-  function removePostIt() {
-    var id = props.id;
-    props.onRemove(id);
-  }
-  return _react2.default.createElement(
-    "li",
-    {
-      className: "post-it-container"
-    },
-    _react2.default.createElement(
-      "div",
-      { className: "post-it " + props.color },
-      _react2.default.createElement(
-        "h3",
-        { className: "title" },
-        props.title
-      ),
-      _react2.default.createElement(
-        "p",
-        { className: "description" },
-        props.description
-      ),
-      _react2.default.createElement("img", { src: "img/edit24.png", id: "edit", alt: "edit post-it" }),
-      _react2.default.createElement(
-        "button",
-        { className: "close", onClick: removePostIt },
-        "\u2715"
-      )
-    )
-  );
-};
-PostIt.propTypes = function () {
-  return {
-    id: _react2.default.PropTypes.number.isRequired,
-    title: _react2.default.PropTypes.string,
-    color: _react2.default.PropTypes.string,
-    description: _react2.default.PropTypes.string,
-    onRemove: _react2.default.PropTypes.func
-  };
-};
-
-var Wip = function Wip(props) {
-  return _react2.default.createElement(
-    "li",
-    { className: "wb-section", id: "wip" },
-    _react2.default.createElement(
-      "div",
-      { className: "wb-section" },
-      _react2.default.createElement(
-        "div",
-        { className: "wb-section-title" },
-        _react2.default.createElement(
-          "h2",
-          { id: "wip" },
-          "WIP"
-        )
-      ),
-      _react2.default.createElement(
-        "div",
-        { className: "wb-section-content" },
-        _react2.default.createElement(
-          "ul",
-          { className: "ul-colstyle" },
-          props.postIts.map(function (postIt) {
-            return _react2.default.createElement(PostIt, {
-              key: postIt.id,
-              id: postIt.id,
-              title: postIt.title,
-              color: postIt.color,
-              description: postIt.description,
-              onRemove: props.onRemove
-            });
-          }).reverse()
-        )
-      )
-    )
-  );
-};
-
-Wip.propTypes = function () {
-  return {
-    postIt: _react2.default.PropTypes.element
-  };
-};
-
-exports.default = Wip;
-
-},{"react":185}],213:[function(require,module,exports){
+},{"../actions":200,"./add-button":202,"./backlog":203,"./edit-dialog":204,"./post-it-dialog":205,"./side-bar":206,"react":185,"react-redux":33}],208:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -33818,7 +33271,7 @@ var HIDE_DIALOG = exports.HIDE_DIALOG = 'HIDE_DIALOG';
 var SHOW_EDIT_DIALOG = exports.SHOW_EDIT_DIALOG = 'SHOW_EDIT_DIALOG';
 var HIDE_EDIT_DIALOG = exports.HIDE_EDIT_DIALOG = 'HIDE_EDIT_DIALOG';
 
-},{}],214:[function(require,module,exports){
+},{}],209:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -33848,7 +33301,7 @@ var requestCall = function requestCall(callType, path, callback, dataObject) {
 
 exports.default = requestCall;
 
-},{"jquery":28}],215:[function(require,module,exports){
+},{"jquery":28}],210:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -33883,7 +33336,7 @@ var reducer = function reducer() {
 
 exports.default = reducer;
 
-},{"../constants/action-types":213}],216:[function(require,module,exports){
+},{"../constants/action-types":208}],211:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -33929,101 +33382,7 @@ var reducer = function reducer() {
 
 exports.default = reducer;
 
-},{"../constants/action-types":213}],217:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _actionTypes = require('../constants/action-types');
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var reducer = function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var action = arguments[1];
-
-  var newState = void 0;
-  switch (action.type) {
-    case _actionTypes.ADD_POSTIT:
-      {
-        var newPostIt = Object.assign({}, action.data);
-        return [].concat(_toConsumableArray(state), [newPostIt]);
-      }
-    case _actionTypes.REMOVE_POSTIT:
-      {
-        var _ret = function () {
-          var id = Object.assign({}, action.data);
-          newState = state.filter(function (postit) {
-            return postit.id !== id;
-          });
-          return {
-            v: newState
-          };
-        }();
-
-        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-      }
-    default:
-      {
-        return state;
-      }
-  }
-};
-
-exports.default = reducer;
-
-},{"../constants/action-types":213}],218:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _actionTypes = require('../constants/action-types');
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var reducer = function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var action = arguments[1];
-
-  var newState = void 0;
-  switch (action.type) {
-    case _actionTypes.ADD_POSTIT:
-      {
-        var newPostIt = Object.assign({}, action.data);
-        return [].concat(_toConsumableArray(state), [newPostIt]);
-      }
-    case _actionTypes.REMOVE_POSTIT:
-      {
-        var _ret = function () {
-          var id = Object.assign({}, action.data);
-          newState = state.filter(function (postit) {
-            return postit.id !== id;
-          });
-          return {
-            v: newState
-          };
-        }();
-
-        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-      }
-    default:
-      {
-        return state;
-      }
-  }
-};
-
-exports.default = reducer;
-
-},{"../constants/action-types":213}],219:[function(require,module,exports){
+},{"../constants/action-types":208}],212:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -34059,7 +33418,7 @@ var reducer = function reducer() {
 
 exports.default = reducer;
 
-},{"../constants/action-types":213}],220:[function(require,module,exports){
+},{"../constants/action-types":208}],213:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -34071,26 +33430,6 @@ var _redux = require('redux');
 var _backlog = require('./backlog');
 
 var _backlog2 = _interopRequireDefault(_backlog);
-
-var _stories = require('./stories');
-
-var _stories2 = _interopRequireDefault(_stories);
-
-var _currsprint = require('./currsprint');
-
-var _currsprint2 = _interopRequireDefault(_currsprint);
-
-var _wip = require('./wip');
-
-var _wip2 = _interopRequireDefault(_wip);
-
-var _test = require('./test');
-
-var _test2 = _interopRequireDefault(_test);
-
-var _done = require('./done');
-
-var _done2 = _interopRequireDefault(_done);
 
 var _add = require('./add');
 
@@ -34104,157 +33443,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (0, _redux.combineReducers)({
   backlog: _backlog2.default,
-  stories: _stories2.default,
-  currsprint: _currsprint2.default,
-  wip: _wip2.default,
-  test: _test2.default,
-  done: _done2.default,
   add: _add2.default,
   edit: _edit2.default
 });
 
-},{"./add":215,"./backlog":216,"./currsprint":217,"./done":218,"./edit":219,"./stories":221,"./test":222,"./wip":223,"redux":191}],221:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _actionTypes = require('../constants/action-types');
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var reducer = function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var action = arguments[1];
-
-  var newState = void 0;
-  switch (action.type) {
-    case _actionTypes.ADD_POSTIT:
-      {
-        var newPostIt = Object.assign({}, action.data);
-        return [].concat(_toConsumableArray(state), [newPostIt]);
-      }
-    case _actionTypes.REMOVE_POSTIT:
-      {
-        var _ret = function () {
-          var id = Object.assign({}, action.data);
-          newState = state.filter(function (postit) {
-            return postit.id !== id;
-          });
-          return {
-            v: newState
-          };
-        }();
-
-        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-      }
-    default:
-      {
-        return state;
-      }
-  }
-};
-
-exports.default = reducer;
-
-},{"../constants/action-types":213}],222:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _actionTypes = require('../constants/action-types');
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var reducer = function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var action = arguments[1];
-
-  var newState = void 0;
-  switch (action.type) {
-    case _actionTypes.ADD_POSTIT:
-      {
-        var newPostIt = Object.assign({}, action.data);
-        return [].concat(_toConsumableArray(state), [newPostIt]);
-      }
-    case _actionTypes.REMOVE_POSTIT:
-      {
-        var _ret = function () {
-          var id = Object.assign({}, action.data);
-          newState = state.filter(function (postit) {
-            return postit.id !== id;
-          });
-          return {
-            v: newState
-          };
-        }();
-
-        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-      }
-    default:
-      {
-        return state;
-      }
-  }
-};
-
-exports.default = reducer;
-
-},{"../constants/action-types":213}],223:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _actionTypes = require('../constants/action-types');
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var reducer = function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var action = arguments[1];
-
-  var newState = void 0;
-  switch (action.type) {
-    case _actionTypes.ADD_POSTIT:
-      {
-        var newPostIt = Object.assign({}, action.data);
-        return [].concat(_toConsumableArray(state), [newPostIt]);
-      }
-    case _actionTypes.REMOVE_POSTIT:
-      {
-        var _ret = function () {
-          var id = Object.assign({}, action.data);
-          newState = state.filter(function (postit) {
-            return postit.id !== id;
-          });
-          return {
-            v: newState
-          };
-        }();
-
-        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-      }
-    default:
-      {
-        return state;
-      }
-  }
-};
-
-exports.default = reducer;
-
-},{"../constants/action-types":213}],224:[function(require,module,exports){
+},{"./add":210,"./backlog":211,"./edit":212,"redux":191}],214:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -34272,7 +33465,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var store = (0, _redux.createStore)(_reducers2.default);
 exports.default = store;
 
-},{"../reducers":220,"redux":191}]},{},[201])
+},{"../reducers":213,"redux":191}]},{},[201])
 
 
 //# sourceMappingURL=whiteboard.bundle.js.map

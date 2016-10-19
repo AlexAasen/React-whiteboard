@@ -18,13 +18,16 @@ module.exports.updatePostItColumn = postIt => ({
 module.exports.showDialog = () => ({
   type: types.SHOW_DIALOG
 });
+
 module.exports.hideDialog = () => ({
   type: types.HIDE_DIALOG
 });
+
 module.exports.showEditDialog = postIt => ({
   type: types.SHOW_EDIT_DIALOG,
   data: postIt
 });
+
 module.exports.hideEditDialog = () => ({
   type: types.HIDE_EDIT_DIALOG
 });
