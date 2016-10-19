@@ -1,6 +1,7 @@
 import React from 'react';
 import RequirementInput from './requirement-input';
 import RequirementList from './requirement-list';
+import { connect } from 'react-redux';
 import { addRequirement, removeRequirement } from '../actions';
 
 
@@ -99,7 +100,12 @@ const PostItDialog = (props) => {
 };
 PostItDialog.propTypes = () => ({
   isVisible: React.PropTypes.bool,
-  requirements: React.PropTypes.array,
+  requirements: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      id: React.PropTypes.number,
+      requirement: React.PropTypes.string
+    })
+  ),
   handleAdd: React.PropTypes.func.isRequired,
   handleRemove: React.PropTypes.func.isRequired
 });
@@ -113,7 +119,6 @@ const mapDispatchToProps = dispatch => ({
     const requirement = {id: +(new Date()),
     requirement: text
     };
-    console.log(props.requirement);
     dispatch(addRequirement(requirement));
   },
   handleRemove: (id) => {
@@ -121,4 +126,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default PostItDialog;
+export default connect(mapStateToProps, mapDispatchToProps)(PostItDialog);

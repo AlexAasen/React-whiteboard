@@ -31062,7 +31062,7 @@ var addRequirement = exports.addRequirement = function addRequirement(requiremen
 var removeRequirement = exports.removeRequirement = function removeRequirement(id) {
   return {
     type: types.REMOVE_REQUIREMENT,
-    data: number
+    data: id
   };
 };
 
@@ -31593,6 +31593,8 @@ var _requirementList = require('./requirement-list');
 
 var _requirementList2 = _interopRequireDefault(_requirementList);
 
+var _reactRedux = require('react-redux');
+
 var _actions = require('../actions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -31732,7 +31734,10 @@ var PostItDialog = function PostItDialog(props) {
 PostItDialog.propTypes = function () {
   return {
     isVisible: _react2.default.PropTypes.bool,
-    requirements: _react2.default.PropTypes.array,
+    requirements: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
+      id: _react2.default.PropTypes.number,
+      requirement: _react2.default.PropTypes.string
+    })),
     handleAdd: _react2.default.PropTypes.func.isRequired,
     handleRemove: _react2.default.PropTypes.func.isRequired
   };
@@ -31750,7 +31755,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       var requirement = { id: +new Date(),
         requirement: text
       };
-      console.log(props.requirement);
       dispatch((0, _actions.addRequirement)(requirement));
     },
     handleRemove: function handleRemove(id) {
@@ -31759,9 +31763,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-exports.default = PostItDialog;
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(PostItDialog);
 
-},{"../actions":270,"./requirement-input":277,"./requirement-list":278,"react":241}],277:[function(require,module,exports){
+},{"../actions":270,"./requirement-input":277,"./requirement-list":278,"react":241,"react-redux":89}],277:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31837,15 +31841,11 @@ var Requirement = function Requirement(props) {
   }
   return _react2.default.createElement(
     "li",
-    { className: "post-it-container" },
+    { className: "dialog-container" },
     _react2.default.createElement(
       "div",
       { className: "text-area" },
-      _react2.default.createElement(
-        "h3",
-        null,
-        props.requirement
-      )
+      props.requirement
     ),
     _react2.default.createElement(
       "button",
@@ -31864,21 +31864,18 @@ Requirement.propTypes = function () {
 };
 
 var RequirementList = function RequirementList(props) {
-  if (props.requirements) {
-    return _react2.default.createElement(
-      "ul",
-      { className: "ul-colstyle" },
-      props.requirements.map(function (requirement) {
-        return _react2.default.createElement(Requirement, {
-          key: requirement.id,
-          id: requirement.id,
-          requirement: requirement.requirement,
-          onRemove: props.onRemove
-        });
-      }).reverse()
-    );
-  }
-  return null;
+  return _react2.default.createElement(
+    "ul",
+    { className: "ul-colstyle requirements" },
+    props.requirements.map(function (requirement) {
+      return _react2.default.createElement(Requirement, {
+        key: requirement.id,
+        id: requirement.id,
+        requirement: requirement.requirement,
+        onRemove: props.onRemove
+      });
+    }).reverse()
+  );
 };
 
 RequirementList.propTypes = function () {
@@ -32658,10 +32655,8 @@ var _actionTypes = require('../constants/action-types');
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var initialState = { requirements: [] };
-
 var reducer = function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments[1];
 
   var newState = void 0;

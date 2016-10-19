@@ -10,7 +10,7 @@ export const addRequirement = requirement => ({
 
 export const removeRequirement = id => ({
   type: types.REMOVE_REQUIREMENT,
-  data: number
+  data: id
 });
 
 export const returnPostItRequirements = () => ({

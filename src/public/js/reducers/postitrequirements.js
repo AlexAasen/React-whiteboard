@@ -1,8 +1,6 @@
 import { REMOVE_REQUIREMENT, ADD_REQUIREMENT } from '../constants/action-types';
 
-let initialState = {requirements: []};
-
-const reducer =  (state = initialState, action) => {
+const reducer =  (state = [], action) => {
   let newState;
   switch (action.type) {
     case ADD_REQUIREMENT: {

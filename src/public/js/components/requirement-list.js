@@ -4,9 +4,9 @@ const Requirement = (props) => {
   function remove() {
     props.onRemove(props.id);
   }
-  return (<li className="post-it-container">
+  return (<li className="dialog-container">
     <div className="text-area">
-    <h3>{props.requirement}</h3>
+      {props.requirement}
     </div>
     <button className="badge" onClick={remove}>X</button>
   </li>);
@@ -19,9 +19,8 @@ Requirement.propTypes = () => ({
 });
 
 const RequirementList = props => {
-  if(props.requirements){
     return (
-      <ul className="ul-colstyle">
+      <ul className="ul-colstyle requirements">
         {props.requirements.map(requirement => (
           <Requirement
             key={requirement.id}
@@ -32,8 +31,6 @@ const RequirementList = props => {
         )).reverse()
       }</ul>
     );
-  }
-  return null;
 };
 
 RequirementList.propTypes = () => ({
