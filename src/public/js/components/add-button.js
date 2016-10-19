@@ -11,7 +11,7 @@ const AddButton = (props) => {
   );
 };
 AddButton.propTypes = () => ({
-  onShowDialog: React.PropTypes.func
+  showDialog: React.PropTypes.func
 });
 
 export default AddButton;
