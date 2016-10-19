@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addPostIt, setVisFilterPostIt, removePostIt } from '../actions';
+import { addPostItToBacklog, setVisFilterPostIt, removePostItFromBacklog } from '../actions';
 import AddButton from './add-button';
 import PostItDialog from './post-it-dialog';
 import Backlog from './backlog';
@@ -76,12 +76,12 @@ const mapDispatchToProps = dispatch => ({
       description: postItDescription,
       color: postItColor
     };
-    dispatch(addPostIt(postIt));
+    dispatch(addPostItToBacklog(postIt));
     const visfilter = { filter: false };
     dispatch(setVisFilterPostIt(visfilter));
   },
   onRemove: (id) => {
-    dispatch(removePostIt(id));
+    dispatch(removePostItFromBacklog(id));
   },
   showDialog: (visfilter) => {
     dispatch(setVisFilterPostIt(visfilter));

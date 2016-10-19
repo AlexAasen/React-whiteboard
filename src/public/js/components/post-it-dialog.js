@@ -1,12 +1,13 @@
 import React from 'react';
 import RequirementInput from './requirement-input';
 import RequirementList from './requirement-list';
+import { addRequirement, removeRequirement } from '../actions';
+
 
 const PostItDialog = (props) => {
   let postItTitle;
   let postItDescription;
   let colorSelect = '';
-  let requirements = [];
 
   function handleSave() {
     if (colorSelect.trim().length > 0) {
@@ -23,16 +24,6 @@ const PostItDialog = (props) => {
     const visfilter = { filter: false };
     props.showDialog(visfilter);
   }
-  function handleAdd(requirement) {
-    requirements = [...requirements, {
-      id: +(new Date()),
-      requirement
-    }];
-    console.log(requirements);
-  }
-  function handleRemove(id) {
-    requirements = requirements.filter(requirement => requirement.id !== id);
-  }
 
   if (props.isVisible) {
     return (
@@ -42,6 +33,7 @@ const PostItDialog = (props) => {
           <button className="close" onClick={handleClose}>&#10005;</button>
           <div className="text-area">
             <input
+              autoFocus
               type="text"
               name="title-field"
               placeholder="Title"
@@ -91,11 +83,12 @@ const PostItDialog = (props) => {
             <button className="save-button" onClick={handleSave}>Save</button>
           </nav>
         </div>
-        <div>
-          <RequirementInput onAdd={handleAdd} />
+        <div className="dialog-container-col">
+          <RequirementInput
+            onAdd={props.handleAdd} />
           <RequirementList
-            requirements={requirements}
-            onRemove={handleRemove}
+            requirements={props.requirements}
+            onRemove={props.handleRemove}
           />
         </div>
         </div>
@@ -105,7 +98,27 @@ const PostItDialog = (props) => {
   return null;
 };
 PostItDialog.propTypes = () => ({
-  isVisible: React.PropTypes.bool
+  isVisible: React.PropTypes.bool,
+  requirements: React.PropTypes.array,
+  handleAdd: React.PropTypes.func.isRequired,
+  handleRemove: React.PropTypes.func.isRequired
+});
+
+const mapStateToProps = state => ({
+  requirements: state.postitrequirements
+});
+
+const mapDispatchToProps = dispatch => ({
+  handleAdd: (text) => {
+    const requirement = {id: +(new Date()),
+    requirement: text
+    };
+    console.log(props.requirement);
+    dispatch(addRequirement(requirement));
+  },
+  handleRemove: (id) => {
+    dispatch(removeRequirement(id));
+  }
 });
 
 export default PostItDialog;

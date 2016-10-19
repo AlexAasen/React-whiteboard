@@ -6,6 +6,8 @@ import wip from './wip';
 import test from './test';
 import done from './done';
 import visfilter from './visfilter';
+import services from './services';
+import postitrequirements from './postitrequirements';
 
 export default combineReducers({
   backlog,
@@ -14,5 +16,7 @@ export default combineReducers({
   wip,
   test,
   done,
-  visfilter
+  visfilter,
+  services,
+  postitrequirements
 });

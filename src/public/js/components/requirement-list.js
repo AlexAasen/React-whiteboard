@@ -5,7 +5,9 @@ const Requirement = (props) => {
     props.onRemove(props.id);
   }
   return (<li className="post-it-container">
-    {props.requirement}
+    <div className="text-area">
+    <h3>{props.requirement}</h3>
+    </div>
     <button className="badge" onClick={remove}>X</button>
   </li>);
 };
@@ -16,16 +18,23 @@ Requirement.propTypes = () => ({
   onRemove: React.PropTypes.func
 });
 
-const RequirementList = (props) => (<ul className="list-group">
-  {props.requirements.map(requirement => (
-    <Requirement
-      key={requirement.id}
-      id={requirement.id}
-      requirement={requirement.requirement}
-      onRemove={props.onRemove}
-    />
-  )).reverse()
-}</ul>);
+const RequirementList = props => {
+  if(props.requirements){
+    return (
+      <ul className="ul-colstyle">
+        {props.requirements.map(requirement => (
+          <Requirement
+            key={requirement.id}
+            id={requirement.id}
+            requirement={requirement.requirement}
+            onRemove={props.onRemove}
+          />
+        )).reverse()
+      }</ul>
+    );
+  }
+  return null;
+};
 
 RequirementList.propTypes = () => ({
   requirements: React.PropTypes.arrayOf(
@@ -34,6 +43,7 @@ RequirementList.propTypes = () => ({
       requirement: React.PropTypes.string
     })
   ),
+  requirement: React.PropTypes.string,
   onRemove: React.PropTypes.func
 });
 

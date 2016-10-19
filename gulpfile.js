@@ -11,15 +11,16 @@ const concat = require('gulp-concat');
 const sourcemaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
-const browserSync = require('browser-sync').create();
+const server = require('gulp-server-livereload');
 
-gulp.task('browserSync', () =>
-  browserSync.init({
-    server: {
-      baseDir: 'dist'
-    }
-  })
-);
+gulp.task('webserver', () => {
+  gulp.src('./dist')
+    .pipe(server({
+      livereload: true,
+      directoryListing: false,
+      open: true
+    }));
+});
 
 gulp.task('css', () =>
   gulp.src(['./src/public/css/reset.css', './src/public/css/global.css'])
@@ -29,9 +30,6 @@ gulp.task('css', () =>
   .pipe(cleanCSS())
   .pipe(sourcemaps.write('.'))
   .pipe(gulp.dest('./dist/css'))
-  .pipe(browserSync.reload({
-    stream: true
-  }))
 );
 
 gulp.task('html', () => gulp.src('./src/public/**/*.html')
@@ -39,9 +37,6 @@ gulp.task('html', () => gulp.src('./src/public/**/*.html')
     collapseWhitespace: true
   }))
   .pipe(gulp.dest('./dist'))
-  .pipe(browserSync.reload({
-    stream: true
-  }))
 );
 
 gulp.task('images', () => gulp.src('./src/public/img/**.*')
@@ -60,12 +55,9 @@ gulp.task('javascript', () => browserify('./src/public/js/app.js', {
   }))
   .pipe(sourcemaps.write('./'))
   .pipe(gulp.dest('./dist/js'))
-  .pipe(browserSync.reload({
-    stream: true
-  }))
 );
 
-gulp.task('default', ['browserSync', 'html', 'css', 'javascript', 'images'], () => {
+gulp.task('default', ['webserver', 'html', 'css', 'javascript', 'images'], () => {
   gulp.watch('./src/public/css/**/*.css', ['css']);
   gulp.watch('./src/public/src/img/**.*', ['images']);
   gulp.watch('./src/public/js/**/*.js*', ['javascript']);
