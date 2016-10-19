@@ -1,37 +1,27 @@
 import React from 'react';
 
-const PostItDialog = (props) => {
-  let postItTitle;
-  let postItDescription;
-  let postItColor = '';
+const EditDialog = (props) => {
+  let postItTitle = props.showEdit.title;
+  let postItDescription = props.showEdit.description;
+  let colorSelect = props.showEdit.color;
 
   function handleSave() {
-    if (postItColor.trim().length > 0) {
-      props.onAdd({
-        id: +(new Date()),
-        title: postItTitle.value,
-        description: postItDescription.value,
-        color: postItColor
-      });
-    } else {
-      postItColor = 'yellow';
-      props.onAdd({
-        id: +(new Date()),
-        title: postItTitle.value,
-        description: postItDescription.value,
-        color: postItColor
-      });
-    }
-    props.onHideDialog();
+    props.onUpdate({
+      id: props.showEdit.id,
+      title: postItTitle.value,
+      description: postItDescription.value,
+      color: colorSelect
+    });
+    props.onHideEditDialog();
   }
   function handleSelect(event) {
-    postItColor = event.currentTarget.id;
+    colorSelect = event.currentTarget.id;
   }
   function handleClose() {
-    props.onHideDialog();
+    props.onHideEditDialog();
   }
 
-  if (props.isVisible) {
+  if (props.showEdit.displayEditDialog) {
     return (
       <div className="main-dialog-container">
         <div className="dialog-container">
@@ -40,14 +30,14 @@ const PostItDialog = (props) => {
             <input
               type="text"
               name="title-field"
-              placeholder="Title"
+              placeholder={props.showEdit.title}
               ref={(c) => { postItTitle = c; }}
             />
             <textarea
               id="description"
               type="text"
               name="list-field"
-              placeholder="Description"
+              placeholder={props.showEdit.description}
               ref={(c) => { postItDescription = c; }}
             />
           </div>
@@ -92,10 +82,9 @@ const PostItDialog = (props) => {
   }
   return null;
 };
-PostItDialog.propTypes = () => ({
-  isVisible: React.PropTypes.bool,
-  onhideDialog: React.PropTypes.func,
-  onAdd: React.PropTypes.func
+EditDialog.propTypes = () => ({
+  onHideEditDialog: React.PropTypes.func,
+  onUpdate: React.PropTypes.func
 });
 
-export default PostItDialog;
+export default EditDialog;
