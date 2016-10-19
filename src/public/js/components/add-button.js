@@ -2,8 +2,7 @@ import React from 'react';
 
 const AddButton = (props) => {
   function handleClick() {
-    const visfilter = { filter: true };
-    props.showDialog(visfilter);
+    props.onShowDialog();
   }
   return (
     <div className="img-holder nav-menu add-post-it">
@@ -12,7 +11,7 @@ const AddButton = (props) => {
   );
 };
 AddButton.propTypes = () => ({
-  showDialog: React.PropTypes.func
+  onShowDialog: React.PropTypes.func
 });
 
 export default AddButton;

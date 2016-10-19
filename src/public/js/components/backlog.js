@@ -5,6 +5,15 @@ const PostIt = (props) => {
     const id = props.id;
     props.onRemove(id);
   }
+  function editPost() {
+    props.onShowEditDialog({
+      id: props.id,
+      title: props.title,
+      description: props.description,
+      color: props.color,
+      displayEditDialog: true
+    });
+  }
   return (
     <li
       className="post-it-container"
@@ -12,7 +21,7 @@ const PostIt = (props) => {
       <div className={`post-it ${props.color}`}>
         <h3 className="title">{props.title}</h3>
         <p className="description">{props.description}</p>
-        <img src="img/edit24.png" id="edit" alt="edit post-it" />
+        <button className="edit" onClick={editPost} />
         <button className="close" onClick={removePostIt}>&#10005;</button>
       </div>
     </li>
@@ -23,18 +32,19 @@ PostIt.propTypes = () => ({
   title: React.PropTypes.string,
   color: React.PropTypes.string,
   description: React.PropTypes.string,
-  onRemove: React.PropTypes.func
+  onRemove: React.PropTypes.func,
+  onShowEditDialog: React.PropTypes.func
 });
 
 const Backlog = (props) => {
   return (
-        <li className="wb-section" id="backlog">
-          <div className="wb-section">
-            <div className="wb-section-title" id="backlog">
-              <h2 id="backlog">Backlog</h2>
-            </div>
-            <div className="wb-section-content">
-              <ul className="ul-colstyle">{
+    <li className="wb-section" id="backlog">
+      <div className="wb-section">
+        <div className="wb-section-title" id="backlog">
+          <h2 id="backlog">Backlog</h2>
+        </div>
+        <div className="wb-section-content">
+          <ul className="ul-colstyle">{
                 props.postIts.map(postIt =>
                 (<PostIt
                   key={postIt.id}
@@ -43,12 +53,13 @@ const Backlog = (props) => {
                   color={postIt.color}
                   description={postIt.description}
                   onRemove={props.onRemove}
+                  onShowEditDialog={props.onShowEditDialog}
                 />
               )).reverse()
               }</ul>
-            </div>
-          </div>
-        </li>);
+        </div>
+      </div>
+    </li>);
 };
 Backlog.propTypes = () => ({
   postIts: React.PropTypes.arrayOf(
@@ -59,7 +70,8 @@ Backlog.propTypes = () => ({
       description: React.PropTypes.string
     })
   ),
-  onRemove: React.PropTypes.func
+  onRemove: React.PropTypes.func,
+  onShowEditDialog: React.PropTypes.func
 });
 
 export default Backlog;
