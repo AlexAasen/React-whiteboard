@@ -32,7 +32,13 @@ PostIt.propTypes = () => ({
   title: React.PropTypes.string,
   color: React.PropTypes.string,
   description: React.PropTypes.string,
-  onRemove: React.PropTypes.func,
+  requirements: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      id: React.PropTypes.number,
+      requirement: React.PropTypes.string
+    })
+  ),
+  onRemove: React.PropTypes.func
   onShowEditDialog: React.PropTypes.func
 });
 
@@ -52,6 +58,7 @@ const Backlog = (props) => {
                   title={postIt.title}
                   color={postIt.color}
                   description={postIt.description}
+                  requirements={postIt.requirements}
                   onRemove={props.onRemove}
                   onShowEditDialog={props.onShowEditDialog}
                 />
@@ -67,7 +74,13 @@ Backlog.propTypes = () => ({
       id: React.PropTypes.number,
       title: React.PropTypes.string,
       color: React.PropTypes.string,
-      description: React.PropTypes.string
+      description: React.PropTypes.string,
+      requirements: React.PropTypes.arrayOf(
+        React.PropTypes.shape({
+          id: React.PropTypes.number,
+          requirement: React.PropTypes.string
+        })
+      )
     })
   ),
   onRemove: React.PropTypes.func,

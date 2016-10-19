@@ -1,4 +1,4 @@
-import { ADD_POSTIT, REMOVE_POSTIT } from '../constants/action-types';
+import { ADD_POSTIT_TO_BACKLOG, REMOVE_POSTIT, UPDATE_ALL_POSTITS } from '../constants/action-types';
 
 const reducer =  (state = [], action) => {
   let newState;
@@ -8,7 +8,7 @@ const reducer =  (state = [], action) => {
       return [...state, newPostIt];
     }
     case REMOVE_POSTIT: {
-      const id = Object.assign({}, action.data);
+      const id = action.data;
       newState = state.filter(postit => postit.id !== id);
       return newState;
     }

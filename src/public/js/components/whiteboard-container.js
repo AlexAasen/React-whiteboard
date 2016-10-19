@@ -1,6 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+<<<<<<< HEAD
+import { addPostItToBacklog, setVisFilterPostIt, removePostItFromBacklog } from '../actions';
+=======
 import { addPostIt, showDialog, hideDialog, showEditDialog, hideEditDialog, removePostIt, updatePostIt } from '../actions';
+>>>>>>> develop
 import AddButton from './add-button';
 import PostItDialog from './post-it-dialog';
 import Backlog from './backlog';
@@ -73,14 +77,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onAdd: (postIt) => {
-    dispatch(addPostIt(postIt));
+  onAdd: (postIt, columnTitle) => {
+    dispatch(addPostIt(postIt, columnTitle));
   },
-  onUpdate: (postIt) => {
-    dispatch(updatePostIt(postIt));
+  onUpdate: (postIt, columnTitle) => {
+    dispatch(updatePostIt(postIt, columnTitle));
   },
   onRemove: (id) => {
-    dispatch(removePostIt(id));
+    dispatch(removePostItFromBacklog(id));
   },
   onShowDialog: () => {
     dispatch(showDialog());

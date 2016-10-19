@@ -1,4 +1,8 @@
 import React from 'react';
+import RequirementInput from './requirement-input';
+import RequirementList from './requirement-list';
+import { connect } from 'react-redux';
+import { addRequirement, removeRequirement } from '../actions';
 
 const PostItDialog = (props) => {
   let postItTitle;
@@ -11,7 +15,8 @@ const PostItDialog = (props) => {
         id: +(new Date()),
         title: postItTitle.value,
         description: postItDescription.value,
-        color: postItColor
+        color: postItColor,
+        requirement: props.requirements
       });
     } else {
       postItColor = 'yellow';
@@ -19,7 +24,8 @@ const PostItDialog = (props) => {
         id: +(new Date()),
         title: postItTitle.value,
         description: postItDescription.value,
-        color: postItColor
+        color: postItColor,
+        requirement: props.requirements
       });
     }
     props.onHideDialog();
@@ -34,10 +40,12 @@ const PostItDialog = (props) => {
   if (props.isVisible) {
     return (
       <div className="main-dialog-container">
+      <div className="dialog-container-col">
         <div className="dialog-container">
           <button className="close" onClick={handleClose}>&#10005;</button>
           <div className="text-area">
             <input
+              autoFocus
               type="text"
               name="title-field"
               placeholder="Title"
@@ -51,7 +59,7 @@ const PostItDialog = (props) => {
               ref={(c) => { postItDescription = c; }}
             />
           </div>
-          <nav className="post-it-container">
+          <nav className="text-area">
             <div className="dropdown">
               <button className="pick-color-button">Color</button>
               <div className="dropdown-content">
@@ -87,6 +95,15 @@ const PostItDialog = (props) => {
             <button className="save-button" onClick={handleSave}>Save</button>
           </nav>
         </div>
+        <div className="dialog-container-col">
+          <RequirementInput
+            onAdd={props.handleAdd} />
+          <RequirementList
+            requirements={props.requirements}
+            onRemove={props.handleRemove}
+          />
+        </div>
+        </div>
       </div>
   );
   }
@@ -94,8 +111,32 @@ const PostItDialog = (props) => {
 };
 PostItDialog.propTypes = () => ({
   isVisible: React.PropTypes.bool,
+  requirements: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      id: React.PropTypes.number,
+      requirement: React.PropTypes.string
+    })
+  ),
+  handleAdd: React.PropTypes.func.isRequired,
+  handleRemove: React.PropTypes.func.isRequired,
   onhideDialog: React.PropTypes.func,
   onAdd: React.PropTypes.func
 });
 
-export default PostItDialog;
+const mapStateToProps = state => ({
+  requirements: state.postitrequirements
+});
+
+const mapDispatchToProps = dispatch => ({
+  handleAdd: (text) => {
+    const requirement = {id: +(new Date()),
+    requirement: text
+    };
+    dispatch(addRequirement(requirement));
+  },
+  handleRemove: (id) => {
+    dispatch(removeRequirement(id));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostItDialog);
