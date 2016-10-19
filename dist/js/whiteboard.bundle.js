@@ -32638,9 +32638,11 @@ _reactDom2.default.render(_react2.default.createElement(
   _react2.default.createElement(_whiteboardContainer2.default, null)
 ), document.querySelector('#application'));
 
-(0, _requests2.default)('POST', 'backlog/', { title: 'hej' }, function (data) {
-  console.log(data);
-});
+// request('GET', 'all', function(data){
+//   console.log(data);
+// }, {
+//
+// });
 
 },{"./components/whiteboard-container":210,"./crud/requests":213,"./store":222,"react":185,"react-dom":30,"react-redux":33}],202:[function(require,module,exports){
 "use strict";
@@ -33649,37 +33651,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var baseUrl = 'http://localhost:8081/floggit/';
 
-// const requestCall = (callType, path, dataObject, callback) => {
-//   if (callType === 'POST' || callType === 'PUT') {
-//     $.ajax({
-//       url: baseUrl + path,
-//       crossDomain: true,
-//       type: callType,
-//       data: JSON.stringify(dataObject),
-//       dataType: 'json',
-//       contentType: 'application/json',
-//       success: callback
-//     });
-//   } else if (callType === 'GET' || callType === 'DELETE') {
-//     $.ajax({
-//       url: baseUrl + path,
-//       crossDomain: true,
-//       type: callType,
-//       dataType: 'json',
-//       accept: 'application/json',
-//       contentType: 'application/json',
-//       success: callback
-//     });
-//   }
-// };
-
-var requestCall = function requestCall(callType, path, dataObject, callback) {
+var requestCall = function requestCall(callType, path, callback, dataObject) {
   _jquery2.default.ajax({
     url: baseUrl + path,
     crossDomain: true,
     type: callType,
     data: JSON.stringify(dataObject),
     dataType: 'json',
+    cache: false,
     contentType: 'application/json',
     success: callback
   });

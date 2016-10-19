@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import WhiteboardContainer from './components/whiteboard-container';
-// import request from './crud/requests';
+import request from './crud/requests';
 
 ReactDOM.render(
     (<Provider store={store}>
@@ -12,6 +12,8 @@ ReactDOM.render(
       document.querySelector('#application')
     );
 
-// request('POST', 'backlog/', { title: 'hej' }, (data) => {
+// request('GET', 'all', function(data){
 //   console.log(data);
+// }, {
+//
 // });
