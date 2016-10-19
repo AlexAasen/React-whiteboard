@@ -60,6 +60,12 @@ const WhiteboardContainer = props => (
     </div>
   </div>
 );
+WhiteboardContainer.propTypes = () => ({
+  onShowDialog: React.PropTypes.func,
+  isVisible: React.PropTypes.bool,
+  onAdd: React.PropTypes.func,
+  onHideDialog: React.PropTypes.func
+});
 
 const mapStateToProps = state => ({
   isVisible: state.add.displayDialog,

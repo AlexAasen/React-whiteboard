@@ -8,7 +8,7 @@ const reducer = (state = [], action) => {
       return [...state, newPostIt];
     }
     case REMOVE_POSTIT: {
-      newState = state.filter(postit => postit.id !== action.data.id);
+      newState = state.filter(postit => postit.id !== action.data);
       return newState;
     }
     case UPDATE_POSTIT: {

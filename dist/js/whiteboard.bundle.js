@@ -32691,13 +32691,13 @@ AddButton.propTypes = function () {
 exports.default = AddButton;
 
 },{"react":185}],203:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -32705,8 +32705,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var PostIt = function PostIt(props) {
   function removePostIt() {
-    var id = props.id;
-    props.onRemove(id);
+    var userPick = confirm('Do you wanna remove me taxnos?');
+
+    if (userPick === true) {
+      props.onRemove(props.id);
+    }
   }
   function editPost() {
     props.onShowEditDialog({
@@ -32718,28 +32721,28 @@ var PostIt = function PostIt(props) {
     });
   }
   return _react2.default.createElement(
-    "li",
+    'li',
     {
-      className: "post-it-container"
+      className: 'post-it-container'
     },
     _react2.default.createElement(
-      "div",
-      { className: "post-it " + props.color },
+      'div',
+      { className: 'post-it ' + props.color },
       _react2.default.createElement(
-        "h3",
-        { className: "title" },
+        'h3',
+        { className: 'title' },
         props.title
       ),
       _react2.default.createElement(
-        "p",
-        { className: "description" },
+        'p',
+        { className: 'description' },
         props.description
       ),
-      _react2.default.createElement("button", { className: "edit", onClick: editPost }),
+      _react2.default.createElement('button', { className: 'edit', onClick: editPost }),
       _react2.default.createElement(
-        "button",
-        { className: "close", onClick: removePostIt },
-        "\u2715"
+        'button',
+        { className: 'close', onClick: removePostIt },
+        '\u2715'
       )
     )
   );
@@ -32757,26 +32760,26 @@ PostIt.propTypes = function () {
 
 var Backlog = function Backlog(props) {
   return _react2.default.createElement(
-    "li",
-    { className: "wb-section", id: "backlog" },
+    'li',
+    { className: 'wb-section', id: 'backlog' },
     _react2.default.createElement(
-      "div",
-      { className: "wb-section" },
+      'div',
+      { className: 'wb-section' },
       _react2.default.createElement(
-        "div",
-        { className: "wb-section-title", id: "backlog" },
+        'div',
+        { className: 'wb-section-title', id: 'backlog' },
         _react2.default.createElement(
-          "h2",
-          { id: "backlog" },
-          "Backlog"
+          'h2',
+          { id: 'backlog' },
+          'Backlog'
         )
       ),
       _react2.default.createElement(
-        "div",
-        { className: "wb-section-content" },
+        'div',
+        { className: 'wb-section-content' },
         _react2.default.createElement(
-          "ul",
-          { className: "ul-colstyle" },
+          'ul',
+          { className: 'ul-colstyle' },
           props.postIts.map(function (postIt) {
             return _react2.default.createElement(PostIt, {
               key: postIt.id,
@@ -33649,6 +33652,14 @@ var WhiteboardContainer = function WhiteboardContainer(props) {
     )
   );
 };
+WhiteboardContainer.propTypes = function () {
+  return {
+    onShowDialog: _react2.default.PropTypes.func,
+    isVisible: _react2.default.PropTypes.bool,
+    onAdd: _react2.default.PropTypes.func,
+    onHideDialog: _react2.default.PropTypes.func
+  };
+};
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -33897,7 +33908,7 @@ var reducer = function reducer() {
     case _actionTypes.REMOVE_POSTIT:
       {
         newState = state.filter(function (postit) {
-          return postit.id !== action.data.id;
+          return postit.id !== action.data;
         });
         return newState;
       }
