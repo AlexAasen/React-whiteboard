@@ -12,6 +12,12 @@ ReactDOM.render(
       document.querySelector('#application')
     );
 
+// const socket = io.connect('http://localhost:8081');
+//
+// socket.on('broadcast', function(data){
+//   console.log(data);
+// });
+
 // request('GET', 'all', function(data){
 //   console.log(data);
 // }, {

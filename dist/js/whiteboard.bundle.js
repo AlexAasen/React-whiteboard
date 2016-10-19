@@ -32653,6 +32653,12 @@ _reactDom2.default.render(_react2.default.createElement(
   _react2.default.createElement(_whiteboardContainer2.default, null)
 ), document.querySelector('#application'));
 
+// const socket = io.connect('http://localhost:8081');
+//
+// socket.on('broadcast', function(data){
+//   console.log(data);
+// });
+
 // request('GET', 'all', function(data){
 //   console.log(data);
 // }, {
