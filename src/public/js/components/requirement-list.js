@@ -18,16 +18,16 @@ Requirement.propTypes = () => ({
   onRemove: React.PropTypes.func
 });
 
-const RequirementList = (props) => {
-  return (
-    <ul className="ul-colstyle requirements">
-      {props.requirements.map(requirement => (
-        <Requirement
-          key={requirement.id}
-          id={requirement.id}
-          requirement={requirement.requirement}
-          onRemove={props.onRemove}
-        />
+const RequirementList = props => {
+    return (
+      <ul className="ul-colstyle requirements">
+        {props.requirements.map(requirement => (
+          <Requirement
+            key={requirement.id}
+            id={requirement.id}
+            requirement={requirement.requirement}
+            onRemove={props.onRemove}
+          />
         )).reverse()
       }</ul>
     );

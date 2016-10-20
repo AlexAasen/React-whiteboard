@@ -22,7 +22,6 @@ const RequirementInput = (props) => {
   return (
     <div className="dialog-container">
       <input
-        autoFocus
         type="text"
         ref={(c) => {
           requirementInput = c;

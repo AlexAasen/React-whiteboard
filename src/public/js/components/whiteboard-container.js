@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addPostIt, showDialog, hideDialog, showEditDialog, hideEditDialog, removePostIt, updatePostIt } from '../actions';
+import { addPostIt, showDialog, hideDialog, showEditDialog, hideEditDialog, removePostIt, updatePostIt, moveRight, moveLeft } from '../actions';
 import AddButton from './add-button';
 import PostItDialog from './post-it-dialog';
 import Column from './column';
@@ -30,49 +30,54 @@ const WhiteboardContainer = props => (
           title="backlog"
           postIts={props.backlogPostIts}
           onRemove={props.onRemove}
+          onMoveRight={props.onMoveRight}
+          onMoveLeft={props.onMoveLeft}
           onShowEditDialog={props.onShowEditDialog}
         />
         <Column
           title="stories"
           postIts={props.storiesPostIts}
+          onMoveRight={props.onMoveRight}
+          onMoveLeft={props.onMoveLeft}
           onRemove={props.onRemove}
+          onShowEditDialog={props.onShowEditDialog}
         />
         <Column
           title="currsprint"
           postIts={props.currSprintPostIts}
+          onMoveRight={props.onMoveRight}
+          onMoveLeft={props.onMoveLeft}
           onRemove={props.onRemove}
+          onShowEditDialog={props.onShowEditDialog}
         />
         <Column
           title="wip"
           postIts={props.wipPostIts}
+          onMoveRight={props.onMoveRight}
+          onMoveLeft={props.onMoveLeft}
           onRemove={props.onRemove}
+          onShowEditDialog={props.onShowEditDialog}
         />
         <Column
           title="test"
           postIts={props.testPostIts}
+          onMoveRight={props.onMoveRight}
+          onMoveLeft={props.onMoveLeft}
           onRemove={props.onRemove}
+          onShowEditDialog={props.onShowEditDialog}
         />
         <Column
           title="done"
           postIts={props.donePostIts}
+          onMoveRight={props.onMoveRight}
+          onMoveLeft={props.onMoveLeft}
           onRemove={props.onRemove}
+          onShowEditDialog={props.onShowEditDialog}
         />
       </ul>
     </div>
   </div>
 );
-WhiteboardContainer.propTypes = () => ({
-  onShowDialog: React.PropTypes.func,
-  isVisible: React.PropTypes.bool,
-  onAdd: React.PropTypes.func,
-  onHideDialog: React.PropTypes.func,
-  showEdit: React.PropTypes.func,
-  onUpdate: React.PropTypes.func,
-  onHideEditDialog: React.PropTypes.func,
-  postIts: React.PropTypes.element,
-  onRemove: React.PropTypes.func,
-  onShowEditDialog: React.PropTypes.func
-});
 
 const mapStateToProps = state => ({
   isVisible: state.add.displayDialog,
@@ -106,6 +111,12 @@ const mapDispatchToProps = dispatch => ({
   },
   onHideEditDialog: () => {
     dispatch(hideEditDialog());
+  },
+  onMoveRight: (postIt) => {
+    dispatch(moveRight(postIt));
+  },
+  onMoveLeft: (postIt) => {
+    dispatch(moveLeft(postIt));
   }
 });
 

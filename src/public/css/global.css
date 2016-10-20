@@ -271,8 +271,9 @@ button, a.button-link {
   width: 100px;
 }
 .btn-primary{
-  margin-left: 50px
-}.badge{
+  margin-left: 46px
+}
+.badge{
   width: 25px;
   height: 25px;
   text-align: center;
@@ -392,4 +393,41 @@ button:focus {
   border-radius: none;
   box-shadow: none;
   background: rgba(220, 220, 220, 0);
+  opacity: 1;
+  z-index: 99999;
+}
+
+.completed, .backlog {
+  font-family: Helvetica;
+  font-size: 40px;
+  line-height: 25px;
+  background: rgba(220, 220, 220, 0);
+  color: #CCC;
+  position: absolute;
+  right: -30px;
+  text-align: center;
+  font-weight: bold;
+  top: 60px;
+  width: 24px;
+  text-decoration: none;
+  border: none;
+  border-radius: none;
+  box-shadow: none;
+  margin: 0px;
+  padding: 5px;
+}
+.hidden{
+  opacity: -1;
+}
+.hidden:hover{
+  opacity:1;
+}
+
+.backlog {
+  left: -30px;
+}
+
+.completed:hover, .backlog:hover {
+  background: rgba(220, 220, 220, 0);
+  color: #AAA;
 }
